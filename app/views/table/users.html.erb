@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ANOTHER</title>
+</head>
+<body>
+  <div class="table">
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>public_uid</th>
+        <th>email</th>
+        <th>uid</th>
+        <th>provider</th>
+        <th>name</th>
+        <th>image</th>
+        <th>background</th>
+        <th>nickname</th>
+        <th>password</th>
+        <th>encrypted_password</th></tr>
+        <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.public_uid %></td>
+          <td><%= user.email %></td>
+          <td><%= user.uid %></td>
+          <td><%= user.provider %></td>
+          <td><%= user.name %></td>
+          <td><%= user.image %></td>
+          <td><%= user.background %></td>
+          <td><%= user.nickname %></td>
+          <td><%= user.password %></td>
+          <td><%= user.encrypted_password %></td>
+        </tr>
+        <% end %>
+      </div>
+    </body>
+    </html>

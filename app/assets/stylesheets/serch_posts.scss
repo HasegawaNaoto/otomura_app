@@ -1,0 +1,97 @@
+//serch_postページ
+.posts-serch-item {
+  position:relative;
+  background-color: white;
+  max-width :865px;
+  height:auto;
+  width:100%;
+  border-bottom:solid 1px #c1ced7;
+  transition:0.5s;
+}
+
+.serch-center-item-container{
+  clear:both;
+}
+
+.posts-serch-item:hover {
+  background-color:rgba(200,216,225,0.4);
+}
+
+.serch-center-items {
+  max-width:865px;
+  width:100%;
+  padding-bottom:500px;
+  margin:0 auto;
+  padding-top:1px;
+  border-left:solid 1px #c1ced7;
+  border-right:solid 1px #c1ced7;
+}
+
+.thread-serch-menu-item{
+  position:relative;
+  max-width :865px;
+  height:50px;
+  line-height:50px;
+  width:100%;
+  text-align:center;
+  font-size:18px;
+  transition:0.5s;
+}
+
+.thread-serch-menu-item:hover {
+  background-color:rgba(200,216,225,0.8);
+}
+
+.thread-serch-menu-item a:link{
+  color:rgba(255,69,0,1);
+}
+
+.thread-serch-menu-item a:visited{
+  color:rgba(255,69,0,1);
+}
+
+.thread-serch-menu-item a:hover{
+  color:rgba(255,69,0,0.6);
+}
+
+.serch-header-menu{
+  max-width:865px;
+  width:100%;
+  height:58px;
+  background-color: white;
+  border-bottom:solid 1px #c1ced7;
+  z-index:10;
+}
+
+.serch-header-menu li{
+  float:left;
+  font-size:24px;
+  font-weight:800;
+}
+
+.posts-serch a{
+  display:block;
+  line-height:58px;
+  padding-left:30px;
+  padding-right:30px;
+}
+
+.posts-serch-fixed a{
+  color:rgba(0,0,0,1);
+}
+
+.posts-serch-fixed{
+  border-bottom:2px solid #00a968;
+  display:block;
+  line-height:58px;
+  padding-left:30px;
+  padding-right:30px;
+  cursor:pointer;
+}
+
+.posts-serch a:hover{
+  border-bottom:2px solid #00a968;
+  color:rgba(0,0,0,1);
+  transition:0.2s;
+}
+//serch_postページ

@@ -1,0 +1,507 @@
+<div id="edit-modal" class="genre-edit-modal-wrapper">
+  <div id="new-edit-form" class="new-edit-form genre-edit-modal">
+
+    <div class="genre-edit-profile-container">
+      <%= form_with(model: @genre,url: "/genre/update/#{@user.id}",method: :post, local: true) do |form| %>
+      <div class="genre-index">
+        <div class="genre-item">
+          <div class="genre-header-menu">
+            <h4>好みの音楽ジャンルを選択してください！</h4>
+          </div>
+          <div class="check-box-container">
+            <%= form.label :rock,"ロック",class:"check-box-label" %>
+            <%= form.check_box :rock,class:"check-box rock" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :punk,"パンク",class:"check-box-label" %>
+            <%= form.check_box :punk,class:"check-box" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :pop,"ポップス",class:"check-box-label" %>
+            <%= form.check_box :pop,class:"check-box" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :ambient,"アンビエント",class:"check-box-label" %>
+            <%= form.check_box :ambient,class:"check-box" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :alternative,"オルタネイティブ",class:"check-box-label" %>
+            <%= form.check_box :alternative,class:"check-box" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :classic,"クラシック",class:"check-box-label" %>
+            <%= form.check_box :classic,class:"check-box" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :jazz,"ジャズ",class:"check-box-label" %>
+            <%= form.check_box :jazz,class:"check-box" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :hard_rock,"ハードロック",class:"check-box-label" %>
+            <%= form.check_box :hard_rock,class:"check-box" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :progressive,"プログレッシブ・ロック",class:"check-box-label" %>
+            <%= form.check_box :progressive,class:"check-box" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :pop_punk,"ポップパンク",class:"check-box-label" %>
+            <%= form.check_box :pop_punk,class:"check-box" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :heavy_metal,"ヘヴィーメタル",class:"check-box-label" %>
+            <%= form.check_box :heavy_metal,class:"check-box" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :metalcore,"メタルコア",class:"check-box-label" %>
+            <%= form.check_box :metalcore,class:"check-box" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :emo,"エモーショナル",class:"check-box-label" %>
+            <%= form.check_box :emo,class:"check-box" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :merocore,"メロディック・ハードコア",class:"check-box-label" %>
+            <%= form.check_box :merocore,class:"check-box" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :hiphop,"ヒップホップ",class:"check-box-label" %>
+            <%= form.check_box :hiphop,class:"check-box" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :instrument,"インストルメント",class:"check-box-label" %>
+            <%= form.check_box :instrument,class:"check-box" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :western,"洋楽",class:"check-box-label" %>
+            <%= form.check_box :western,class:"check-box" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :japanese,"邦楽",class:"check-box-label" %>
+            <%= form.check_box :japanese,class:"check-box" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :acoustic,"アコースティック",class:"check-box-label" %>
+            <%= form.check_box :acoustic,class:"check-box" %>
+          </div><br>
+
+          <div class="check-box-container">
+            <%= form.label :other1,"その他のジャンル1",class:"genre-text-field-label" %>
+            <%= form.text_field :other1,value:"#{@genre.other1}",placeholder:"その他のジャンルを入力",class:"genre-text-field" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :other2,"その他のジャンル2",class:"genre-text-field-label" %>
+            <%= form.text_field :other2,value:"#{@genre.other2}",placeholder:"その他のジャンルを入力",class:"genre-text-field" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :other3,"その他のジャンル3",class:"genre-text-field-label" %>
+            <%= form.text_field :other3,value:"#{@genre.other3}",placeholder:"その他のジャンルを入力",class:"genre-text-field" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :other4,"その他のジャンル4",class:"genre-text-field-label" %>
+            <%= form.text_field :other4,value:"#{@genre.other4}",placeholder:"その他のジャンルを入力",class:"genre-text-field" %>
+          </div>
+
+          <div class="check-box-container">
+            <%= form.label :other5,"その他のジャンル5",class:"genre-text-field-label" %>
+            <%= form.text_field :other5,value:"#{@genre.other5}",placeholder:"その他のジャンルを入力",class:"genre-text-field" %>
+          </div>
+          <div class="actions">
+            <%= form.submit "更新する", class: "genre-create-btn" %>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        $(function() {
+          rock = document.getElementById('genre_rock');
+          if (rock.checked == true) {
+            $('.check-box-label').eq(0).addClass('check-box-active');
+          }
+          else {
+            $('.check-box-label').eq(0).removeClass('check-box-active');
+          }
+
+          $('#genre_rock').on('change',function(){
+            if (rock.checked == true) {
+              $('.check-box-label').eq(0).addClass('check-box-active');
+            }
+            else {
+              $('.check-box-label').eq(0).removeClass('check-box-active');
+            }
+          });
+
+          punk = document.getElementById('genre_punk');
+          if (punk.checked == true) {
+            $('.check-box-label').eq(1).addClass('check-box-active');
+          }
+          else {
+            $('.check-box-label').eq(1).removeClass('check-box-active');
+          }
+
+          $('#genre_punk').on('change',function(){
+            if (punk.checked == true) {
+              $('.check-box-label').eq(1).addClass('check-box-active');
+            }
+            else {
+              $('.check-box-label').eq(1).removeClass('check-box-active');
+            }
+          });
+
+          pop = document.getElementById('genre_pop');
+          if (pop.checked == true) {
+            $('.check-box-label').eq(2).addClass('check-box-active');
+          }
+          else {
+            $('.check-box-label').eq(2).removeClass('check-box-active');
+          }
+
+          $('#genre_pop').on('change',function(){
+            if (pop.checked == true) {
+              $('.check-box-label').eq(2).addClass('check-box-active');
+            }
+            else {
+              $('.check-box-label').eq(2).removeClass('check-box-active');
+            }
+          });
+
+          ambient = document.getElementById('genre_ambient');
+          if (ambient.checked == true) {
+            $('.check-box-label').eq(3).addClass('check-box-active');
+          }
+          else {
+            $('.check-box-label').eq(3).removeClass('check-box-active');
+          }
+
+          $('#genre_ambient').on('change',function(){
+            if (ambient.checked == true) {
+              $('.check-box-label').eq(3).addClass('check-box-active');
+            }
+            else {
+              $('.check-box-label').eq(3).removeClass('check-box-active');
+            }
+          });
+
+          alternative = document.getElementById('genre_alternative');
+          if (alternative.checked == true) {
+            $('.check-box-label').eq(4).addClass('check-box-active');
+          }
+          else {
+            $('.check-box-label').eq(4).removeClass('check-box-active');
+          }
+
+          $('#genre_alternative').on('change',function(){
+            if (alternative.checked == true) {
+              $('.check-box-label').eq(4).addClass('check-box-active');
+            }
+            else {
+              $('.check-box-label').eq(4).removeClass('check-box-active');
+            }
+          });
+
+
+          classic = document.getElementById('genre_classic');
+          if (classic.checked == true) {
+            $('.check-box-label').eq(5).addClass('check-box-active');
+          }
+          else {
+            $('.check-box-label').eq(5).removeClass('check-box-active');
+          }
+
+          $('#genre_classic').on('change',function(){
+            if (classic.checked == true) {
+              $('.check-box-label').eq(5).addClass('check-box-active');
+            }
+            else {
+              $('.check-box-label').eq(5).removeClass('check-box-active');
+            }
+          });
+
+
+          jazz = document.getElementById('genre_jazz');
+          if (jazz.checked == true) {
+            $('.check-box-label').eq(6).addClass('check-box-active');
+          }
+          else {
+            $('.check-box-label').eq(6).removeClass('check-box-active');
+          }
+
+          $('#genre_jazz').on('change',function(){
+            if (jazz.checked == true) {
+              $('.check-box-label').eq(6).addClass('check-box-active');
+            }
+            else {
+              $('.check-box-label').eq(6).removeClass('check-box-active');
+            }
+          });
+
+
+          hard_rock = document.getElementById('genre_hard_rock');
+          if (hard_rock.checked == true) {
+            $('.check-box-label').eq(7).addClass('check-box-active');
+          }
+          else {
+            $('.check-box-label').eq(7).removeClass('check-box-active');
+          }
+
+          $('#genre_hard_rock').on('change',function(){
+            if (hard_rock.checked == true) {
+              $('.check-box-label').eq(7).addClass('check-box-active');
+            }
+            else {
+              $('.check-box-label').eq(7).removeClass('check-box-active');
+            }
+          });
+
+
+          progressive = document.getElementById('genre_progressive');
+          if (progressive.checked == true) {
+            $('.check-box-label').eq(8).addClass('check-box-active');
+          }
+          else {
+            $('.check-box-label').eq(8).removeClass('check-box-active');
+          }
+
+          $('#genre_progressive').on('change',function(){
+            if (progressive.checked == true) {
+              $('.check-box-label').eq(8).addClass('check-box-active');
+            }
+            else {
+              $('.check-box-label').eq(8).removeClass('check-box-active');
+            }
+          });
+
+
+          pop_punk = document.getElementById('genre_pop_punk');
+          if (pop_punk.checked == true) {
+            $('.check-box-label').eq(9).addClass('check-box-active');
+          }
+          else {
+            $('.check-box-label').eq(9).removeClass('check-box-active');
+          }
+
+          $('#genre_pop_punk').on('change',function(){
+            if (pop_punk.checked == true) {
+              $('.check-box-label').eq(9).addClass('check-box-active');
+            }
+            else {
+              $('.check-box-label').eq(9).removeClass('check-box-active');
+            }
+          });
+
+
+          heavy_metal = document.getElementById('genre_heavy_metal');
+          if (heavy_metal.checked == true) {
+            $('.check-box-label').eq(10).addClass('check-box-active');
+          }
+          else {
+            $('.check-box-label').eq(10).removeClass('check-box-active');
+          }
+
+          $('#genre_heavy_metal').on('change',function(){
+            if (heavy_metal.checked == true) {
+              $('.check-box-label').eq(10).addClass('check-box-active');
+            }
+            else {
+              $('.check-box-label').eq(10).removeClass('check-box-active');
+            }
+          });
+
+
+          metalcore = document.getElementById('genre_metalcore');
+          if (metalcore.checked == true) {
+            $('.check-box-label').eq(11).addClass('check-box-active');
+          }
+          else {
+            $('.check-box-label').eq(11).removeClass('check-box-active');
+          }
+
+          $('#genre_metalcore').on('change',function(){
+            if (metalcore.checked == true) {
+              $('.check-box-label').eq(11).addClass('check-box-active');
+            }
+            else {
+              $('.check-box-label').eq(11).removeClass('check-box-active');
+            }
+          });
+
+
+          emo= document.getElementById('genre_emo');
+          if (emo.checked == true) {
+            $('.check-box-label').eq(12).addClass('check-box-active');
+          }
+          else {
+            $('.check-box-label').eq(12).removeClass('check-box-active');
+          }
+
+          $('#genre_emo').on('change',function(){
+            if (emo.checked == true) {
+              $('.check-box-label').eq(12).addClass('check-box-active');
+            }
+            else {
+              $('.check-box-label').eq(12).removeClass('check-box-active');
+            }
+          });
+
+
+          merocore = document.getElementById('genre_merocore');
+          if (merocore.checked == true) {
+            $('.check-box-label').eq(13).addClass('check-box-active');
+          }
+          else {
+            $('.check-box-label').eq(13).removeClass('check-box-active');
+          }
+
+          $('#genre_merocore').on('change',function(){
+            if (merocore.checked == true) {
+              $('.check-box-label').eq(13).addClass('check-box-active');
+            }
+            else {
+              $('.check-box-label').eq(13).removeClass('check-box-active');
+            }
+          });
+
+
+          hiphop = document.getElementById('genre_hiphop');
+          if (hiphop.checked == true) {
+            $('.check-box-label').eq(14).addClass('check-box-active');
+          }
+          else {
+            $('.check-box-label').eq(14).removeClass('check-box-active');
+          }
+
+          $('#genre_hiphop').on('change',function(){
+            if (hiphop.checked == true) {
+              $('.check-box-label').eq(14).addClass('check-box-active');
+            }
+            else {
+              $('.check-box-label').eq(14).removeClass('check-box-active');
+            }
+          });
+
+
+          instrument = document.getElementById('genre_instrument');
+          if (instrument.checked == true) {
+            $('.check-box-label').eq(15).addClass('check-box-active');
+          }
+          else {
+            $('.check-box-label').eq(15).removeClass('check-box-active');
+          }
+
+          $('#genre_instrument').on('change',function(){
+            if (instrument.checked == true) {
+              $('.check-box-label').eq(15).addClass('check-box-active');
+            }
+            else {
+              $('.check-box-label').eq(15).removeClass('check-box-active');
+            }
+          });
+
+
+          western = document.getElementById('genre_western');
+          if (western.checked == true) {
+            $('.check-box-label').eq(16).addClass('check-box-active');
+          }
+          else {
+            $('.check-box-label').eq(16).removeClass('check-box-active');
+          }
+
+          $('#genre_western').on('change',function(){
+            if (western.checked == true) {
+              $('.check-box-label').eq(16).addClass('check-box-active');
+            }
+            else {
+              $('.check-box-label').eq(16).removeClass('check-box-active');
+            }
+          });
+
+
+          japanese = document.getElementById('genre_japanese');
+          if (japanese.checked == true) {
+            $('.check-box-label').eq(17).addClass('check-box-active');
+          }
+          else {
+            $('.check-box-label').eq(17).removeClass('check-box-active');
+          }
+
+          $('#genre_japanese').on('change',function(){
+            if (japanese.checked == true) {
+              $('.check-box-label').eq(17).addClass('check-box-active');
+            }
+            else {
+              $('.check-box-label').eq(17).removeClass('check-box-active');
+            }
+          });
+
+
+          acoustic = document.getElementById('genre_acoustic');
+          if (acoustic.checked == true) {
+            $('.check-box-label').eq(18).addClass('check-box-active');
+          }
+          else {
+            $('.check-box-label').eq(18).removeClass('check-box-active');
+          }
+
+          $('#genre_acoustic').on('change',function(){
+            if (acoustic.checked == true) {
+              $('.check-box-label').eq(18).addClass('check-box-active');
+            }
+            else {
+              $('.check-box-label').eq(18).removeClass('check-box-active');
+            }
+          });
+
+          var other1 = document.getElementById("genre_other1").value;
+          var other2 = document.getElementById("genre_other2").value;
+          var other3 = document.getElementById("genre_other3").value;
+          var other4 = document.getElementById("genre_other4").value;
+          var other5 = document.getElementById("genre_other5").value;
+
+
+          if (other1 != ""){
+            $('.genre-text-field').eq(0).addClass('genre-text-field-active');
+          }
+
+          if (other2 != ""){
+            $('.genre-text-field').eq(1).addClass('genre-text-field-active');
+          }
+
+          if (other3 != ""){
+            $('.genre-text-field').eq(2).addClass('genre-text-field-active');
+          }
+
+          if (other4 != ""){
+            $('.genre-text-field').eq(3).addClass('genre-text-field-active');
+          }
+
+          if (other5 != ""){
+            $('.genre-text-field').eq(4).addClass('genre-text-field-active');
+          }
+
+        });
+      </script>
+      <% end %>
+    </div>
+  </div>
+</div>

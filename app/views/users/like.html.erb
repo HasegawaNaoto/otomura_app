@@ -1,0 +1,98 @@
+<%= render partial: 'posts/newpost' %>
+<%= render partial: 'posts/new_post_destroy' %>
+
+<%= render partial: 'genre/edit',locals: {user: @users} %>
+<%= render partial: 'instrument/edit',locals: {user: @users} %>
+<%= render partial: 'gender/edit',locals: {user: @users} %>
+<%= render partial: 'prefecture/edit',locals: {user: @users} %>
+
+<%= render partial: 'genre/edit_genre_destroy' %>
+<%= render partial: 'instrument/edit_instrument_destroy'%>
+<%= render partial: 'gender/edit_gender_destroy' %>
+<%= render partial: 'prefecture/edit_prefecture_destroy'%>
+
+<%= render partial: 'friend_destroy_warning_form',locals: {user: @users} %>
+<%= render partial: 'editprofile',locals: {user: @users} %>
+<%= render partial: 'edit_userprofile_destroy',locals:{user:@users} %>
+
+<%= render partial: 'userprofile_upper' %>
+
+<script>
+  $(function(){
+    var OFFSET=70;
+    $(window).scrollTop($('.user-image').offset().top-OFFSET);
+  });
+</script>
+
+<div class="userprofile-index-items-container">
+  <% @like.each do |like| %>
+  <% post=Post.find_by(id: like.post_id) %>
+  <% if post!=nil %>
+  <% post_user=User.find_by(id: post.user_id) %>
+  <%= render partial:'comment/commentform',locals: {post: post,comment: @comments} %>
+  <div id="image-patial-item">
+    <%= render partial:'posts/image_modal',locals: {post: post,index: @index} %>
+  </div>
+  <div class="userprofile-index-item">
+    <div class="before-time"><%= date_format(post[:created_at]) %></div>
+    <div class="post-user-image">
+      <%=link_to image_tag(post_user.image.url),"/profile/#{post_user.public_uid}"%>
+    </div>
+    <div class="post-user-name">
+      <%= link_to(post_user.name,"/profile/#{post_user.public_uid}") %>
+    </div>
+
+    <div class="post-user-id">
+      <%= link_to("@#{post_user.public_uid}","/profile/#{post_user.public_uid}") %>
+    </div>
+
+    <div class="post-contents">
+      <%= link_to(post.content,"/posts/show/#{post.id}") %>
+    </div>
+
+    <div class="user_post_image_container">
+      <%  if post.images? %>
+      <% i=0 %>
+      <%  post.images.length.times do %>
+      <% if post.images.length==1 %>
+      <%= link_to image_tag(post.images[i].url,class:"user_post_image_1"),"/posts/#{post.id}/image/show/#{i}",method: :post,remote:true %>
+      <% elsif post.images.length>1 %>
+      <%= link_to image_tag(post.images[i].url,class:"user_post_images"),"/posts/#{post.id}/image/show/#{i}",method: :post,remote:true %>
+      <% end %>
+      <% i=i+1 %>
+      <% end %>
+      <% end %>
+    </div>
+
+    <div class="user_post_image_container">
+      <%  if post.video? %>
+      <%= video_tag post.video_url,loop: true, controls: true, width: 550, id: "mv",class:"user_post_video" %>
+      <% end %>
+    </div>
+
+    <div class="time"><p><%= japanese_time(post[:created_at]) %></p></div>
+
+    <div class="menu-item">
+      <div id="comment-btn" class="comment-css"><%= link_to("/comment/commentform/#{post.id}",method: :post,remote:true) do %>
+        <%= icon 'fas','comment',class: "fa-comment" %>
+        <% end %>
+      </div>
+
+      <div id="likes_buttons_<%= post.id %>">
+        <%= render partial: 'like/like',locals: {post: post} %>
+      </div>
+
+
+      <div class="destroy-css">
+        <%= link_to("/posts/destroy/#{post.id}",method: :post) do %>
+        <%= icon 'fas','trash',class: "fa-delete" %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+  <% end %>
+  <% end %>
+</div>
+
+<%= render partial: 'userprofile_right_container' %>

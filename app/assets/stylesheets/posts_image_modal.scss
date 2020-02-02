@@ -1,0 +1,61 @@
+.image-modal {
+  position: absolute;
+  top: 7%;
+  left:calc((100% - 900px)/2);
+  background-color: white;
+  border-radius: 10px;
+  width: 900px;
+  height: 600px;
+}
+
+.post_image_modal{
+  border-radius: 10px;
+  width: 900px;
+  height: 600px;
+  object-fit:cover;
+  position:relative;
+  display:none;
+}
+
+.fa-img-cancel-btn{
+  position: absolute;
+  top: 3%;
+  right: 4%;
+  font-size:40px;
+  color:rgba(108,108,108,1);
+  cursor:pointer;
+}
+
+.fa-img-cancel-btn:hover{
+  color:rgba(128,128,128,1);
+}
+
+.fa-image-left{
+  position: absolute;
+  top: 43%;
+  left: 3%;
+  font-size:30px;
+  color:rgba(108,108,108,1);
+  cursor:pointer;
+}
+
+.fa-image-left:hover{
+  color:rgba(128,128,128,1);
+}
+
+.fa-image-right{
+  position: absolute;
+  top: 43%;
+  right: 3%;
+  font-size:30px;
+  color:rgba(128,128,128,1);
+  cursor:pointer;
+}
+
+.active{
+  display:block;
+}
+
+.fa-image-right:hover{
+  color:rgba(108,108,108,1);
+}

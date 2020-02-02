@@ -1,0 +1,2 @@
+class Serch < ApplicationRecord
+end

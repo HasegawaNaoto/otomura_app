@@ -1,0 +1,96 @@
+<% i=0 %>
+<% unless @serch_posts_words.first==nil %>
+<% @serch_posts_words.each do |post| %>
+<%= render partial:'comment/commentform',locals: {post: post,comment: @comments} %>
+<div id="image-patial-item">
+  <%= render partial:'posts/image_modal',locals: {post: post,index: @index} %>
+</div>
+
+<% if post.comment_id==nil %>
+<div id="posts-index-item-<%= post.id %>" class="posts-serch-item">
+  <div class="before-time"><%= date_format(post[:created_at]) %></div>
+  <% if Post.find_by(comment_id:post.id,user_id:post.user_id) %>
+  <div class="comment-line"></div>
+  <% end %>
+  <% post_user=User.find_by(id:post.user_id) %>
+  <div class="post-user-image">
+    <%=link_to image_tag(post_user.image.url),"/profile/#{post_user.public_uid}"%>
+  </div>
+
+  <div class="post-user-name">
+    <%= link_to(post_user.name,"/profile/#{post_user.public_uid}") %>
+  </div>
+
+  <div class="post-user-id">
+    <%= link_to("@#{post_user.public_uid}","/profile/#{post_user.public_uid}") %>
+  </div>
+
+  <div class="post-contents">
+    <%= link_to(post.content,"/posts/show/#{post.id}") %>
+  </div>
+
+  <div class="show_post_image_container">
+    <%  if post.images? %>
+    <% k=0 %>
+    <%  post.images.length.times do %>
+    <% if post.images.length==1 %>
+    <%= link_to image_tag(post.images[k].url,class:"show_post_image_1"),"/posts/#{post.id}/image/show/#{k}",method: :post,remote:true %>
+    <% elsif post.images.length>1 %>
+    <%= link_to image_tag(post.images[k].url,class:"show_post_images"),"/posts/#{post.id}/image/show/#{k}",method: :post,remote:true %>
+    <% end %>
+    <% k=k+1 %>
+    <% end %>
+    <% end %>
+  </div>
+
+  <div class="show_post_image_container">
+    <%  if post.video? %>
+    <%= video_tag post.video_url,loop: true, controls: true, width: 550, id: "mv",class:"show_post_video" %>
+    <% end %>
+  </div>
+
+  <div class="time"><p><%= japanese_time(post[:created_at]) %></p></div>
+
+  <div class="menu-item">
+    <div id="comment-btn" class="comment-css"><%= link_to("/comment/commentform/#{post.id}",method: :post,remote:true) do %>
+      <%= icon 'fas','comment',class: "fa-comment" %>
+      <% end %>
+    </div>
+
+    <div class="comment-count">
+      <%= Post.where(comment_id: post.id).count %>
+    </div>
+
+    <div id="likes_buttons_<%= post.id %>">
+      <%= render partial: 'like/like',locals: {post: post} %>
+    </div>
+
+
+    <div class="destroy-css">
+      <%= link_to("/posts/destroy/#{post.id}",method: :post) do %>
+      <%= icon 'fas','trash',class: "fa-delete" %>
+      <% end %>
+    </div>
+  </div>
+
+  <% if Post.find_by(comment_id:post.id,user_id:post.user_id) %>
+  <div class="thread-serch-menu-item">
+    <div class="thread-user-image">
+      <%=link_to image_tag(user.image.url),"/profile/#{post_user.public_uid}"%>
+    </div>
+    <div class="thread-serch-link">
+      <%= link_to("このスレッドを表示する","/posts/show/#{post.id}/#posts-#{post.id}") %>
+    </div>
+  </div>
+  <% end %>
+
+</div>
+
+<% i=i+1 %>
+
+<% end %>
+<% end %>
+
+<% else %>
+<h2 style="text-align:center; margin-top:50px;">該当する投稿は見つかりませんでした</h2>
+<% end %>

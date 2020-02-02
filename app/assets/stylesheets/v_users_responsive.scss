@@ -1,0 +1,570 @@
+@media(max-width:1024px){
+  //user_profile
+  .userprofile-right-containers{
+    display:none;
+  }
+
+  .userprofile-left-container{
+    width:100%;
+    height:100%;
+    min-width:initial;
+    max-width:initial;
+    padding:10px;
+  }
+
+  .userprofile-index-items-container{
+    width:100%;
+  }
+
+  .userprofile-index-item {
+    border-right:solid 1px #c1ced7;
+  }
+
+  .user_post_image_1{
+    height:auto;
+    min-height:420px;
+    max-height:800px;
+  }
+
+  .user_post_images{
+    height:auto;
+    min-height:200px;
+    max-height:320px;
+  }
+  //user_profile
+
+  //medias
+  .userprofile-medias-items{
+    width:100%;
+    max-width:1000px;
+    min-width:320px;
+  }
+
+  .userprofile-medias-item{
+    margin:10px 0px;
+    width:100%;
+    max-height:550px;
+    min-height:420px;
+    height:auto;
+  }
+
+  .userprofile-medias-item img{
+    width:100%;
+    height:100%;
+  }
+  //medias
+
+  //friendlist
+  .userprofile-friends-item {
+    background-color: white;
+    height:270px;
+    max-width:initial;
+    min-width:initial;
+    width:47%;
+  }
+  //friendlist
+}
+
+@media(max-width:750px){
+  //user_profile
+  .userprofile-background{
+    height:200px;
+  }
+
+  .userprofile-background img{
+    height:200px;
+  }
+
+  .userprofile-container{
+    padding:0px 0px;
+    width:100%;
+  }
+
+  .userprofile-index-items-container{
+    width:100%;
+    overflow:hidden;
+  }
+
+  .userprofile-left-container{
+    width:100%;
+    height:100%;
+    margin-top:20px;
+  }
+
+  .userprofile-prf{
+    width:90%;
+    margin:0 auto;
+  }
+
+  .user-image {
+    position:absolute;
+    top:150px;
+    left:calc((100% - 80px)/2);
+  }
+
+  .user-image img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .user-name h2 {
+    font-weight: 600;
+    font-size:20px;
+    text-align:center;
+  }
+
+  .userprofile-id{
+    text-align:center;
+    font-size:10px;
+  }
+
+  .prf-contents{
+    width:100%;
+    text-align:center;
+    font-size:18px;
+    font-weight:600;
+    margin:5px 0px;
+  }
+
+  .userprofile-edit {
+    font-size:18px;
+    width:100%;
+  }
+
+  .usersprofile-header-container{
+    padding:0px 0px;
+  }
+
+  .usersprofile-header-menu{
+    width:100%;
+    min-width:initial;
+  }
+
+  .usersprofile-header-menu li{
+    font-size:14px;
+    overflow-x:scroll;
+    padding:0;
+    width:20%;
+  }
+
+  .user_post_image_1{
+    height:auto;
+    min-height:200px;
+    max-height:400px;
+    width:95%;
+  }
+
+  .user_post_images{
+    height:auto;
+    max-height:200px;
+    min-height:100px;
+    width:45%;
+  }
+  //user_profile
+
+  //profile_edit
+  .gender{
+    font-size:16px;
+  }
+
+  .prefecture{
+    font-size:16px;
+  }
+
+  .instrument{
+    font-size:16px;
+  }
+
+  .genre{
+    font-size:16px;
+  }
+
+  .genre-header-menu{
+    width:100%;
+    margin-bottom:10px;
+  }
+
+  .genre-item {
+    min-width:initial;
+    width:90%;
+  }
+
+  .genre-create-btn{
+    float:right;
+    margin-top:10px;
+  }
+  //profile_edit
+
+  //friendlist
+  .userprofile-friends-items{
+    max-width:initial;
+    min-width:initial;
+    width:100%;
+    margin-top:5px;
+  }
+
+  .userprofile-friends-item {
+    background-color: white;
+    min-height:100px;
+    height:auto;
+    max-width:initial;
+    width:100%;
+    margin:0;
+    border-bottom:none;
+  }
+
+  .friends-user-name{
+    position:absolute;
+    font-weight: 600;
+    top:20px;
+    left:85px;
+    width:150px;
+  }
+
+  .friends-user-name a:link{
+    color:black;
+  }
+
+  .friends-user-name a:visited{
+    color:black;
+  }
+
+
+  .followlist-follow-create-btn {
+    margin-top:-20px;
+    margin-bottom:10px;
+  }
+
+  .followlist-follow-destroy-btn {
+    margin-top:-20px;
+    margin-bottom:10px;
+  }
+
+  .friends-contents{
+    width:auto;
+    margin-left:82px;
+    margin-right:22px;
+    margin-bottom:60px;
+  }
+
+  .friends-contents p{
+    text-align:justify-all;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    word-wrap:break-word;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    font-size:16px;
+  }
+
+  .friends-contents a:link{
+    color:black;
+  }
+
+  .friends-contents a:visited{
+    color:black;
+  }
+
+  .friends-user-image img{
+    position:absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 1px 6px #c1ced7;
+    border: 1px solid #c1ced7;
+    object-fit: cover;
+    top:10px;
+    left:10px;
+  }
+
+  .friendlist-create-reply-btn {
+    font-size:16px;
+    cursor:pointer;
+    font-weight:600;
+    background-color:rgba(10,180,80,0.7);
+    border-top-left-radius:100px;
+    border-bottom-left-radius:100px;
+    border-top-right-radius:100px;
+    border-bottom-right-radius:100px;
+    border:solid 1px rgba(120,200,80,0.7);
+    color:#ffffff;
+    transition:0.1s;
+    width:100px;
+    height:30px;
+    position:absolute;
+    top:250px;
+    left:95px;
+    outline:none;
+    user-select:none;
+  }
+
+  .friendlist-create-reply-btn:hover{
+    background-color:rgba(100,200,80,1);
+    border:solid 1px rgba(120,200,80,1);
+  }
+
+  .friendlist-destroy-reply-btn {
+    font-size:16px;
+    cursor:pointer;
+    font-weight:600;
+    background-color:rgba(255,102,102,0.7);
+    border-top-left-radius:100px;
+    border-bottom-left-radius:100px;
+    border-top-right-radius:100px;
+    border-bottom-right-radius:100px;
+    border:solid 1px rgba(255,120,120,0.7);
+    color:#ffffff;
+    transition:0.1s;
+    width:100px;
+    height:30px;
+    position:absolute;
+    top:250px;
+    left:95px;
+    outline:none;
+    user-select:none;
+  }
+
+  .friendlist-destroy-reply-btn:hover{
+    background-color:rgba(255,102,102,1);
+    border:solid 1px rgba(255,120,120,1);
+  }
+
+  .friendlist-destroy-btn{
+    font-size:16px;
+    cursor:pointer;
+    font-weight:600;
+    background-color:rgba(10,180,80,0.7);
+    border-top-left-radius:100px;
+    border-bottom-left-radius:100px;
+    border-top-right-radius:100px;
+    border-bottom-right-radius:100px;
+    border:solid 1px rgba(120,200,80,0.7);
+    color:#ffffff;
+    transition:0.1s;
+    width:100px;
+    height:30px;
+    position:absolute;
+    top:250px;
+    left:95px;
+    outline:none;
+    user-select:none;
+  }
+
+  .friendlist-destroy-btn:hover{
+    background-color:rgba(100,200,80,1);
+    border:solid 1px rgba(120,200,80,1);
+  }
+
+  .index-friend-reply-btn{
+    position:absolute;
+    top:60px;
+    left:80px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    background-color:rgba(10,180,80,0.7);
+    border-top-left-radius:100px;
+    border-bottom-left-radius:100px;
+    border-top-right-radius:100px;
+    border-bottom-right-radius:100px;
+    border:solid 1px rgba(120,200,80,0.7);
+    color:#ffffff;
+    transition:0.1s;
+    width:100px;
+    height:30px;
+    outline:none;
+    user-select:none;
+  }
+
+  .index-friend-reply-btn:hover{
+    background-color:rgba(10,180,80,1);
+    border:solid 1px rgba(120,200,80,1);
+  }
+
+  .index-friend-destroy-btn{
+    position:absolute;
+    top:60px;
+    left:80px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    background-color:rgba(255,102,102,0.7);
+    border-top-left-radius:100px;
+    border-bottom-left-radius:100px;
+    border-top-right-radius:100px;
+    border-bottom-right-radius:100px;
+    border:solid 1px rgba(255,120,120,0.7);
+    color:#ffffff;
+    transition:0.1s;
+    width:100px;
+    height:30px;
+    outline:none;
+    user-select:none;
+  }
+
+  .index-friend-destroy-btn:hover{
+    background-color:rgba(255,102,102,1);
+    border:solid 1px rgba(255,120,120,1);
+  }
+  //friendlist
+
+  //medialist
+  .userprofile-medias-item{
+    width:100%;
+    max-width:initial;
+    min-width:initial;
+    max-height:initial;
+    min-height:initial;
+    height:250px;
+  }
+
+  .userprofile-medias-item img{
+    max-width:initial;
+    min-width:initial;
+  }
+  //medialist
+
+  //footer
+  .copyright{
+    font-size:14px;
+  }
+
+  .footer-menu{
+    font-size:14px;
+  }
+  //footer
+
+  //commentform
+  .commentform-item {
+    width:100%;
+    min-width :initial;
+    font-size:16px;
+  }
+
+  .comment_image_container{
+    overflow:hidden;
+    width:75%;
+  }
+
+  .comment_form_image_1{
+    width:95%;
+    height:auto;
+    min-height:200px;
+    max-height:400px;
+  }
+
+  .comment_form_images{
+    width:45%;
+    max-height:200px;
+    min-height:100px;
+    min-width:100px;
+    height:auto;
+  }
+
+  .comment_form_video{
+    width:95%;
+    height:auto;
+    min-height:140px;
+    max-height:400px;
+  }
+
+  .comment-post-modal {
+    left: 0%;
+    width: 100%;
+  }
+  //commentform
+}
+
+@media(max-width:411px){
+  //userprofile
+  .user_post_image_1{
+    height:auto;
+    min-height:150px;
+    max-height:200px;
+  }
+
+  .user_post_images{
+    height:auto;
+    min-height:75px;
+    max-height:100px;
+  }
+
+  .usersprofile-header-menu li{
+    font-size:12px;
+    overflow-x:scroll;
+    padding:0;
+    width:20%;
+  }
+
+  .gender-edit-modal {
+    width: 100%;
+    left:0;
+  }
+
+  .instrument-edit-modal {
+    width: 100%;
+    left:0;
+  }
+
+  .prefecture-edit-modal {
+    width: 100%;
+    left:0;
+  }
+
+  .detail-edit-modal {
+    width: 100%;
+    left:0;
+  }
+
+  .fa-instrument-cancel-btn{
+    font-size:30px;
+  }
+
+  .fa-prefecture-cancel-btn{
+    font-size:30px;
+  }
+
+  .fa-gender-cancel-btn{
+    font-size:30px;
+  }
+
+  .fa-genre-cancel-btn{
+    font-size:30px;
+  }
+  //userprofile
+
+  //footer
+  .footer-logo{
+    display:none;
+  }
+  //footer
+
+  //medias
+  .userprofile-medias-item{
+    width:100%;
+    max-width:400px;
+    min-width:320px;
+    height:200px;
+  }
+  //medias
+
+  //comment-form
+  .comment_form_image_1{
+    height:auto;
+    min-height:150px;
+    max-height:200px;
+  }
+
+  .comment_form_images{
+    min-height:75px;
+    max-height:100px;
+    height:auto;
+  }
+  //comment-form
+
+  //notice
+  .notice-user-name{
+    font-size:16px;
+  }
+  //notice
+}

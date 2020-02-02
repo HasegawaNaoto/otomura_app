@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AudioTag</title>
+</head>
+<body>
+  <div class="table">
+    <table border="1">
+      <tr>
+        <th>audio_tag_id</th><th>audio_tag_genre</th></tr>
+        <% @audio_tags.each do |audio_tag| %>
+        <tr>
+          <td><%= audio_tag.id %></td>
+          <td><%= audio_tag.genre %></td>
+        </tr>
+        <% end %>
+      </div>
+    </body>
+    </html>

@@ -1,0 +1,217 @@
+<% if @serch_users_load_30.first %>
+<%  @serch_users_load_30.each do |serch_result| %>
+<% if serch_result %>
+<div class="users-serch-item">
+  <div class="post-user-image">
+    <%=link_to image_tag(serch_result.image.url),"/profile/#{serch_result.public_uid}"%>
+  </div>
+
+  <div class="post-user-name">
+    <%= link_to(serch_result.name,"/profile/#{serch_result.public_uid}") %>
+  </div>
+
+  <div class="post-user-id">
+    <%= link_to("@#{serch_result.public_uid}","/profile/#{serch_result.public_uid}") %>
+  </div>
+
+
+  <div class="post-contents">
+
+    <div class="select-profile-serch-container">
+      <% if @gender=Gender.find_by(user_id:serch_result.id) %>
+      <div class="gender">性別:
+        <% if @gender.gender=="man" %>
+        <div id="gender-btn" class="userprofile-gender-man-btn">男性</div>
+        <% end %>
+
+        <% if @gender.gender=="woman" %>
+        <div id="gender-btn" class="userprofile-gender-woman-btn">女性</div>
+        <% end %>
+
+        <% if @gender.gender=="seacret" %>
+        <div id="gender-btn" class="userprofile-gender-seacret-btn">非公開</div>
+        <% end %>
+
+        <% if @gender.gender==nil %>
+        未設定
+        <% end %>
+      </div>
+      <% end %>
+
+      <% if @prefecture=Prefecture.find_by(user_id:serch_result.id) %>
+      <div class="prefecture">地域:
+        <% unless @prefecture.area==nil %>
+        <div id="prefecture-btn" class="userprofile-prefecture-btn"><%= @prefecture.area %></div>
+        <% else %>
+        <div class="not-setting">未設定</div>
+        <% end %>
+      </div>
+      <% end %>
+
+      <% if @instrument=Instrument.find_by(user_id:serch_result.id) %>
+      <div class="instrument">担当パート:
+        <% if @instrument.vocal==true %>
+        <div id="instrument-btn" class="userprofile-instrument-btn">ボーカル</div>
+        <% end %>
+
+        <% if @instrument.guiter==true %>
+        <div id="instrument-btn" class="userprofile-instrument-btn">ギター</div>
+        <% end %>
+
+        <% if @instrument.bass==true %>
+        <div id="instrument-btn" class="userprofile-instrument-btn">ベース</div>
+        <% end %>
+
+        <% if @instrument.drum==true %>
+        <div id="instrument-btn" class="userprofile-instrument-btn">ドラム</div>
+        <% end %>
+
+        <% if @instrument.key==true %>
+        <div id="instrument-btn" class="userprofile-instrument-btn">キーボード</div>
+        <% end %>
+
+        <% if @instrument.dj==true %>
+        <div id="instrument-btn" class="userprofile-instrument-btn">DJ</div>
+        <% end %>
+
+        <% if @instrument.violin==true %>
+        <div id="instrument-btn" class="userprofile-instrument-btn">ヴァイオリン</div>
+        <% end %>
+
+        <% if @instrument.sax==true %>
+        <div id="instrument-btn" class="userprofile-instrument-btn">サックス</div>
+        <% end %>
+
+        <% unless @instrument.other==nil || @instrument.other==""  %>
+        <div id="instrument-btn" class="userprofile-instrument-btn"><%= @instrument.other %></div>
+        <% end %>
+
+        <% if @instrument.vocal==false && @instrument.guiter==false && @instrument.bass==false && @instrument.drum==false && @instrument.key==false && @instrument.dj==false && @instrument.violin==false && @instrument.sax==false && @instrument.other=="" %>
+        未設定
+        <% end %>
+      </div>
+      <% end %>
+
+      <% if @genre=Genre.find_by(user_id:serch_result.id) %>
+      <div class="genre">ジャンル:
+        <% if @genre.rock==true %>
+        <div id="genre-btn" class="userprofile-genre-btn">ロック</div>
+        <% end %>
+
+        <% if @genre.punk==true %>
+        <div id="genre-btn" class="userprofile-genre-btn">パンク</div>
+        <% end %>
+
+        <% if @genre.pop==true %>
+        <div id="genre-btn" class="userprofile-genre-btn">ポップス</div>
+        <% end %>
+
+        <% if @genre.ambient==true %>
+        <div id="genre-btn" class="userprofile-genre-btn">アンビエント</div>
+        <% end %>
+
+        <% if @genre.alternative==true %>
+        <div id="genre-btn" class="userprofile-genre-btn">オルタネイティブ・ロック</div>
+        <% end %>
+
+        <% if @genre.classic==true %>
+        <div id="genre-btn" class="userprofile-genre-btn">クラシック</div>
+        <% end %>
+
+        <% if @genre.jazz==true %>
+        <div id="genre-btn" class="userprofile-genre-btn">ジャズ</div>
+        <% end %>
+
+        <% if @genre.hard_rock==true %>
+        <div id="genre-btn" class="userprofile-genre-btn">ハードロック</div>
+        <% end %>
+
+        <% if @genre.progressive==true %>
+        <div id="genre-btn" class="userprofile-genre-btn">プログレッシブ・ロック</div>
+        <% end %>
+
+        <% if @genre.pop_punk==true %>
+        <div id="genre-btn" class="userprofile-genre-btn">ポップパンク</div>
+        <% end %>
+
+        <% if @genre.heavy_metal==true %>
+        <div id="genre-btn" class="userprofile-genre-btn">ヘヴィーメタル</div>
+        <% end %>
+
+        <% if @genre.metalcore==true %>
+        <div id="genre-btn" class="userprofile-genre-btn">メタルコア</div>
+        <% end %>
+
+        <% if @genre.emo==true %>
+        <div id="genre-btn" class="userprofile-genre-btn">エモーショナル</div>
+        <% end %>
+
+        <% if @genre.merocore==true %>
+        <div id="genre-btn" class="userprofile-genre-btn">メロコア</div>
+        <% end %>
+
+        <% if @genre.hiphop==true %>
+        <div id="genre-btn" class="userprofile-genre-btn">ヒップホップ</div>
+        <% end %>
+
+        <% if @genre.instrument==true %>
+        <div id="genre-btn" class="userprofile-genre-btn">インストルメント</div>
+        <% end %>
+
+        <% if @genre.western==true %>
+        <div id="genre-btn" class="userprofile-genre-btn">洋楽</div>
+        <% end %>
+
+        <% if @genre.japanese==true %>
+        <div id="genre-btn" class="userprofile-genre-btn">邦楽</div>
+        <% end %>
+
+        <% if @genre.acoustic==true %>
+        <div id="genre-btn" class="userprofile-genre-btn">アコースティック</div>
+        <% end %>
+
+        <% if @genre.other1!="" %>
+        <div id="genre-btn" class="userprofile-genre-btn"><%= @genre.other1 %></div>
+        <% end %>
+
+        <% if @genre.other2!="" %>
+        <div id="genre-btn" class="userprofile-genre-btn"><%= @genre.other2 %></div>
+        <% end %>
+
+        <% if @genre.other3!="" %>
+        <div id="genre-btn" class="userprofile-genre-btn"><%= @genre.other3 %></div>
+        <% end %>
+
+        <% if @genre.other4!="" %>
+        <div id="genre-btn" class="userprofile-genre-btn"><%= @genre.other4 %></div>
+        <% end %>
+
+        <% if @genre.other5!="" %>
+        <div id="genre-btn" class="userprofile-genre-btn"><%= @genre.other5 %></div>
+        <% end %>
+
+        <% if @genre.rock==false && @genre.punk==false && @genre.pop==false && @genre.ambient==false && @genre.alternative==false && @genre.classic==false && @genre.jazz==false && @genre.hard_rock==false && @genre.progressive==false && @genre.pop_punk==false && @genre.heavy_metal==false && @genre.metalcore==false &&@genre.merocore==false && @genre.hiphop==false && @genre.instrument==false && @genre.western==false && @genre.japanese==false && @genre.acoustic==false && @genre.other1=="" && @genre.other2=="" && @genre.other3=="" && @genre.other4=="" &&@genre.other5=="" %>
+
+        未設定
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+
+    <% if serch_result.content %>
+    <div class="search-users-content">
+      <span style="font-weight:600">PR:</span>
+      <%= link_to(serch_result.content,"/profile/#{serch_result.public_uid}") %>
+      <% end %>
+
+      <div style="color:rgba(0,0,0,0.6); font-size:14px;" class="old-time"><%= japanese_date(serch_result[:created_at]) %>からANOTHERを利用しています。</div>
+    </div>
+
+  </div>
+</div>
+<% end %>
+<% end %>
+
+<% else %>
+<h2 style="text-align:center; margin-top:50px;">該当するユーザは見つかりませんでした</h2>
+<% end %>

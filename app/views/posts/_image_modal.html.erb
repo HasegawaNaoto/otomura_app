@@ -1,0 +1,134 @@
+<% if post %>
+<div id="img-modal-<%= post.id %>-<%= index %>" class="post-modal-wrapper">
+  <div id="new-post-form" class="image-modal">
+    <%  if post.images? %>
+    <% if index.to_i==0 %>
+    <%= image_tag(post.images[index.to_i].url,id:'imgs-slide',class:"active post_image_modal") %>
+
+    <% if post.images[index.to_i+1]!=nil %>
+    <%= image_tag(post.images[index.to_i+1].url,id:'imgs-slide',class:"post_image_modal") %>
+    <% end %>
+
+    <% if post.images[index.to_i+2]!=nil %>
+    <%= image_tag(post.images[index.to_i+2].url,id:'imgs-slide',class:"post_image_modal") %>
+    <% end %>
+
+    <% if post.images[index.to_i+3]!=nil %>
+    <%= image_tag(post.images[index.to_i+3].url,id:'imgs-slide',class:"post_image_modal") %>
+    <% end %>
+    <% end %>
+
+    <% if index.to_i==1 %>
+    <% if post.images[index.to_i-1]!=nil %>
+    <%= image_tag(post.images[index.to_i-1].url,id:'imgs-slide',class:"post_image_modal") %>
+    <% end %>
+
+    <%= image_tag(post.images[index.to_i].url,id:'imgs-slide',class:"active post_image_modal") %>
+
+    <% if post.images[index.to_i+1]!=nil %>
+    <%= image_tag(post.images[index.to_i+1].url,id:'imgs-slide',class:"post_image_modal") %>
+    <% end %>
+
+    <% if post.images[index.to_i+2]!=nil %>
+    <%= image_tag(post.images[index.to_i+2].url,id:'imgs-slide',class:"post_image_modal") %>
+    <% end %>
+    <% end %>
+
+    <% if index.to_i==2 %>
+    <% if post.images[index.to_i-2]!=nil %>
+    <%= image_tag(post.images[index.to_i-2].url,id:'imgs-slide',class:"post_image_modal") %>
+    <% end %>
+
+    <% if post.images[index.to_i-1]!=nil %>
+    <%= image_tag(post.images[index.to_i-1].url,id:'imgs-slide',class:"post_image_modal") %>
+    <% end %>
+
+    <%= image_tag(post.images[index.to_i].url,id:'imgs-slide',class:"active post_image_modal") %>
+
+    <% if post.images[index.to_i+1]!=nil %>
+    <%= image_tag(post.images[index.to_i+1].url,id:'imgs-slide',class:"post_image_modal") %>
+    <% end %>
+    <% end %>
+
+    <% if index.to_i==3 %>
+    <% if post.images[index.to_i-3]!=nil %>
+    <%= image_tag(post.images[index.to_i-3].url,id:'imgs-slide',class:"post_image_modal") %>
+    <% end %>
+
+    <% if post.images[index.to_i-2]!=nil %>
+    <%= image_tag(post.images[index.to_i-2].url,id:'imgs-slide',class:"post_image_modal") %>
+    <% end %>
+
+    <% if post.images[index.to_i-1]!=nil %>
+    <%= image_tag(post.images[index.to_i-1].url,id:'imgs-slide',class:"post_image_modal") %>
+    <% end %>
+
+    <%= image_tag(post.images[index.to_i].url,id:'imgs-slide',class:"active post_image_modal") %>
+    <% end %>
+
+    <%= icon 'fas','times',id:'img_cancel_btn',class: "fa-img-cancel-btn" %>
+    <%= icon 'fas','arrow-circle-left',id:'img_left_btn',class: "change_btn fa-image-left" %>
+    <%= icon 'fas','arrow-circle-right',id:'img_right_btn',class: "change_btn fa-image-right" %>
+
+    <script>
+      $(function(){
+        <% if index.to_i==0 && post.images.length==1  %>
+        $('.fa-image-left').css('display','none');
+        $('.fa-image-right').css('display','none');
+
+        <% elsif index.to_i==0 %>
+        $('.fa-image-left').css('display','none');
+
+        <% elsif index.to_i==(post.images.length)-1 %>
+        $('.fa-image-right').css('display','none');
+        <% end %>
+
+        $('.change_btn').click(function() {
+          $('.fa-image-left').css('display','block');
+          $('.fa-image-right').css('display','block');
+          var $displaySlide=$('.active');
+          $displaySlide.removeClass('active');
+
+          if ($(this).hasClass('fa-image-right')){
+            $displaySlide.next().addClass('active');
+          }
+
+          else if($(this).hasClass('fa-image-left')){
+            $displaySlide.prev().addClass('active');
+          }
+
+          var slideIndex=$('.post_image_modal').index($('.active'));
+          $('.change-btn').show();
+
+          <% if post.images.length==4 %>
+          if (slideIndex==0){
+            $('.fa-image-left').hide();
+          }
+          else if (slideIndex==3){
+            $('.fa-image-right').hide();
+          }
+          <% elsif post.images.length==3 %>
+          if (slideIndex==0){
+            $('.fa-image-left').hide();
+          }
+          else if (slideIndex==2){
+            $('.fa-image-right').hide();
+          }
+
+          <% elsif post.images.length==2 %>
+          if (slideIndex==0){
+            $('.fa-image-left').hide();
+          }
+          else if (slideIndex==1){
+            $('.fa-image-right').hide();
+          }
+          <%end%>
+
+        });
+
+      });
+    </script>
+    <% end %>
+  </div>
+</div>
+<% end %>

@@ -1,0 +1,38 @@
+<% @comments.each do |comment| %>
+<% if (comment.post_id==post.id) %>
+<div class="posts-index-item">
+  <% user=User.find_by(id:post.user_id) %>
+  <div class="post-user-image">
+    <%=link_to image_tag("/user_images/#{user.image}"),"/users/userprofile/#{user.public_uid}"%>
+  </div>
+  <div class="post-user-name">
+    <%= link_to(user.name,"/users/userprofile/#{user.public_uid}") %>
+  </div>
+
+  <div class="post-user-id">
+    <%= link_to("@#{post_user.public_uid}","/users/userprofile/#{post_user.public_uid}") %>
+  </div>
+
+  <div class="post-contents">
+    <%= link_to(comment.content,"/comment/#{post.id}/show/#{post.id}") %>
+  </div>
+  <div class="time"><%= japanese_time(post[:created_at]) %></div>
+
+  <div class="menu-item">
+    <div id="comment-btn" class="comment-css">
+      <%= fa_icon 'comments lg',class: "fa-comment" %>
+    </div>
+
+    <div id="likes_buttons_<%= post.id %>">
+      <%= render partial: 'like/like',locals: {post: post} %>
+    </div>
+
+    <div class="destroy-css">
+      <%= link_to("/posts/destroy/#{post.id}",method: :post) do %>
+      <%= fa_icon 'trash lg',class: "fa-delete" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
+<% end %>

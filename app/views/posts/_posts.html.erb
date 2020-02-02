@@ -1,0 +1,90 @@
+<div class="posts-index-item-container">
+  <% @posts.each do |post| %>
+  <% post_user=User.find_by(id:post.user_id) %>
+  <% if post_user %>
+  <%= render partial:'comment/commentform',locals: {post: post,comment: @comments} %>
+  <div id="image-patial-item">
+    <%= render partial:'image_modal',locals: {post: post,index: @index} %>
+  </div>
+  <% if post.comment_id==nil %>
+  <div id="posts-index-item-<%= post.id %>" class="posts-index-item">
+    <div class="before-time"><%= date_format(post[:created_at]) %></div>
+    <div class="post-user-image">
+      <%=link_to image_tag(post_user.image.url),"/profile/#{post_user.public_uid}"%>
+    </div>
+    <% if Post.find_by(comment_id:post.id,user_id:post.user_id) %>
+    <div class="comment-line"></div>
+    <% end %>
+
+    <div class="post-user-name">
+      <%= link_to(post_user.name,"/profile/#{post_user.public_uid}") %>
+    </div>
+
+    <div class="post-user-id">
+      <%= link_to("@#{post_user.public_uid}","/profile/#{post_user.public_uid}") %>
+    </div>
+
+    <div class="post-contents">
+      <%= link_to(post.content,"/posts/show/#{post.id}") %>
+    </div>
+
+    <div class="post_image_container">
+      <%  if post.images? %>
+      <% i=0 %>
+      <%  post.images.length.times do %>
+      <% if post.images.length==1 %>
+      <%= link_to image_tag(post.images[i].url,class:"post_image_1"),"/posts/#{post.id}/image/show/#{i}",method: :post,remote:true %>
+      <% elsif post.images.length>1 %>
+      <%= link_to image_tag(post.images[i].url,class:"post_images"),"/posts/#{post.id}/image/show/#{i}",method: :post,remote:true %>
+      <% end %>
+      <% i=i+1 %><% end %>
+      <% end %>
+    </div>
+
+    <div class="post_image_container">
+      <%  if post.video? %>
+      <%= video_tag post.video_url,loop: true, controls: true, width: 550, id: "mv",class:"post_video" %>
+      <% end %>
+    </div>
+
+    <div class="time">
+      <p><%= japanese_time(post[:created_at]) %></p>
+    </div>
+
+    <div class="menu-item">
+      <div id="comment-btn" class="comment-css"><%= link_to("/comment/commentform/#{post.id}",method: :post,remote:true) do %>
+        <%= icon 'fas','comment',class: "fa-comment" %>
+        <% end %>
+      </div>
+
+      <div class="comment-count">
+        <%= Post.where(comment_id: post.id).count %>
+      </div>
+
+      <div id="likes_buttons_<%= post.id %>">
+        <%= render partial: 'like/like',locals: {post: post} %>
+      </div>
+
+      <div class="destroy-css">
+        <%= link_to("/posts/destroy/#{post.id}",method: :post) do %>
+        <%= icon 'fas','trash',class: "fa-delete" %>
+        <% end %>
+      </div>
+    </div>
+
+    <% if Post.find_by(comment_id:post.id,user_id:post.user_id) %>
+    <% repost_user=User.find_by(id:post.user_id) %>
+    <div class="thread-menu-item">
+      <div class="thread-user-image">
+        <%=link_to image_tag(repost_user.image.url),"/profile/#{repost_user.public_uid}"%>
+      </div>
+      <div class="thread-link">
+        <%= link_to("このスレッドを表示する","/posts/show/#{post.id}/#posts-#{post.id}") %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <% end %>
+  <% end %>
+  <% end %>
+</div>

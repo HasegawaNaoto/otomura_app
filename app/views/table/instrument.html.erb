@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ANOTHER</title>
+</head>
+<body>
+  <div class="table">
+    <table border="1">
+      <tr>
+        <th>user_id</th>
+        <th>vocal</th>
+        <th>guiter</th>
+        <th>bass</th>
+        <th>drum</th>
+        <th>key</th>
+        <th>dj</th>
+        <th>sax</th>
+        <th>violin</th>
+        <th>other</th></tr>
+        <% @instruments.each do |instrument| %>
+        <tr>
+          <td><%= instrument.user_id %></td>
+          <td><%= instrument.vocal %></td>
+          <td><%= instrument.guiter %></td>
+          <td><%= instrument.bass %></td>
+          <td><%= instrument.drum %></td>
+          <td><%= instrument.key %></td>
+          <td><%= instrument.dj %></td>
+          <td><%= instrument.sax %></td>
+          <td><%= instrument.violin %></td>
+          <td><%= instrument.other %></td></tr>
+          <% end %>
+        </div>
+      </body>
+      </html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ANOTHER</title>
+</head>
+<body>
+  <div class="table">
+    <table border="1">
+      <tr>
+        <th>user_id</th>
+        <th>rock</th>
+        <th>punk</th>
+        <th>pop</th>
+        <th>ambient</th>
+        <th>alternative</th>
+        <th>classic</th>
+        <th>jazz</th>
+        <th>hard_rock</th>
+        <th>progressive</th>
+        <th>pop_punk</th>
+        <th>heavy_metal</th>
+        <th>metalcore</th>
+        <th>emo</th>
+        <th>merocore</th>
+        <th>hiphop</th>
+        <th>instrument</th>
+        <th>western</th>
+        <th>japanese</th>
+        <th>acoustic</th>
+        <th>other1</th>
+        <th>other2</th>
+        <th>other3</th>
+        <th>other4</th>
+        <th>other5</th>
+      </tr>
+      <% @genres.each do |genre| %>
+      <tr>
+        <td><%= genre.user_id %></td>
+        <td><%= genre.rock %></td>
+        <td><%= genre.punk %></td>
+        <td><%= genre.pop %></td>
+        <td><%= genre.ambient %></td>
+        <td><%= genre.alternative %></td>
+        <td><%= genre.classic %></td>
+        <td><%= genre.jazz %></td>
+        <td><%= genre.hard_rock %></td>
+        <td><%= genre.progressive %></td>
+        <td><%= genre.pop_punk %></td>
+        <td><%= genre.heavy_metal %></td>
+        <td><%= genre.metalcore %></td>
+        <td><%= genre.emo %></td>
+        <td><%= genre.merocore %></td>
+        <td><%= genre.hiphop %></td>
+        <td><%= genre.instrument %></td>
+        <td><%= genre.western %></td>
+        <td><%= genre.japanese %></td>
+        <td><%= genre.acoustic %></td>
+        <td><%= genre.other1 %></td>
+        <td><%= genre.other2 %></td>
+        <td><%= genre.other3 %></td>
+        <td><%= genre.other4 %></td>
+        <td><%= genre.other5 %></td></tr>
+        <% end %>
+      </div>
+    </body>
+    </html>

@@ -1,0 +1,29 @@
+<div style="padding-top:100px;">
+  <%= form_with model:@audio,url:'/audio/create',local:true,method: :post do |form|%>
+  <%= form.label :title,"タイトル" %>
+  <%= form.text_field :title %>
+
+  <%= form.label :genre,"ジャンルタグ" %>
+  <%= form.text_field :genre %>
+
+  <%= form.label :image,"画像" %>
+  <%= form.file_field :image,accept:"image/jpg" %>
+
+  <%= form.label :file,"音源" %>
+  <%= form.file_field :file,accept:"audio/mp3" %>
+
+  <%= form.file_field :file,accept:"video/mp4" %>
+
+  <%= form.submit "変 更" %>
+  <% end %>
+</div>
+
+
+<div style="padding-top:100px;">
+  <%= form_with model:@audio,url:'/audio/searching',local:true,method: :post do |form|%>
+  <%= form.label :keyword,"キーワード" %>
+  <%= form.text_field :keyword %>
+
+  <%= form.submit "検 索" %>
+  <% end %>
+</div>

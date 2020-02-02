@@ -1,0 +1,50 @@
+//user serchレイアウト
+.users-serch-item {
+  position:relative;
+  background-color: white;
+  padding-bottom:15px;
+  height:auto;
+  max-width:865px;
+  width:100%;
+  border-bottom:solid 1px #c1ced7;
+}
+
+.select-profile-serch-container{
+  margin-bottom:20px;
+}
+
+.search-users-content{
+  width:100%;
+}
+
+.old-time{
+  width:100%;
+  text-align:left;
+}
+
+.users-serch a{
+  display:block;
+  line-height:58px;
+  padding-left:30px;
+  padding-right:30px;
+}
+
+.users-serch-fixed a{
+  color:rgba(0,0,0,1);
+}
+
+.users-serch-fixed{
+  display:block;
+  line-height:58px;
+  padding-left:30px;
+  padding-right:30px;
+  border-bottom:2px solid #00a968;
+  cursor:pointer;
+}
+
+.users-serch a:hover{
+  border-bottom:2px solid #00a968;
+  color:rgba(0,0,0,1);
+  transition:0.2s;
+}
+//user serchレイアウト

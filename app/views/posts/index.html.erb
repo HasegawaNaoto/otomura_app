@@ -1,0 +1,19 @@
+<%= render partial: 'newpost' %>
+<%= render partial: 'new_post_destroy' %>
+
+<div class="main">
+  <div class="main-container">
+    <%= render partial: 'index_left_container' %>
+    <div id="posts_index" class="posts-index-center-items">
+      <div class="index-center-header"><h3>投稿一覧</h3></div>
+      <div id="posts-index-item">
+        <%= render partial: 'posts',locals: {post: @posts,comment:@comments} %>
+      </div>
+    </div>
+    <%= render partial: 'index_right_container' %>
+  </div>
+</div>
+
+<script>
+  if (window.location.hash == "#_=_") window.location.hash = "";
+</script>

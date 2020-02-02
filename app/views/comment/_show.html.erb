@@ -1,0 +1,111 @@
+<div class="posts-index-item">
+  <% if Comment.find_by(post_id:comment.id) %>
+  <div class="comment-line"></div>
+  <% end %>
+  <% comment_user=User.find_by(id:post.user_id) %>
+  <div class="post-user-image">
+    <%=link_to image_tag("/user_images/#{comment_user.image}"),"/users/userprofile/#{comment_user.public_uid}"%>
+  </div>
+  <div class="post-user-name">
+    <%= link_to(comment_user.name,"/users/userprofile/#{comment_user.public_uid}") %>
+  </div>
+  <div class="post-contents">
+    <%= link_to(post.content,"/posts/#{post.id}/show/#{comment.id}") %>
+  </div>
+  <div class="time"><%= comment[:created_at] %></div>
+
+  <div class="menu-item">
+    <div id="comment-btn" class="comment-css"><%= link_to("/comment/commentform/#{post.id}",method: :post,remote:true) do %>
+      <%= fa_icon 'comments lg',class: "fa-comment" %>
+      <% end %>
+    </div>
+
+    <div id="likes_buttons_<%= comment.id %>">
+      <%= render partial: 'like/like',locals: {post: @post} %>
+    </div>
+
+    <div class="destroy-css">
+      <%= link_to("/posts/destroy/#{comment.id}",method: :post) do %>
+      <%= fa_icon 'trash lg',class: "fa-delete" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% @comments=Post.where(comment_id: post.id).order(created_at: :desc) %>
+<% @comments.each do |comment| %>
+<% @another_user=Post.find_by(id: comment.comment_id) %>
+<% if @another_user.comment_id==nil %>
+<div class="posts-index-item">
+  <% comment_user=User.find_by(id:comment.User_id) %>
+  <div class="post-user-image">
+    <%=link_to image_tag("/user_images/#{comment_user.image}"),"/users/userprofile/#{comment_user.public_uid}"%>
+  </div>
+
+  <div class="post-user-name">
+    <%= link_to(comment_user.name,"/users/userprofile/#{comment_user.public_uid}") %>
+  </div>
+
+  <div class="post-contents">
+    @<%= link_to(@another_user.User_id,"/users/userprofile/#{@another_user.User_id}") %><br>
+    <%= link_to(comment.content,"/posts/show/#{comment.id}") %>
+  </div>
+  <div class="time"><%= comment[:created_at] %></div>
+
+  <div class="menu-item">
+    <div id="comment-btn" class="comment-css"><%= link_to("/comment/commentform/#{post.id}",method: :post,remote:true) do %>
+      <%= fa_icon 'comments lg',class: "fa-comment" %>
+      <% end %>
+    </div>
+
+    <div id="likes_buttons_<%= post.id %>">
+      <%= render partial: 'like/like',locals: {post: post} %>
+    </div>
+
+
+    <div class="destroy-css">
+      <%= link_to("/posts/destroy/#{post.id}",method: :post) do %>
+      <%= fa_icon 'trash lg',class: "fa-delete" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<% if @another_user.comment_id!=nil %>
+<div class="posts-index-item">
+  <% comment_user=User.find_by(id:comment.User_id) %>
+  <div class="post-user-image">
+    <%=link_to image_tag("/user_images/#{comment_user.image}"),"/users/userprofile/#{comment_user.public_uid}"%>
+  </div>
+
+  <div class="post-user-name">
+    <%= link_to(comment_user.name,"/users/userprofile/#{comment_user.public_uid}") %>
+  </div>
+
+  <div class="post-contents">
+    @<%= link_to(@another_user.User_id,"/users/userprofile/#{@another_user.User_id}") %><br>
+    <%= link_to(comment.content,"/posts/show/#{comment.id}") %>
+  </div>
+  <div class="time"><%= comment[:created_at] %></div>
+
+  <div class="menu-item">
+    <div id="comment-btn" class="comment-css"><%= link_to("/comment/commentform/#{post.id}",method: :post,remote:true) do %>
+      <%= fa_icon 'comments lg',class: "fa-comment" %>
+      <% end %>
+    </div>
+
+    <div id="likes_buttons_<%= post.id %>">
+      <%= render partial: 'like/like',locals: {post: post} %>
+    </div>
+
+
+    <div class="destroy-css">
+      <%= link_to("/posts/destroy/#{post.id}",method: :post) do %>
+      <%= fa_icon 'trash lg',class: "fa-delete" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
+<% end %>

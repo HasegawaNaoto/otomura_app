@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ANOTHER</title>
+</head>
+<body>
+  <div class="table">
+    <table border="1">
+      <tr>
+        <th>send_id</th><th>visited_id</th><th>comment_id</th><th>like_id</th><th>follower_id</th><th>friend_id</th><th>friended_id</th><th>checked</th></tr>
+        <% @notices.each do |notice| %>
+        <tr>
+          <td><%= notice.send_id %></td>
+          <td><%= notice.visited_id %></td>
+          <td><%= notice.comment_id %></td>
+          <td><%= notice.like_id %></td>
+          <td><%= notice.follower_id %></td>
+          <td><%= notice.friend_id %></td>
+          <td><%= notice.friended_id %></td>
+          <td><%= notice.checked %></td>
+        </tr>
+        <% end %>
+      </div>
+    </body>
+    </html>

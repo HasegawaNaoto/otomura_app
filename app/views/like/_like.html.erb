@@ -1,0 +1,14 @@
+<% if Like.find_by(user_id: @current_user.id,post_id: post.id) %>
+<%= link_to("/like/destroy/#{post.id}",method: :post,remote: true) do %>
+<%= icon 'fas','star',class: "fa-like_create" %>
+<% end %>
+
+<% else %>
+<%= link_to("/like/create/#{post.id}",method: :post,remote: true) do %>
+<%= icon 'fas','star',class: "fa-like_destroy" %>
+<% end %>
+<% end %>
+
+<div class="like-count">
+  <%= Like.where(post_id: post.id).count %>
+</div>

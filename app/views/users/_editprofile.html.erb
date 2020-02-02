@@ -1,0 +1,134 @@
+<div id="edit-modal" class="edit-modal-wrapper">
+  <div id="new-edit-form" class="new-edit-form edit-modal">
+    <%= form_with model:@users,url:"/users/edit/#{@users.public_uid}",multipart: true,method: :post,local:true do |form| %>
+
+    <div class="edit-profile-container">
+      <%= icon 'fas','times',id:'edit_cancel_btn',class: "fa-edit-cancel-btn" %>
+      <label id="background_file_label" for="userprofile_background_form">
+        <output id="upload_background"></output>
+        <%= image_tag((@users.background.url),id:"edit-background",class:'edit-user-background') %>
+        <%= icon 'fas','camera',class:"edit-user-background-camera"%>
+        <%= form.file_field :background,id:"userprofile_background_form",accept:"image/*" %>
+      </label>
+
+      <label id="image_file_label" for="userprofile_image_form">
+        <output id="upload_image"></output>
+        <%= image_tag((@users.image.url),id:"edit-image",class:"edit-user-image") %><%= icon 'fas','camera',class:"edit-user-image-camera"%>
+        <%= form.file_field :image,id:"userprofile_image_form",accept:"image/*" %>
+      </label>
+
+      <div class="edit_name_and_content_container">
+        <%= form.label :name,"名前",class:"user-name-edit-label" %>
+        <%= form.text_field :name,value:"#{@users.name}",id:"userprofile_name_form",class:"edit_name_input",placeholder:"ユーザ名" %>
+
+        <%= form.label :public_uid,"ユーザID",class:"user-name-edit-label" %>
+        <%= form.text_field :public_uid,value:"#{@users.public_uid}",id:"userprofile_id_form",class:"edit_name_input",placeholder:"ID名" %>
+
+        <%= form.label :content,"PR",class:"user-name-edit-label" %>
+        <%= form.text_area :content,id:"userprofile_content_form",value:"#{@users.content}",class:'edit_content_input',placeholder:"PR" %>
+      </div>
+      <%= form.submit "変 更",class: 'editprofile-form-btn' %>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  $(function(){
+    var name_first_value=$('#userprofile_name_form').val();
+    var id_first_value=$('#userprofile_id_form').val();
+    var content_first_value=$('#userprofile_content_form').val();
+
+    $('#userprofile_edit_btn').click(function () {
+      $('#edit-modal').show();
+    }),
+    $(document).on('click', function(e) {
+      if($(e.target).is('#edit-modal')) {
+        $('#edit-userprofile-destroy-modal').show();
+      }
+    })
+
+    $('#edit_cancel_btn').click(function(){
+      $('#edit-userprofile-destroy-modal').show();
+    })
+
+
+    $('#edit-userprofile-modal-yes-btn').click(function(){
+      $('#edit-modal').hide();
+      $('#edit-userprofile-destroy-modal').hide();
+      $('#upload_background').after('<output id="upload_background_new"></output>');
+      $('#upload_image').after('<output id="upload_image_new"></output>');
+      $('#upload_background').remove();
+      $('#upload_image').remove();
+      $('#upload_background_new').attr('id','upload_background');
+      $('#upload_image_new').attr('id','upload_image');
+      $('#userprofile_background_form').val("");
+      $('#userprofile_image_form').val("");
+      $('#upload_background').append('<%= image_tag((@users.background.url),id:"edit-background",class:'edit-user-background') %>');
+      $('#upload_image').append('<%= image_tag((@users.image.url),id:"edit-image",class:"edit-user-image") %>');
+      $('#userprofile_name_form').val(name_first_value)
+      $('#userprofile_id_form').val(id_first_value)
+      $('#userprofile_content_form').val(content_first_value)
+    })
+
+    $('#edit-userprofile-modal-no-btn').click(function(){
+      $('#edit-userprofile-destroy-modal').hide();
+    })
+
+  })
+
+  $(function(){
+    document.getElementById('userprofile_background_form').onchange = function(event){
+      initializeFiles();
+
+      var files = event.target.files;
+
+      for (var i = 0, f; f = files[i]; i++) {
+        var reader = new FileReader;
+        reader.readAsDataURL(f);
+
+        reader.onload = (function(theFile) {
+          return function (e) {
+            var div = document.createElement('div');
+            div.className = 'reader_edit_background';
+            div.innerHTML += '<img class="reader_profile_background" src="' + e.target.result + '" />';
+            document.getElementById('upload_background').insertBefore(div, null);
+            $('#edit-background').remove();
+          }
+        })(f);
+      }
+    };
+
+    function initializeFiles() {
+      document.getElementById('upload_background').innerHTML = '';
+    }
+  })
+
+
+  $(function(){
+    document.getElementById('userprofile_image_form').onchange = function(event){
+      initializeFiles();
+
+      var files = event.target.files;
+
+      for (var i = 0, f; f = files[i]; i++) {
+        var reader = new FileReader;
+        reader.readAsDataURL(f);
+
+        reader.onload = (function(theFile) {
+          return function (e) {
+            var div = document.createElement('div');
+            div.className = 'reader_edit_image';
+            div.innerHTML += '<img class="reader_profile_image" src="' + e.target.result + '" />';
+            document.getElementById('upload_image').insertBefore(div, null);
+            $('#edit-image').remove();
+          }
+        })(f);
+      }
+    };
+
+    function initializeFiles() {
+      document.getElementById('upload_image').innerHTML = '';
+    }
+  })
+</script>

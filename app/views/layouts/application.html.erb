@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+  <% if request.fullpath=="/table/audio_tag"%>
+  <title>audio_tag</title>
+
+  <% elsif request.fullpath=="/table/audio_tagmap"%>
+  <title>audio_tagmap</title>
+
+  <% elsif request.fullpath=="/table/audio"%>
+  <title>audio</title>
+
+  <% else %>
+  <title>OTOMURA</title>
+  <% end %>
+
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+  <% if user_signed_in? %>
+  <div class="index-header">
+    <div class="index-header-container">
+      <div class="index-header-list-container">
+        <div class="index-header-list">
+          <ul>
+            <% if request.fullpath=="/posts/index"%>
+            <li class="index-header-menu-fixed-1"><%= link_to("/posts/index") do %>
+              <%= icon 'fas','home',class:"fa-home" %>
+              <% end %>
+            </li>
+            <% else %>
+            <li class="index-header-menu-1"><%= link_to("/posts/index") do %>
+              <%= icon 'fas','home',class:"fa-home" %>
+              <% end %>
+            </li>
+            <% end %>
+
+            <% if request.fullpath=="/users/notice/#{@current_user.public_uid}"%>
+            <li class="index-header-menu-fixed-2"><%= link_to("/users/notice/#{@current_user.public_uid}") do %>
+              <%= icon 'fas','bell',class:"fa-notice" %>
+              <% end %>
+            </li>
+            <% else %>
+            <li id="index-notice-header" class="index-header-menu-2">
+              <%= link_to("/users/notice/#{@current_user.public_uid}") do %>
+              <%= icon 'fas','bell',class:"fa-notice" %>
+              <% if @self_user_notice.first %>
+              <%= icon 'fas','flag-checkered',class:"fa-checked" %>
+              <div class="notices-count"><%= "#{@notices_count}件" %></div>
+              <% end %>
+              <% end %>
+            </li>
+            <% end %>
+
+            <% if request.fullpath=="/search"%>
+            <li class="index-header-menu-fixed-3">
+              <%= link_to("/search") do %>
+              <%=icon 'fas','search',class:"fa-serch" %>
+              <% end %>
+            </li>
+
+            <% else %>
+            <li class="index-header-menu-3">
+              <%= link_to("/search") do %>
+              <%= icon 'fas','search',class:"fa-serch" %>
+              <% end %>
+            </li>
+            <% end %>
+
+
+            <li class="index-header-menu-4"><%= link_to(destroy_user_session_path,method: :delete) do%>
+              <%= icon 'fas','door-open',class:"fa-door" %>
+              <% end %>
+            </li>
+
+
+            <li class="index-header-mypage-container"><%= link_to("/profile/#{@current_user.public_uid}") do %>
+              <div class="mypage-link-font">My Page</div>
+              <div class="index-header-mypage">
+                <%= image_tag(@current_user.image.url) %>
+                <% end %>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="header-logo-container">
+        <div id="header-logo" class="index-header-logo">OTOMURA</div>
+      </div>
+
+      <div id="header-menu-btn" class="header-menu-bar-container"><%= icon 'fas','bars',class:"header-menu-bar"%></div>
+
+      <div id="newpost-form-show" class="index-newpost-icon"><%= icon 'fas','pen-fancy',class:"fa-pen-fancy"%></div>
+
+    </div>
+  </div>
+
+
+  <% if flash[:notice] %>
+  <div id="notice-modal" class="notice-modal-wrapper">
+    <div id="notice" class="notice-header">
+      <div class="notice-content">
+        <%= render partial: 'posts/flash' %>
+      </div>
+      <div id="notice-ok-btn" class="notice-ok-btn-css">
+        OK
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+  <div id=notice-js class="notice-header-js">投稿が完了しました！</div>
+  <% end %>
+
+  <script>
+    <% if @current_user %>
+    <% notice_user=Notice.find_by(checked: false,visited_id: @current_user.id) %>
+    <% if notice_user && notice_user.send_id!=@current_user.id  %>
+    $(function(){
+      var flag=0;
+      setInterval(function(){
+        if (flag==0){
+          $('#index-notice-header').css( 'background','rgba(200,200,200,0.3)');
+          $('.fa-notice').css( 'color','rgb(255,212,0)');
+          flag=1;
+        } else {
+          $('#index-notice-header').css( 'background','none');
+          $('.fa-notice').css( 'color','white');
+          flag=0;
+        }
+      },1000);
+    });
+    <% end %>
+    <% end %>
+  </script>
+
+  <%= yield %>
+
+  <% if user_signed_in? %>
+  <footer>
+    <div class="footer-container">
+      <div class="copyright">Copyright ©</div>
+      <div class="footer-logo">
+        <%= icon 'fas','guitar' %>
+      </div>
+
+      <div class="footer-menu">
+        <ul>
+          <% if @current_user %>
+          <%  unless @current_user.provider? %>
+          <li><%=link_to("アカウントの編集","/users/edit")%></li>
+          <% end %>
+          <% end %>
+          <li><%=link_to("お問い合わせ","https://docs.google.com/forms/d/1mgzMqxZbMJe3Pyiwgo-9NPX002kgZ68eD6iSUMTL4YY/edit")%></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  <% end %>
+</body>
+</html>

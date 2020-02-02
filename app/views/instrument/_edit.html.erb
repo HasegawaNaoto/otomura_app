@@ -1,0 +1,223 @@
+<div id="instrument-edit-modal" class="detail-edit-modal-wrapper">
+  <div id="new-edit-form" class="new-edit-form instrument-edit-modal">
+
+    <div class="detail-edit-profile-container">
+
+      <%= form_with(model: @instrument,url: "/instrument/update/#{@users.id}",method: :post, local: true) do |form| %>
+      <div class="genre-index">
+        <%= icon 'fas','times',id:'intrument_cancel_btn',class: "fa-instrument-cancel-btn" %>
+        <div class="genre-item">
+          <div class="genre-header-menu">
+            <h4>あなたが担当する or 担当したいパートを選択してください！</h4>
+          </div>
+          <%= form.label :vocal,"ボーカル",class:"instrument-check-box-label" %>
+          <%= form.check_box :vocal,class:"instrument-check-box" %>
+          
+          <%= form.label :guiter,"ギター",class:"instrument-check-box-label" %>
+          <%= form.check_box :guiter,class:"instrument-check-box" %>
+
+          <%= form.label :bass,"ベース",class:"instrument-check-box-label" %>
+          <%= form.check_box :bass,class:"instrument-check-box" %>
+
+          <%= form.label :drum,"ドラム",class:"instrument-check-box-label" %>
+          <%= form.check_box :drum,class:"instrument-check-box" %>
+
+          <%= form.label :key,"キーボード",class:"instrument-check-box-label" %>
+          <%= form.check_box :key,class:"instrument-check-box" %>
+
+          <%= form.label :dj,"DJ",class:"instrument-check-box-label" %>
+          <%= form.check_box :dj,class:"instrument-check-box" %>
+
+          <%= form.label :sax,"サックス",class:"instrument-check-box-label" %>
+          <%= form.check_box :sax,class:"instrument-check-box" %>
+
+          <%= form.label :violin,"ヴァイオリン",class:"instrument-check-box-label" %>
+          <%= form.check_box :violin,class:"instrument-check-box" %>
+
+          <%= form.label :other,"その他",class:"instrument-text-field-label" %>
+          <%= form.text_field :other,value:"#{@instrument.other}",placeholder:"一覧にない楽器",class:"instrument-text-field" %>
+
+          <div class="actions">
+            <%= form.submit "更新する", class: "genre-create-btn" %>
+          </div>
+        </div>
+
+        <script>
+          $(function(){
+            $('#instrument-profile-edit-btn').click(function () {
+              $('#instrument-edit-modal').show();
+            }),
+
+            $(document).on('click', function(e) {
+              if($(e.target).is('#instrument-edit-modal')) {
+                $('#edit-instrument-destroy-modal').show();
+              }
+            })
+
+            $("#intrument_cancel_btn").click(function(){
+              $('#edit-instrument-destroy-modal').show();
+            })
+
+            $('#edit-instrument-modal-yes-btn').click(function(){
+              $('#instrument-edit-modal').hide();
+              $('#edit-instrument-destroy-modal').hide();
+            })
+
+            $('#edit-instrument-modal-no-btn').click(function(){
+              $('#edit-instrument-destroy-modal').hide();
+            })
+          });
+
+
+          $(function() {
+            vocal = document.getElementById('instrument_vocal');
+            if (vocal.checked == true) {
+              $('.instrument-check-box-label').eq(0).addClass('instrument-check-box-active');
+            }
+            else {
+              $('.instrument-check-box-label').eq(0).removeClass('instrument-check-box-active');
+            }
+
+            $(vocal).on('change',function(){
+              if (vocal.checked == true) {
+                $('.instrument-check-box-label').eq(0).addClass('instrument-check-box-active');
+              }
+              else {
+                $('.instrument-check-box-label').eq(0).removeClass('instrument-check-box-active');
+              }
+            });
+
+            guiter = document.getElementById('instrument_guiter');
+            if (guiter.checked == true) {
+              $('.instrument-check-box-label').eq(1).addClass('instrument-check-box-active');
+            }
+            else {
+              $('.instrument-check-box-label').eq(1).removeClass('instrument-check-box-active');
+            }
+
+            $(guiter).on('change',function(){
+              if (guiter.checked == true) {
+                $('.instrument-check-box-label').eq(1).addClass('instrument-check-box-active');
+              }
+              else {
+                $('.instrument-check-box-label').eq(1).removeClass('instrument-check-box-active');
+              }
+            });
+
+            bass = document.getElementById('instrument_bass');
+            if (bass.checked == true) {
+              $('.instrument-check-box-label').eq(2).addClass('instrument-check-box-active');
+            }
+            else {
+              $('.instrument-check-box-label').eq(2).removeClass('instrument-check-box-active');
+            }
+
+            $(bass).on('change',function(){
+              if (bass.checked == true) {
+                $('.instrument-check-box-label').eq(2).addClass('instrument-check-box-active');
+              }
+              else {
+                $('.instrument-check-box-label').eq(2).removeClass('instrument-check-box-active');
+              }
+            });
+
+            drum = document.getElementById('instrument_drum');
+            if (drum.checked == true) {
+              $('.instrument-check-box-label').eq(3).addClass('instrument-check-box-active');
+            }
+            else {
+              $('.instrument-check-box-label').eq(3).removeClass('instrument-check-box-active');
+            }
+
+            $(drum).on('change',function(){
+              if (drum.checked == true) {
+                $('.instrument-check-box-label').eq(3).addClass('instrument-check-box-active');
+              }
+              else {
+                $('.instrument-check-box-label').eq(3).removeClass('instrument-check-box-active');
+              }
+            });
+
+            key = document.getElementById('instrument_key');
+            if (key.checked == true) {
+              $('.instrument-check-box-label').eq(4).addClass('instrument-check-box-active');
+            }
+            else {
+              $('.instrument-check-box-label').eq(4).removeClass('instrument-check-box-active');
+            }
+
+            $(key).on('change',function(){
+              if (key.checked == true) {
+                $('.instrument-check-box-label').eq(4).addClass('instrument-check-box-active');
+              }
+              else {
+                $('.instrument-check-box-label').eq(4).removeClass('instrument-check-box-active');
+              }
+            });
+
+            dj = document.getElementById('instrument_dj');
+            if (dj.checked == true) {
+              $('.instrument-check-box-label').eq(5).addClass('instrument-check-box-active');
+            }
+            else {
+              $('.instrument-check-box-label').eq(5).removeClass('instrument-check-box-active');
+            }
+
+            $(dj).on('change',function(){
+              if (dj.checked == true) {
+                $('.instrument-check-box-label').eq(5).addClass('instrument-check-box-active');
+              }
+              else {
+                $('.instrument-check-box-label').eq(5).removeClass('instrument-check-box-active');
+              }
+            });
+
+
+            sax = document.getElementById('instrument_sax');
+            if (sax.checked == true) {
+              $('.instrument-check-box-label').eq(6).addClass('instrument-check-box-active');
+            }
+            else {
+              $('.instrument-check-box-label').eq(6).removeClass('instrument-check-box-active');
+            }
+
+            $(sax).on('change',function(){
+              if (sax.checked == true) {
+                $('.instrument-check-box-label').eq(6).addClass('instrument-check-box-active');
+              }
+              else {
+                $('.instrument-check-box-label').eq(6).removeClass('instrument-check-box-active');
+              }
+            });
+
+            violin = document.getElementById('instrument_violin');
+            if (violin.checked == true) {
+              $('.instrument-check-box-label').eq(7).addClass('instrument-check-box-active');
+            }
+            else {
+              $('.instrument-check-box-label').eq(7).removeClass('instrument-check-box-active');
+            }
+
+            $(violin).on('change',function(){
+              if (violin.checked == true) {
+                $('.instrument-check-box-label').eq(7).addClass('instrument-check-box-active');
+              }
+              else {
+                $('.instrument-check-box-label').eq(7).removeClass('instrument-check-box-active');
+              }
+            });
+
+            var other = document.getElementById("instrument_other").value;
+
+
+            if (other != ""){
+              $('.instrument-text-field').addClass('instrument-text-field-active');
+            }
+          });
+        </script>
+      </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

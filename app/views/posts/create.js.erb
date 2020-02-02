@@ -1,0 +1,14 @@
+$(function(){
+  $('#posts-index-item').html("<%= j(render partial: 'posts',locals: {post: @posts,comment:@comments}) %>");
+  $('#newpost-form').val('');
+  $('#post-modal').hide();
+  $('.new-form')[0].reset();
+  $('#list').after('<output id="list_new"></output>');
+  $('#list').remove();
+  $('#list_new').attr('id','list');
+  $('#article_image_file_name').val("");
+  var $notice=$('#notice-js');
+  $notice.show();
+  $notice.fadeIn(1500);
+  $notice.fadeOut(3000);
+})

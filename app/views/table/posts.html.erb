@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ANOTHER</title>
+</head>
+<body>
+  <div style="height:1000px; overflow:scroll;" class="table">
+    <table border="1">
+      <tr>
+        <th>ID</th><th>contents</th><th>user_id</th><th>comment_id</th><th>images</th><th>video</th><th>post.created_at</th></tr>
+        <% @posts.each do |post| %>
+        <tr>
+          <td><%= post.id %></td>
+          <td><%= post.content %></td>
+          <td><%= post.user_id %></td>
+          <td><%= post.comment_id %></td>
+          <td><%= post.images %></td>
+          <td><%= post.video %></td>
+          <td><%= post.created_at %></td>
+        </tr>
+        <% end %>
+      </div>
+    </body>
+    </html>

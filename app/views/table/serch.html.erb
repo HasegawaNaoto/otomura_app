@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ANOTHER</title>
+</head>
+<body>
+  <div class="table">
+    <table border="1">
+      <tr>
+        <th>user_id</th>
+        <th>word</th>
+        <th>gender</th>
+        <th>area</th>
+        <th>vocal</th>
+        <th>guiter</th>
+        <th>bass</th>
+        <th>drum</th>
+        <th>key</th>
+        <th>dj</th>
+        <th>sax</th>
+        <th>violin</th>
+        <th>other_instrument</th>
+        <th>rock</th>
+        <th>punk</th>
+        <th>pop</th>
+        <th>ambient</th>
+        <th>alternative</th>
+        <th>classic</th>
+        <th>jazz</th>
+        <th>hard_rock</th>
+        <th>progressive</th>
+        <th>pop_punk</th>
+        <th>heavy_metal</th>
+        <th>metalcore</th>
+        <th>emo</th>
+        <th>merocore</th>
+        <th>hiphop</th>
+        <th>instrument</th>
+        <th>western</th>
+        <th>japanese</th>
+        <th>acoustic</th>
+        <th>other_genre</th>
+      </tr>
+      <% @serchs.each do |serch| %>
+      <tr>
+        <td><%= serch.user_id %></td>
+        <td><%= serch.word %></td>
+        <td><%= serch.gender %></td>
+        <td><%= serch.area %></td>
+        <td><%= serch.vocal %></td>
+        <td><%= serch.guiter %></td>
+        <td><%= serch.bass %></td>
+        <td><%= serch.drum %></td>
+        <td><%= serch.key %></td>
+        <td><%= serch.dj %></td>
+        <td><%= serch.sax %></td>
+        <td><%= serch.violin %></td>
+        <td><%= serch.other_instrument %></td>
+        <td><%= serch.rock %></td>
+        <td><%= serch.punk %></td>
+        <td><%= serch.pop %></td>
+        <td><%= serch.ambient %></td>
+        <td><%= serch.alternative %></td>
+        <td><%= serch.classic %></td>
+        <td><%= serch.jazz %></td>
+        <td><%= serch.hard_rock %></td>
+        <td><%= serch.progressive %></td>
+        <td><%= serch.pop_punk %></td>
+        <td><%= serch.heavy_metal %></td>
+        <td><%= serch.metalcore %></td>
+        <td><%= serch.emo %></td>
+        <td><%= serch.merocore %></td>
+        <td><%= serch.hiphop %></td>
+        <td><%= serch.instrument %></td>
+        <td><%= serch.western %></td>
+        <td><%= serch.japanese %></td>
+        <td><%= serch.acoustic %></td>
+        <td><%= serch.other_genre %></td>
+      </tr>
+      <% end %>
+    </div>
+  </body>
+  </html>

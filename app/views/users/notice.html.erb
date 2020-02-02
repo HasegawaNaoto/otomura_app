@@ -1,0 +1,13 @@
+<%= render partial: 'posts/newpost' %>
+<%= render partial: 'posts/new_post_destroy' %>
+<div class="main">
+  <div class="main-container">
+    <%= render partial: 'posts/show_left_container' %>
+    <div id="posts_index" class="posts-notice-center-items">
+      <div class="notice-center-header"><h3>通知</h3></div>
+      <div id="notice-index-item" class="notice-index-item-container">
+        <%= render partial: 'notice',locals: {post: @posts,comment:@comments} %>
+      </div>
+    </div>
+  </div>
+</div>

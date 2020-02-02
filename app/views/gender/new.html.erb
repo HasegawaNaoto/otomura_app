@@ -1,0 +1,45 @@
+<%= form_with(model: @gender,url: "/gender/create",method: :post, local: true) do |form| %>
+<div class="genre-index">
+  <div class="genre-item">
+    <div class="genre-header-menu">
+      <h2>性別</h2>
+    </div>
+    <%= form.label :gender,"男性",value:"man",class:"man gender-check-box-label" %>
+    <%= form.radio_button :gender,:man,class:"gender-check-box",onchange:"onRadioButtonChange();" %>
+
+    <%= form.label :gender,"女性",value:"woman",class:"woman gender-check-box-label" %>
+    <%= form.radio_button :gender,:woman,class:"gender-check-box",onchange:"onRadioButtonChange();" %>
+
+    <%= form.label :gender,"非公開",value:"seacret",class:"seacret gender-check-box-label" %>
+    <%= form.radio_button :gender,:seacret,class:"gender-check-box",onchange:"onRadioButtonChange();" %>
+
+    <div class="actions">
+      <%= form.submit "登録する", class: "gender-create-btn" %>
+    </div>
+  </div>
+</div>
+
+<script>
+  function onRadioButtonChange() {
+    man = document.getElementById('gender_gender_man');
+    woman = document.getElementById('gender_gender_woman');
+    seacret = document.getElementById('gender_gender_seacret');
+
+    if (man.checked == true) {
+      $('.gender-check-box-label').eq(0).addClass('man-active');
+      $('.gender-check-box-label').eq(1).removeClass('woman-active');
+      $('.gender-check-box-label').eq(2).removeClass('seacret-active');
+    }
+    else if (woman.checked == true) {
+      $('.gender-check-box-label').eq(1).addClass('woman-active');
+      $('.gender-check-box-label').eq(0).removeClass('man-active');
+      $('.gender-check-box-label').eq(2).removeClass('seacret-active');
+    }
+    else if (seacret.checked == true) {
+      $('.gender-check-box-label').eq(2).addClass('seacret-active');
+      $('.gender-check-box-label').eq(0).removeClass('man-active');
+      $('.gender-check-box-label').eq(1).removeClass('woman-active');
+    }
+  };
+</script>
+<% end %>

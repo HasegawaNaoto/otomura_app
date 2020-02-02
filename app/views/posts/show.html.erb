@@ -1,0 +1,14 @@
+<%= render partial: 'newpost' %>
+<%= render partial: 'new_post_destroy' %>
+<div class="main">
+  <div class="main-container">
+    <%= render partial: 'show_left_container' %>
+    <div id="posts_index" class="posts-show-center-items">
+      <div class="show-center-header"><h3>スレッド詳細</h3></div>
+      <div id="posts-index-item" class="posts-show-item-container">
+        <%= render partial: 'show',locals: {post: @post} %>
+      </div>
+    </div>
+
+  </div>
+</div>

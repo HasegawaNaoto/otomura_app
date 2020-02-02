@@ -1,0 +1,59 @@
+.instrument-edit-modal {
+  position: absolute;
+  top: 30%;
+  left:calc((100% - 600px)/2);
+  background-color: rgba(240,248,255,1);
+  padding: 0px 0 30px;
+  border-radius: 10px;
+  width: 600px;
+  height: 200px;
+  overflow:scroll;
+}
+
+.instrument-create-btn{
+  cursor:pointer;
+  width:100px;
+  height:40px;
+  line-height:40px;
+  border-top-left-radius:100px;
+  border-bottom-left-radius:100px;
+  border-top-right-radius:100px;
+  border-bottom-right-radius:100px;
+  border:solid 1px rgba(128,128,128,0.5);
+  background-color:rgba(148,148,148,0.5);
+  color:#ffffff;
+  font-weight:600;
+  outline:none;
+  font-size:14px;
+  user-select: none;
+  display:inline-block;
+  margin-left:750px;
+  margin-top:30px;
+  margin-bottom:30px;
+}
+
+.instrument-create-btn:hover{
+  border:solid 1px rgba(128,128,128,1);
+  background-color:rgba(148,148,148,1);
+}
+
+.fa-instrument-cancel-btn{
+  position:absolute;
+  top:3%;
+  right:4%;
+  font-size:40px;
+  color:rgba(108,108,108,1);
+  cursor:pointer;
+  z-index:10;
+}
+
+.fa-instrument-cancel-btn:hover{
+  color:rgba(128,128,128,1);
+}
+
+
+.instrument-profile-edit{
+  display:inline-block;
+  cursor:pointer;
+  width:20px;
+}

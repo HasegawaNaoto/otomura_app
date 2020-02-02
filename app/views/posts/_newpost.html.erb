@@ -1,0 +1,178 @@
+<div id="post-modal" class="post-modal-wrapper">
+  <div id="new-post-form" class="new-post-form post-modal">
+    <%= icon 'fas','times',id:'post_cancel_btn',class: "fa-post-cancel-btn" %>
+    <div class="comment-own-user">
+      <div class="own-user-image">
+        <%= image_tag(@current_user.image.url) %>
+      </div>
+      <div class="own-user-name"><%= link_to(@current_user.name,"/users/userprofile/#{@current_user.public_uid}") %></div>
+      <div class="own-user-id">
+        <%= link_to("@#{@current_user.public_uid}","/users/userprofile/#{@current_user.public_uid}") %>
+      </div>
+    </div>
+
+    <%= form_with model:@post,url:'/posts/create',multipart: true,local:true,method: :post,class: "new-form" do |form| %>
+    <div class="new-post-form-body">
+      <%= form.text_area :content,id:"new-post-content",placeholder:"投稿内容を記入する" %>
+      <div class="output_container">
+        <output id="list">
+        </output>
+      </div>
+
+      <div id="new-post-form-notice" class="form-notice">画像は4枚までしかアップロードできません！</div>
+      <div class="post-menu-select">
+        <label id="image_file_label" class="image_file_css" for="article_image_file_name"><%= icon 'fas', 'camera'%>
+          <%= form.file_field :images,id:"article_image_file_name",accept:"image/*",multiple:true %>
+        </label>
+
+        <label id="video_file_label" class="video_file_css" for="post_video">
+          <%= icon 'fas', 'film'%>
+          <%= form.file_field :video,accept:"video/*" %>
+        </label>
+
+        <div id="newpost-cancel-btn" class="newpost-cancel-container"><%= icon 'fas','times-circle' %></div>
+      </div>
+
+
+      <div class="post-btn-container">
+        <%= form.submit "投 稿",class: 'new-post-btn' %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  $(function() {
+    $('.image_file_css').hover(function() {
+      $(this).css('color', 'rgba(120,200,80,1)');
+    }, function() {
+      $(this).css('color', 'rgba(10,180,80,0.7)');
+    })
+  });
+
+  $(function() {
+    $('.video_file_css').hover(function() {
+      $(this).css('color', 'rgba(120,200,80,1)');
+    }, function() {
+      $(this).css('color', 'rgba(10,180,80,0.7)');
+    })
+  });
+
+  $(function(){
+    document.getElementById('post_video').onchange = function(event){
+      initializeFiles();
+
+      var files = event.target.files;
+
+      var size_in_megabytes = files[0].size/1024/1024;
+      if (size_in_megabytes > 100) {
+        alert('ファイルの容量が大きすぎます(100MB以内で添付してください)');
+        $('#post_video').val("")
+
+      }else{
+
+        var reader = new FileReader;
+        reader.readAsDataURL(files[0]);
+
+        reader.onload = (function(theFile) {
+          return function (e) {
+            var div = document.createElement('div');
+
+            $('#new-post-form-notice').css('display','none');
+            div.className = 'reader_video_file';
+            div.innerHTML += '<video class="reader_video" src="' + e.target.result + '" controls autoplay muted />';
+
+            document.getElementById('list').insertBefore(div, null);
+          }
+        })(files[0]);
+
+        $('#article_image_file_name').attr('id', 'article_image_file_name_none');
+        $('.image_file_css').css('color', 'rgba(120,120,120,0.7)');
+        $('.image_file_css').hover(function() {
+          $(this).css('color', 'rgba(120,120,120,1)');
+        }, function() {
+          $(this).css('color', 'rgba(120,120,120,0.7)');
+        })
+        $('.image_file_css').css('cursor','default');
+
+        $('#post_video').attr('id', 'post_video_none');
+        $('.video_file_css').css('color', 'rgba(120,120,120,0.7)');
+        $('.video_file_css').hover(function() {
+          $(this).css('color', 'rgba(120,120,120,1)');
+        }, function() {
+          $(this).css('color', 'rgba(120,120,120,0.7)');
+        })
+        $('.video_file_css').css('cursor','default');
+
+
+      }
+    };
+
+    function initializeFiles() {
+      document.getElementById('list').innerHTML = '';
+    }
+  })
+
+
+  $(function(){
+    document.getElementById('article_image_file_name').onchange = function(event){
+      initializeFiles();
+
+      var files = event.target.files;
+
+      for (var i = 0, f; f = files[i]; i++) {
+        var reader = new FileReader;
+        reader.readAsDataURL(f);
+
+        reader.onload = (function(theFile) {
+          return function (e) {
+            var div = document.createElement('div');
+
+            if(i==1){
+              $('#new-post-form-notice').css('display','none');
+              div.className = 'reader_file_1';
+              div.innerHTML += '<img class="reader_image_1" src="' + e.target.result + '" />';
+            }
+
+            else if(1<i && i<5){
+              $('#new-post-form-notice').css('display','none')
+              div.className = 'reader_file_2';
+              div.innerHTML += '<img class="reader_image_2" src="' + e.target.result + '" />';
+            }
+
+            else if(i>4){
+              $('#new-post-form-notice').css('display','block')
+              $('#article_image_file_name').val("")
+            }
+
+            document.getElementById('list').insertBefore(div, null);
+          }
+        })(f);
+      }
+
+      $('#post_video').attr('id', 'post_video_none');
+      $('.video_file_css').css('color', 'rgba(120,120,120,0.7)');
+      $('.video_file_css').hover(function() {
+        $(this).css('color', 'rgba(120,120,120,1)');
+      }, function() {
+        $(this).css('color', 'rgba(120,120,120,0.7)');
+      })
+      $('.video_file_css').css('cursor','default');
+
+      $('#article_image_file_name').attr('id', 'article_image_file_name_none');
+      $('.image_file_css').css('color', 'rgba(120,120,120,0.7)');
+      $('.image_file_css').hover(function() {
+        $(this).css('color', 'rgba(120,120,120,1)');
+      }, function() {
+        $(this).css('color', 'rgba(120,120,120,0.7)');
+      })
+      $('.image_file_css').css('cursor','default');
+
+    };
+
+    function initializeFiles() {
+      document.getElementById('list').innerHTML = '';
+    }
+  })
+</script>

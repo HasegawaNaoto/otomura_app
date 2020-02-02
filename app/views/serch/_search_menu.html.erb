@@ -1,0 +1,13 @@
+<ul>
+  <% if request.fullpath=="/search/#{@current_user.public_uid}/posts"%>
+  <li class="posts-serch-fixed"><a><%=link_to("投稿","/search/#{@current_user.public_uid}/posts")%></a></li>
+  <% else %>
+  <li class="posts-serch"><a><%=link_to("投稿","/search/#{@current_user.public_uid}/posts")%></a></li>
+  <% end %>
+
+  <% if request.fullpath=="/search/#{@current_user.public_uid}/users"%>
+  <li class="users-serch-fixed"><a><%=link_to("ユーザ","/search/#{@current_user.public_uid}/users")%></a></li>
+  <% else %>
+  <li class="users-serch"><a><%=link_to("ユーザ","/search/#{@current_user.public_uid}/users")%></a></li>
+  <% end %>
+</ul>

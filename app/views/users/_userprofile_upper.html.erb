@@ -1,0 +1,16 @@
+<div class="userprofile-background">
+  <%= image_tag(@users.background.url) %>
+</div>
+
+<div class="user-image">
+  <%= image_tag(@users.image.url) %>
+</div>
+
+<%= render partial: 'userprofile_left_container' %>
+
+<div class="usersprofile-menu">
+  <div class="usersprofile-header-container">
+
+    <div class="usersprofile-header-menu">
+      <%= render partial: 'userprofile_menu' %>
+    </div>

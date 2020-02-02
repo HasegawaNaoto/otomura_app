@@ -1,0 +1,14 @@
+$(function(){
+  $('#image-patial-item').html("<%= j(render partial: 'image_modal',locals: {post: @post,index:@index}) %>");
+  $('#image-patial-item-before').html("<%= j(render partial: 'image_modal',locals: {post: @post,index:@index}) %>");
+  $('#img-modal-<%= @post.id %>-<%= @index %>').show();
+  $(document).on('click', function(e) {
+    if($(e.target).is('#img-modal-<%= @post.id %>-<%= @index %>')) {
+      $('#img-modal-<%= @post.id %>-<%= @index %>').hide();
+    }
+  })
+
+  $('#img_cancel_btn').click(function(){
+    $('#img-modal-<%= @post.id %>-<%= @index %>').hide();
+  })
+})

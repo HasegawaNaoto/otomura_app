@@ -1,0 +1,29 @@
+<% if @serch_users_load_30 %>
+<% i=0 %>
+<% @serch_users_load_30.length.times do %>
+<% user=@serch_users_load_30[i] %>
+<% if user %>
+<div class="users-serch-item">
+  <div class="post-user-image">
+    <%=link_to image_tag(user.image.url),"/users/userprofile/#{user.id}"%>
+  </div>
+
+  <div class="post-user-name">
+    <%= link_to(user.name,"/users/userprofile/#{user.id}") %>
+  </div>
+
+  <div class="post-user-id">
+    <%= link_to("@#{user.id}","/users/userprofile/#{user.id}") %>
+  </div>
+
+  <div class="post-contents">
+    <% if user.content %>
+    <%= link_to(user.content,"/users/userprofile/#{user.id}") %>
+    <% end %>
+  </div>
+  <div style="color:rgba(0,0,0,0.6); font-size:14px;" class="time"><%= japanese_date(user[:created_at]) %>からANOTHERを利用しています。</div>
+</div>
+<% i=i+1 %>
+<% end %>
+<% end %>
+<% end %>

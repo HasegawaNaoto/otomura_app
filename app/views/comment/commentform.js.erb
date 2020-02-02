@@ -1,0 +1,78 @@
+$(function(){
+  $('#comment-modal-<%= @post.id %>').show();
+
+
+  $('#comment_post_form_btn_<%=@post.id%>').click(function () {
+    $('#comment-modal-<%= @post.id %>').hide();
+    $('#comment_list_<%= @post.id %>').after('<output id="comment_list_new_<%= @post.id %>"></output>');
+    $('#comment_list_<%= @post.id %>').remove();
+    $('#comment_list_new_<%= @post.id %>').attr('id','comment_list_<%= @post.id %>');
+  })
+
+  $(document).on('click', function(e) {
+    if($(e.target).is('#comment-modal-<%= @post.id %>')) {
+      $('#new-comment-destroy-modal-<%=@post.id%>').show();
+    }
+  })
+
+  $('#comment_cancel_btn_<%= @post.id %>').click(function(){
+    $('#new-comment-destroy-modal-<%=@post.id%>').show();
+  })
+
+  $('#new-comment-modal-yes-btn-<%=@post.id%>').click(function(){
+    $('#comment-modal-<%= @post.id %>').hide();
+    $('#new-comment-destroy-modal-<%=@post.id%>').hide();
+    $('#comment_list_<%= @post.id %>').after('<output id="comment_list_new_<%= @post.id %>"></output>');
+    $('#comment_list_<%= @post.id %>').remove();
+    $('#comment_list_new_<%= @post.id %>').attr('id','comment_list_<%= @post.id %>');
+    $('#comment-text-form-<%=@post.id%>').val("");
+    $('#comment_image_file_name_<%= @post.id %>').val("");
+    $('#post_video_<%= @post.id %>').val("");
+    $('#comment_image_file_name_none_<%= @post.id %>').attr('id', 'comment_image_file_name_<%= @post.id %>');
+    $('.image_file_css').css('color', 'rgba(10,180,80,0.7)');
+    $('.image_file_css').hover(function() {
+      $(this).css('color', 'rgba(120,200,80,1)');
+    }, function() {
+      $(this).css('color', 'rgba(10,180,80,0.7)');
+    })
+    $('.image_file_css').css('cursor','pointer');
+
+    $('#post_video_none_<%= @post.id %>').attr('id', 'post_video_<%= @post.id %>');
+    $('.video_file_css').css('color', 'rgba(10,180,80,0.7)');
+    $('.video_file_css').hover(function() {
+      $(this).css('color', 'rgba(120,200,80,1)');
+    }, function() {
+      $(this).css('color', 'rgba(10,180,80,0.7)');
+    })
+    $('.video_file_css').css('cursor','pointer');
+  })
+
+  $('#new-comment-modal-no-btn-<%=@post.id%>').click(function(){
+    $('#new-comment-destroy-modal-<%=@post.id%>').hide();
+  })
+
+  $('#newpost-cancel-btn-<%= @post.id%>').click(function () {
+    $('#comment_list_<%= @post.id %>').after('<output id="comment_list_new_<%= @post.id %>"></output>');
+    $('#comment_list_<%= @post.id %>').remove();
+    $('#comment_list_new_<%= @post.id %>').attr('id','comment_list_<%= @post.id %>');
+    $('#comment_image_file_name_<%= @post.id %>').val("");
+    $('#post_video_<%= @post.id %>').val("");
+    $('#comment_image_file_name_none_<%= @post.id %>').attr('id', 'comment_image_file_name_<%= @post.id %>');
+    $('.image_file_css').css('color', 'rgba(10,180,80,0.7)');
+    $('.image_file_css').hover(function() {
+      $(this).css('color', 'rgba(120,200,80,1)');
+    }, function() {
+      $(this).css('color', 'rgba(10,180,80,0.7)');
+    })
+    $('.image_file_css').css('cursor','pointer');
+
+    $('#post_video_none_<%= @post.id %>').attr('id', 'post_video_<%= @post.id %>');
+    $('.video_file_css').css('color', 'rgba(10,180,80,0.7)');
+    $('.video_file_css').hover(function() {
+      $(this).css('color', 'rgba(120,200,80,1)');
+    }, function() {
+      $(this).css('color', 'rgba(10,180,80,0.7)');
+    })
+    $('.video_file_css').css('cursor','pointer');
+  })
+})

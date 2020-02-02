@@ -1,0 +1,500 @@
+<% if post %>
+<div id="image-patial-item">
+  <%= render partial:'image_modal',locals: {post: post,index: @index} %>
+</div>
+
+<% i=0 %>
+<% before_posts=[] %>
+
+<% before_posts[i]=Post.find_by(id: post.comment_id) %>
+
+
+<% if before_posts[i]==nil %>
+<% else %>
+<% loop do %>
+<% if before_posts[i].comment_id!=nil %>
+<% before_posts[i+1]=Post.find_by(id: before_posts[i].comment_id) %>
+<% i=i+1 %>
+<% else %>
+<% break %>
+<% end %>
+<% end %>
+<% end %>
+
+<% if before_posts[i]==nil %>
+<% else %>
+<% i=before_posts.length %>
+<% i.times do %>
+<div id="posts-<%= before_posts[i-1].id %>" class="posts-show-item">
+  <div class="before-time"><%= date_format(before_posts[i-1][:created_at]) %></div>
+  <%= render partial:'comment/commentform',locals: {post: before_posts[i-1]} %>
+
+  <% @another=Post.find_by(id: before_posts[i-1].comment_id) %>
+  <% if @another %>
+  <% @another_user=User.find_by(id: @another.user_id) %>
+  <% end %>
+
+  <% if Post.find_by(comment_id:before_posts[i-1].id) %>
+  <div class="show-comment-line"></div>
+  <% end %>
+  <% before_post_user=User.find_by(id:before_posts[i-1].user_id) %>
+  <div class="post-user-image">
+    <%=link_to image_tag(before_post_user.image.url),"/profile/#{before_post_user.public_uid}"%>
+  </div>
+  <div class="post-user-name">
+    <%= link_to(before_post_user.name,"/profile/#{before_post_user.public_uid}") %>
+  </div>
+  <div class="post-user-id">
+    <%= link_to("@#{before_post_user.public_uid}","/profile/#{before_post_user.public_uid}") %>
+  </div>
+  <div class="post-contents">
+    <% if @another_user %>
+    <%= link_to("> Reply To @#{@another_user.public_uid}","/profile/#{@another_user.public_uid}",style:"font-size:16px; color:blue; border-bottom:solid 1px blue;") %><br>
+    <% end %>
+
+    <%= link_to(before_posts[i-1].content,"/posts/show/#{before_posts[i-1].id}/#posts-#{before_posts[i-1].id}") %>
+  </div>
+
+  <div class="show_post_image_container">
+    <%  if before_posts[i-1].images? %>
+    <% k=0 %>
+    <%  before_posts[i-1].images.length.times do %>
+    <% if before_posts[i-1].images.length==1 %>
+    <%= link_to image_tag(before_posts[i-1].images[k].url,class:"show_post_image_1"),"/posts/#{before_posts[i-1].id}/image/show/#{k}",method: :post,remote:true %>
+    <% elsif before_posts[i-1].images.length>1 %>
+    <%= link_to image_tag(before_posts[i-1].images[k].url,class:"show_post_images"),"/posts/#{before_posts[i-1].id}/image/show/#{k}",method: :post,remote:true %>
+    <% end %>
+    <% k=k+1 %>
+    <% end %>
+    <% end %>
+  </div>
+
+
+  <div class="show_post_image_container">
+    <%  if before_posts[i-1].video? %>
+    <%= video_tag before_posts[i-1].video_url,loop: true, controls: true, width: 550, id: "mv",class:"show_post_video" %>
+    <% end %>
+  </div>
+
+
+  <div class="time"><p><%= japanese_time(before_posts[i-1][:created_at]) %></p></div>
+
+  <div class="menu-item">
+    <div id="comment-btn" class="comment-css"><%= link_to("/comment/commentform/#{before_posts[i-1].id}",method: :post,remote:true) do %>
+      <%= icon 'fas','comment',class: "fa-comment" %>
+      <% end %>
+    </div>
+
+    <div class="comment-count">
+      <%= Post.where(comment_id: before_posts[i-1].id).count %>
+    </div>
+
+    <div id="likes_buttons_<%= before_posts[i-1].id %>">
+      <%= render partial: 'like/like',locals: {post: before_posts[i-1]} %>
+    </div>
+
+    <div class="destroy-css">
+      <%= link_to("/posts/destroy/#{before_posts[i-1].id}",method: :post) do %>
+      <%= icon 'fas','trash',class: "fa-delete" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% i=i-1 %>
+<% end %>
+<% end %>
+
+
+<div id="posts-<%= post.id %>" class="posts-show-item">
+  <%= render partial:'comment/commentform',locals: {post: post} %>
+
+
+  <% @another=Post.find_by(id: post.comment_id) %>
+  <% if @another %>
+  <% @another_user=User.find_by(id: @another.user_id) %>
+  <% end %>
+
+  <div class="before-time"><%= date_format(post[:created_at]) %></div>
+  <% if Post.find_by(comment_id:post.id) %>
+  <div class="show-comment-line"></div>
+  <% end %>
+  <% post_user=User.find_by(id:post.user_id) %>
+  <div class="post-user-image">
+    <%=link_to image_tag(post_user.image.url),"/profile/#{post_user.public_uid}"%>
+  </div>
+  <div class="post-user-name">
+    <%= link_to(post_user.name,"/profile/#{post_user.public_uid}") %>
+  </div>
+  <div class="post-user-id">
+    <%= link_to("@#{post_user.public_uid}","/profile/#{post_user.public_uid}") %>
+  </div>
+  <div  style="font-size:24px; font-weight:400;" id="posts-show-<%= post.id %>" class="post-contents">
+    <% if @another_user %>
+    <%= link_to("> Reply To @#{@another_user.public_uid}","/profile/#{@another_user.public_uid}",style:"font-size:16px; color:blue; border-bottom:solid 1px blue;") %><br>
+    <% end %>
+
+    <%= link_to(post.content,"/posts/show/#{post.id}/#posts-#{post.id}") %>
+  </div>
+
+  <script>
+    $(function(){
+      var OFFSET=50;
+      $(window).scrollTop($('#posts-<%= post.id %>').offset().top-OFFSET);
+    });
+
+    $('#posts-show-<%= post.id %>').click(function() {
+      var OFFSET=50;
+      $("html,body").animate({scrollTop:$('#posts-<%= post.id %>').offset().top-OFFSET});
+    });
+  </script>
+
+  <div class="show_post_image_container">
+    <%  if post.images? %>
+    <% k=0 %>
+    <%  post.images.length.times do %>
+    <% if post.images.length==1 %>
+    <%= link_to image_tag(post.images[k].url,class:"show_post_image_1"),"/posts/#{post.id}/image/show/#{k}",method: :post,remote:true %>
+    <% elsif post.images.length>1 %>
+    <%= link_to image_tag(post.images[k].url,class:"show_post_images"),"/posts/#{post.id}/image/show/#{k}",method: :post,remote:true %>
+    <% end %>
+    <% k=k+1 %>
+    <% end %>
+    <% end %>
+  </div>
+
+  <div class="show_post_image_container">
+    <%  if post.video? %>
+    <%= video_tag post.video_url,loop: true, controls: true, width: 550, id: "mv",class:"show_post_video" %>
+    <% end %>
+  </div>
+
+  <div class="time"><p><%= japanese_time(post[:created_at]) %></p></div>
+
+  <div class="menu-item">
+    <div id="comment-btn" class="comment-css"><%= link_to("/comment/commentform/#{post.id}",method: :post,remote:true) do %>
+      <%= icon 'fas','comment',class: "fa-comment" %>
+      <% end %>
+    </div>
+
+    <div class="comment-count">
+      <%= Post.where(comment_id: post.id).count %>
+    </div>
+
+    <div id="likes_buttons_<%= post.id %>">
+      <%= render partial: 'like/like',locals: {post: @post} %>
+    </div>
+
+    <div class="destroy-css">
+      <%= link_to("/posts/destroy/#{post.id}",method: :post) do %>
+      <%= icon 'fas','trash',class: "fa-delete" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+<% reposts=Post.where(comment_id: post.id,user_id:post.user_id) %>
+<% reposts.each do |repost| %>
+<div id="posts-<%= repost.id %>" class="posts-show-item">
+  <div class="before-time"><%= date_format(repost[:created_at]) %></div>
+  <%= render partial:'comment/commentform',locals: {post: repost} %>
+
+  <% @another=Post.find_by(id: repost.comment_id) %>
+  <% @another_user=User.find_by(id: @another.user_id) %>
+
+  <% if Post.find_by(comment_id:repost.id) %>
+  <div class="show-comment-line"></div>
+  <% end %>
+  <% repost_user=User.find_by(id:repost.user_id) %>
+  <div class="post-user-image">
+    <%=link_to image_tag(repost_user.image.url),"/profile/#{repost_user.public_uid}"%>
+  </div>
+  <div class="post-user-name">
+    <%= link_to(repost_user.name,"/profile/#{repost_user.public_uid}") %>
+  </div>
+  <div class="post-user-id">
+    <%= link_to("@#{repost_user.public_uid}","/profile/#{repost_user.public_uid}") %>
+  </div>
+  <div class="post-contents">
+    <%= link_to("> Reply To @#{@another_user.public_uid}","/profile/#{@another_user.public_uid}",style:"font-size:16px; color:blue; border-bottom:solid 1px blue;") %><br>
+    <%= link_to(repost.content,"/posts/show/#{repost.id}/#posts-#{repost.id}") %>
+  </div>
+
+  <div class="show_post_image_container">
+    <%  if repost.images? %>
+    <% k=0 %>
+    <%  repost.images.length.times do %>
+    <% if repost.images.length==1 %>
+    <%= link_to image_tag(repost.images[k].url,class:"show_post_image_1"),"/posts/#{repost.id}/image/show/#{k}",method: :post,remote:true %>
+    <% elsif repost.images.length>1 %>
+    <%= link_to image_tag(repost.images[k].url,class:"show_post_images"),"/posts/#{repost.id}/image/show/#{k}",method: :post,remote:true %>
+    <% end %>
+    <% k=k+1 %>
+    <% end %>
+    <% end %>
+  </div>
+
+  <div class="show_post_image_container">
+    <%  if repost.video? %>
+    <%= video_tag repost.video_url,loop: true, controls: true, width: 550, id: "mv",class:"show_post_video" %>
+    <% end %>
+  </div>
+
+  <div class="time"><p><%= japanese_time(repost[:created_at]) %></p></div>
+
+  <div class="menu-item">
+    <div id="comment-btn" class="comment-css"><%= link_to("/comment/commentform/#{repost.id}",method: :post,remote:true) do %>
+      <%= icon 'fas','comment',class: "fa-comment" %>
+      <% end %>
+    </div>
+
+    <div class="comment-count">
+      <%= Post.where(comment_id: repost.id).count %>
+    </div>
+
+    <div id="likes_buttons_<%= repost.id %>">
+      <%= render partial: 'like/like',locals: {post: repost} %>
+    </div>
+
+    <div class="destroy-css">
+      <%= link_to("/posts/destroy/#{repost.id}",method: :post) do %>
+      <%= icon 'fas','trash',class: "fa-delete" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
+
+
+<% @comments=Post.where(comment_id: post.id).order(created_at: :asc) %>
+<% @comments.each do |comment| %>
+<% if comment.user_id!=post.user_id %>
+<%= render partial:'comment/commentform',locals: {post: comment} %>
+<% @another=Post.find_by(id: comment.comment_id) %>
+<% @another_user=User.find_by(id: @another.user_id) %>
+<div id="posts-<%= comment.id %>" class="posts-show-item">
+  <div class="before-time"><%= date_format(comment[:created_at]) %></div>
+  <% if Post.find_by(comment_id:comment.id) %>
+  <div class="show-comment-line"></div>
+  <% end %>
+  <% comment_user=User.find_by(id:comment.user_id) %>
+  <div class="post-user-image">
+    <%=link_to image_tag(comment_user.image.url),"/profile/#{comment_user.public_uid}"%>
+  </div>
+
+  <div class="post-user-name">
+    <%= link_to(comment_user.name,"/profile/#{comment_user.public_uid}") %>
+  </div>
+
+  <div class="post-user-id">
+    <%= link_to("@#{comment_user.public_uid}","/profile/#{comment_user.public_uid}") %>
+  </div>
+
+  <div class="post-contents">
+    <%= link_to("> Reply To @#{@another_user.public_uid}","/profile/#{@another_user.public_uid}",style:"font-size:16px; color:blue; border-bottom:solid 1px blue;") %><br>
+
+    <%= link_to(comment.content,"/posts/show/#{comment.id}/#posts-#{comment.id}") %>
+  </div>
+
+  <div class="show_post_image_container">
+    <%  if comment.images? %>
+    <% k=0 %>
+    <%  comment.images.length.times do %>
+    <% if comment.images.length==1 %>
+    <%= link_to image_tag(comment.images[k].url,class:"show_post_image_1"),"/posts/#{comment.id}/image/show/#{k}",method: :post,remote:true %>
+    <% elsif comment.images.length>1 %>
+    <%= link_to image_tag(comment.images[k].url,class:"show_post_images"),"/posts/#{comment.id}/image/show/#{k}",method: :post,remote:true %>
+    <% end %>
+    <% k=k+1 %>
+    <% end %>
+    <% end %>
+  </div>
+
+
+  <div class="show_post_image_container">
+    <%  if comment.video? %>
+    <%= video_tag comment.video_url,loop: true, controls: true, width: 550, id: "mv",class:"show_post_video" %>
+    <% end %>
+  </div>
+
+  <div class="time"><p><%= japanese_time(comment[:created_at]) %></p></div>
+
+  <div class="menu-item">
+    <div id="comment-btn" class="comment-css"><%= link_to("/comment/commentform/#{comment.id}",method: :post,remote:true) do %>
+      <%= icon 'fas','comment',class: "fa-comment" %>
+      <% end %>
+    </div>
+
+    <div class="comment-count">
+      <%= Post.where(comment_id: comment.id).count %>
+    </div>
+
+    <div id="likes_buttons_<%= comment.id %>">
+      <%= render partial: 'like/like',locals: {post: comment} %>
+    </div>
+
+
+    <div class="destroy-css">
+      <%= link_to("/posts/destroy/#{comment.id}",method: :post) do %>
+      <%= icon 'fas','trash',class: "fa-delete" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<% @recomments=Post.where(comment_id: comment.id).order(created_at: :desc) %>
+<% @recomments.each do |recomment| %>
+<% if recomment.user_id!=comment.user_id %>
+<%= render partial:'comment/commentform',locals: {post: recomment} %>
+<% @another=Post.find_by(id: recomment.comment_id) %>
+<% @another_user=User.find_by(id: @another.user_id) %>
+<div id="posts-<%= recomment.id %>" class="posts-show-item">
+  <div class="before-time"><%= date_format(recomment[:created_at]) %></div>
+  <% if Post.find_by(comment_id:recomment.id) %>
+  <div class="show-comment-line"></div>
+  <% end %>
+  <% recomment_user=User.find_by(id: recomment.user_id) %>
+  <div class="post-user-image">
+    <%=link_to image_tag(recomment_user.image.url),"/profile/#{recomment_user.public_uid}"%>
+  </div>
+
+  <div class="post-user-name">
+    <%= link_to(recomment_user.name,"/profile/#{recomment_user.public_uid}") %>
+  </div>
+
+  <div class="post-user-id">
+    <%= link_to("@#{recomment_user.public_uid}","/profile/#{recomment_user.public_uid}") %>
+  </div>
+
+  <div class="post-contents">
+    <%= link_to("> Reply To @#{@another_user.public_uid}","/profile/#{@another_user.public_uid}",style:"font-size:16px; color:blue; border-bottom:solid 1px blue;") %><br>
+    <%= link_to(recomment.content,"/posts/show/#{recomment.id}/#posts-#{recomment.id}") %>
+  </div>
+
+  <div class="show_post_image_container">
+    <%  if recomment.images? %>
+    <% k=0 %>
+    <%  recomment.images.length.times do %>
+    <% if recomment.images.length==1 %>
+    <%= link_to image_tag(recomment.images[k].url,class:"show_post_image_1"),"/posts/#{recomment.id}/image/show/#{k}",method: :post,remote:true %>
+    <% elsif recomment.images.length>1 %>
+    <%= link_to image_tag(recomment.images[k].url,class:"show_post_images"),"/posts/#{recomment.id}/image/show/#{k}",method: :post,remote:true %>
+    <% end %>
+    <% k=k+1 %>
+    <% end %>
+    <% end %>
+  </div>
+
+  <div class="show_post_image_container">
+    <%  if recomment.video? %>
+    <%= video_tag recomment.video_url,loop: true, controls: true, width: 550, id: "mv",class:"show_post_video" %>
+    <% end %>
+  </div>
+
+
+  <div class="time"><p><%= japanese_time(recomment[:created_at]) %></p></div>
+
+  <div class="menu-item">
+    <div id="comment-btn" class="comment-css"><%= link_to("/comment/commentform/#{recomment.id}",method: :post,remote:true) do %>
+      <%= icon 'fas','comment',class: "fa-comment" %>
+      <% end %>
+    </div>
+
+    <div class="comment-count">
+      <%= Post.where(comment_id: recomment.id).count %>
+    </div>
+
+    <div id="likes_buttons_<%= recomment.id %>">
+      <%= render partial: 'like/like',locals: {post: recomment} %>
+    </div>
+
+
+    <div class="destroy-css">
+      <%= link_to("/posts/destroy/#{recomment.id}",method: :post) do %>
+      <%= icon 'fas','trash',class: "fa-delete" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<% @replys=Post.where(comment_id: recomment.id).order(created_at: :desc) %>
+<% @replys.each do |reply| %>
+<%= render partial:'comment/commentform',locals: {post: reply} %>
+<% @another=Post.find_by(id: reply.comment_id) %>
+<% @another_user=User.find_by(id: @another.user_id) %>
+<div id="posts-<%= reply.id %>" class="posts-show-item">
+  <div class="before-time"><%= date_format(reply[:created_at]) %></div>
+  <% if Post.find_by(comment_id:reply.id) %>
+  <div class="show-comment-line"></div>
+  <% end %>
+  <% reply_user=User.find_by(id: reply.user_id) %>
+  <div class="post-user-image">
+    <%=link_to image_tag(reply_user.image.url),"/profile/#{reply_user.public_uid}"%>
+  </div>
+
+  <div class="post-user-name">
+    <%= link_to(reply_user.name,"/profile/#{reply_user.public_uid}") %>
+  </div>
+
+  <div class="post-user-id">
+    <%= link_to("@#{reply_user.public_uid}","/profile/#{reply_user.public_uid}") %>
+  </div>
+
+  <div class="post-contents">
+    <%= link_to("> Reply To @#{@another_user.public_uid}","/profile/#{@another_user.public_uid}",style:"font-size:16px; color:blue; border-bottom:solid 1px blue;") %><br>
+    <%= link_to(reply.content,"/posts/show/#{reply.id}") %>
+  </div>
+
+  <div class="show_post_image_container">
+    <%  if reply.images? %>
+    <% k=0 %>
+    <%  reply.images.length.times do %>
+    <% if reply.images.length==1 %>
+    <%= link_to image_tag(reply.images[k].url,class:"show_post_image_1"),"/posts/#{reply.id}/image/show/#{k}",method: :post,remote:true %>
+    <% elsif reply.images.length>1 %>
+    <%= link_to image_tag(reply.images[k].url,class:"show_post_images"),"/posts/#{reply.id}/image/show/#{k}",method: :post,remote:true %>
+    <% end %>
+    <% k=k+1 %>
+    <% end %>
+    <% end %>
+  </div>
+
+  <div class="show_post_image_container">
+    <%  if reply.video? %>
+    <%= video_tag reply.video_url,loop: true, controls: true, width: 550, id: "mv",class:"show_post_video" %>
+    <% end %>
+  </div>
+
+  <div class="time"><p><%= japanese_time(reply[:created_at]) %></p></div>
+
+  <div class="menu-item">
+    <div id="comment-btn" class="comment-css"><%= link_to("/comment/commentform/#{reply.id}/#posts-#{reply.id}",method: :post,remote:true) do %>
+      <%= icon 'fas','comment',class: "fa-comment" %>
+      <% end %>
+    </div>
+
+    <div class="comment-count">
+      <%= Post.where(comment_id: reply.id).count %>
+    </div>
+
+    <div id="likes_buttons_<%= reply.id %>">
+      <%= render partial: 'like/like',locals: {post: reply} %>
+    </div>
+
+
+    <div class="destroy-css">
+      <%= link_to("/posts/destroy/#{reply.id}",method: :post) do %>
+      <%= icon 'fas','trash',class: "fa-delete" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
+<% end %>
+<% end %>
+<% else %>
+<div style="font-size:30px; text-align:center; font-weight:600; margin-top:200px;">投稿は削除されました</div>
+<% end %>

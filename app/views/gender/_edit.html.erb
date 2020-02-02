@@ -1,0 +1,79 @@
+<div id="gender-edit-modal" class="detail-edit-modal-wrapper">
+  <div id="new-edit-form" class="new-edit-form gender-edit-modal">
+
+    <div class="detail-edit-profile-container">
+
+      <%= form_with(model: @gender,url: "/gender/update/#{@users.id}",method: :post, local: true) do |form| %>
+      <div class="genre-index">
+        <%= icon 'fas','times',id:'gender_cancel_btn',class: "fa-gender-cancel-btn" %>
+        <div class="genre-item">
+          <div class="genre-header-menu">
+            <h4>あなたの性別を選択してください！</h4>
+          </div>
+          <%= form.label :gender,"男性",value:"man",class:"man gender-check-box-label" %>
+          <%= form.radio_button :gender,:man,class:"gender-check-box",onchange:"onRadioButtonChange();" %>
+          
+          <%= form.label :gender,"女性",value:"woman",class:"woman gender-check-box-label" %>
+          <%= form.radio_button :gender,:woman,class:"gender-check-box",onchange:"onRadioButtonChange();" %>
+
+          <%= form.label :gender,"非公開",value:"seacret",class:"seacret gender-check-box-label" %>
+          <%= form.radio_button :gender,:seacret,class:"gender-check-box",onchange:"onRadioButtonChange();" %>
+
+          <div class="actions">
+            <%= form.submit "更新する", class: "genre-create-btn" %>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        $(function(){
+          $('#gender-profile-edit-btn').click(function () {
+            $('#gender-edit-modal').show();
+          }),
+
+          $(document).on('click', function(e) {
+            if($(e.target).is('#gender-edit-modal')) {
+              $('#edit-gender-destroy-modal').show();
+            }
+          })
+
+          $("#gender_cancel_btn").click(function(){
+            $('#edit-gender-destroy-modal').show();
+          })
+
+          $('#edit-gender-modal-yes-btn').click(function(){
+            $('#gender-edit-modal').hide();
+            $('#edit-gender-destroy-modal').hide();
+          })
+
+          $('#edit-gender-modal-no-btn').click(function(){
+            $('#edit-gender-destroy-modal').hide();
+          })
+        });
+
+        function onRadioButtonChange() {
+          man = document.getElementById('gender_gender_man');
+          woman = document.getElementById('gender_gender_woman');
+          seacret = document.getElementById('gender_gender_seacret');
+
+          if (man.checked == true) {
+            $('.gender-check-box-label').eq(0).addClass('man-active');
+            $('.gender-check-box-label').eq(1).removeClass('woman-active');
+            $('.gender-check-box-label').eq(2).removeClass('seacret-active');
+          }
+          else if (woman.checked == true) {
+            $('.gender-check-box-label').eq(1).addClass('woman-active');
+            $('.gender-check-box-label').eq(0).removeClass('man-active');
+            $('.gender-check-box-label').eq(2).removeClass('seacret-active');
+          }
+          else if (seacret.checked == true) {
+            $('.gender-check-box-label').eq(2).addClass('seacret-active');
+            $('.gender-check-box-label').eq(0).removeClass('man-active');
+            $('.gender-check-box-label').eq(1).removeClass('woman-active');
+          }
+        };
+      </script>
+      <% end %>
+    </div>
+  </div>
+</div>

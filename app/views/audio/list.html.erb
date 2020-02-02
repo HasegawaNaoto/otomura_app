@@ -1,0 +1,59 @@
+<%= render partial: 'users/editprofile',locals: {user: @users} %>
+<%= render partial: 'genre/edit',locals: {user: @users} %>
+<%= render partial: 'instrument/edit',locals: {user: @users} %>
+<%= render partial: 'gender/edit',locals: {user: @users} %>
+<%= render partial: 'posts/newpost' %>
+
+<div class="userprofile-background">
+  <%= image_tag(@users.background.url) %>
+</div>
+
+<div class="usersprofile-menu">
+  <div class="usersprofile-header-container">
+    
+    <%= render partial: 'users/userprofile_left_container' %>
+
+    <div class="usersprofile-header-menu">
+      <%= render partial: 'users/userprofile_menu',local: {user: @users} %>
+    </div>
+
+    <script>
+      $(function(){
+        var OFFSET=70;
+        $(window).scrollTop($('.user-image').offset().top-OFFSET);
+      });
+    </script>
+
+    <%= render partial: 'users/userprofile_btn_item' %>
+
+    <div class= "userprofile-friends-items">
+      <%   @audios.each do |audio| %>
+      <div class="audio-cointainer">
+        <div class="audio-image"><%= image_tag (audio.image.url) %></div>
+        <%= audio_tag (audio.file_identifier),id:"audio",preload:"auto" %><br>
+        <div class="track-details"><%= audio.title %></div>
+
+
+        <% @tags=AudioTag.where(id: audio.audio_tags.ids) %>
+        <div class="audio-tag-container">タグ:
+          <% @tags.each do |tag| %>
+          <div class="userprofile-genre-btn">
+            <%= link_to(tag.genre,"/audio/tag/#{tag.genre}") %>
+          </div>
+          <% end %>
+        </div>
+
+        <div class="audio-content-container">水溜りボンドのテーマソングです！</div>
+
+        <div class="audio-show-link-container"><%=link_to("詳細を見る","/audio/show/#{audio.id}") %></div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  audiojs.events.ready(function() {
+    var as = audiojs.createAll();
+  });
+</script>

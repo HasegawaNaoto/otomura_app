@@ -1,0 +1,31 @@
+<ul>
+  <% if request.fullpath=="/profile/#{@users.public_uid}"%>
+  <li class="posts-fixed"><a><%=link_to("投稿一覧","/profile/#{@users.public_uid}")%></a></li>
+  <% else %>
+  <li class="posts"><a><%=link_to("投稿一覧","/profile/#{@users.public_uid}")%></a></li>
+  <% end %>
+
+  <% if request.fullpath=="/connect/#{@users.public_uid}"%>
+  <li class="follows-fixed"><a><%=link_to("コネクト","/connect/#{@users.public_uid}")%></a></li>
+  <% else %>
+  <li class="follows"><a><%=link_to("コネクト","/connect/#{@users.public_uid}")%></a></li>
+  <% end %>
+
+  <% if request.fullpath=="/connected/#{@users.public_uid}"%>
+  <li class="followers-fixed"><a><%=link_to("コネクター","/connected/#{@users.public_uid}")%></a></li>
+  <% else %>
+  <li class="followers"><a><%=link_to("コネクター","/connected/#{@users.public_uid}")%></a></li>
+  <% end %>
+
+  <% if request.fullpath=="/media/#{@users.public_uid}"%>
+  <li class="friends-fixed"><a><%=link_to("メディア","/media/#{@users.public_uid}")%></a></li>
+  <% else %>
+  <li class="friends"><a><%=link_to("メディア","/media/#{@users.public_uid}")%></a></li>
+  <% end %>
+
+  <% if request.fullpath=="/like/#{@users.public_uid}"%>
+  <li class="likes-fixed"><a><%=link_to("いいね！","/like/#{@users.public_uid}")%></a></li>
+  <% else %>
+  <li class="likes"><a><%=link_to("いいね！","/like/#{@users.public_uid}")%></a></li>
+  <% end %>
+</ul>

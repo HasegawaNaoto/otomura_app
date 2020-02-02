@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ANOTHER</title>
+</head>
+<body>
+  <div class="table">
+    <table border="1">
+      <tr>
+        <th>follow_id</th><th>follower_id</th><th>user_id</th>
+        <% @follows.each do |follow| %>
+        <tr>
+          <td><%= follow.follow_id %></td>
+          <td><%= follow.follower_id %></td>
+          <td><%= follow.user_id %></td>
+        </tr>
+        <% end %>
+      </div>
+    </body>
+    </html>

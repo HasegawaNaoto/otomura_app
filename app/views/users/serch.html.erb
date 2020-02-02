@@ -1,0 +1,13 @@
+<div class="main posts-index">
+  <div class="serch-header-menu">
+    <ul>
+      <li class="posts-serch"><a><%=link_to("投稿","/posts/serch/#{@serch_word}")%></a></li>
+      <li class="users-serch-fixed"><a><%=link_to("ユーザ","/users/serch/#{@serch_word}")%></a></li>
+    </ul>
+  </div>
+  <div id="posts_index" class="serch-center-items">
+    <div id="posts-index-item">
+      <%= render partial: 'serch',locals: {post: @serch_posts,comment:@comments} %>
+    </div>
+  </div>
+</div>

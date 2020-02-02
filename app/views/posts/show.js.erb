@@ -1,0 +1,18 @@
+$(document).ready(function(){
+  var headerHeight = $('.index-header').outerHeight();
+  var urlHash ="/posts/show/<%= @post.id %>/#posts-<%= @post.id %>";
+  if(urlHash) {
+    $('body,html').stop().scrollTop(0);
+    setTimeout(function(){
+      var target = $(urlHash);
+      var position = target.offset().top - headerHeight;
+      $('body,html').stop().animate({scrollTop:position}, 500);
+    }, 100)
+  }
+  $('#post-show-<%= @post.id %>').click(function() {
+    var href= $(this).attr("href");
+    var target = $(href);
+    var position = target.offset().top - headerHeight;
+    $('body,html').stop().animate({scrollTop:position}, 500);
+  })
+});

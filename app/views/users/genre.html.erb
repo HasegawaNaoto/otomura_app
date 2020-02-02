@@ -1,0 +1,15 @@
+<%= form_tag("/users/create") do %>
+<div class="main posts-index">
+  <div class="genre-header-menu">
+    <h1>好きなジャンル</h1>
+    <div class="genre-item">
+      <% %w(ロック パンク ポップパンク メロコア ヘヴィーメタル エモーショナル プログレッシブロック 邦楽 洋楽 アコースティック).each.with_index do |ingredient,i| %>
+      <label>
+        <%= check_box_tag 'user[genre][]', ingredient,false,id:"samurai_ingredients_#{i}"%>
+        <%= ingredient %>
+      </label>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>

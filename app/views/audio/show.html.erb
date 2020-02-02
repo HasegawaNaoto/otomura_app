@@ -1,0 +1,21 @@
+<div style="padding-top:100px;">
+  <div style="margin-top:20px;">
+    ユーザ名:<%= @user.name %><br>
+    タイトル:<%= @audio.title %><br>
+
+    音源
+    <div class="audio-cointainer">
+      <div class="audio-image"><%= image_tag (@audio.image.url) %></div>
+      <%= audio_tag (@audio.file_identifier),id:"audio",preload:"auto" %><br>
+      <div class="track-details"><%= @audio.title %></div>
+    </div>
+
+    <script>
+      audiojs.events.ready(function() {
+        var as = audiojs.createAll();
+      });
+    </script>
+
+    ジャンル:<%= @tag.genre %>
+  </div>
+</div>

@@ -1,0 +1,103 @@
+// userprofile中央ページレイアウト
+.userprofile-background {
+  width:100%;
+  height:400px;
+  position:relative;
+}
+
+
+.userprofile-background img{
+  width:100%;
+  height:400px;
+  object-fit: cover;
+}
+
+.userprofile-container{
+  padding:0 20px;
+  margin:0 auto;
+  width:100%;
+  max-width:1170px;
+  padding-bottom:82px;
+}
+
+.user_post_image_container{
+  overflow:hidden;
+  margin-left:76px;
+}
+
+.user_post_image_1{
+  width:97%;
+  height:auto;
+  min-height:420px;
+  max-height:800px;
+  margin:2px;
+  border-radius: 10px;
+  object-fit: cover;
+  background-color:white;
+}
+
+.user_post_images{
+  margin:2px;
+  width:48%;
+  height:auto;
+  min-height:200px;
+  max-height:320px;
+  border-radius: 10px;
+  object-fit: cover;
+  background-color:white;
+  float:left;
+}
+
+.user_post_video{
+  width:97%;
+  height:auto;
+  min-height:140px;
+  max-height:800px;
+  margin:2px;
+  border-radius: 10px;
+  object-fit: cover;
+  background-color:white;
+}
+
+.userprofile-index-items-container{
+  width:75%;
+  height:auto;
+  margin-top:5px;
+  float:left;
+  padding-bottom:82px;
+}
+
+.userprofile-index-item {
+  background-color: white;
+  padding-bottom:10px;
+  width:100%;
+  height:auto;
+  position:relative;
+  border-bottom:solid 1px #c1ced7;
+  border-left:solid 1px #c1ced7;
+  transition:0.5s;
+}
+
+.userprofile-index-item:hover{
+  background-color:rgba(200,216,225,0.4);
+}
+
+.user-name p:hover {
+  color: #3ecdc6;
+}
+
+.thread-useprofile-item{
+  position:relative;
+  margin-bottom:-10px;
+  margin-top:15px;
+  height:50px;
+  line-height:50px;
+  width:100%;
+  text-align:center;
+  font-size:18px;
+}
+
+.thread-useprofile-item:hover{
+  background-color:rgba(220,236,245,0.4);
+}
+// userprofile中央ページレイアウト

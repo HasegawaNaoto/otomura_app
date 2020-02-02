@@ -1,0 +1,4 @@
+$('#comment_index-<%= @post.id %>').html("<%= j(render partial:'comment',locals: {post: @post,comment: @comments}) %>");
+$('#newpost-form').val('');
+$('#comment-modal-<%= @post.id %>').fadeOut();
+$('.new-form')[0].reset();
