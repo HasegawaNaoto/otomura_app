@@ -13,20 +13,20 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password: eqJSBbC9
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASS'] %>
   socket: /tmp/mysql.sock
 
 development:
   <<: *default
-  database: otomura_app_development
+  database: <%= ENV['DB_DEVELOPMENT_NAME'] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: otomura_app_test
+  database: <%= ENV['DB_TEST_NAME'] %>
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -49,6 +49,4 @@ test:
 #
 production:
   <<: *default
-  database: otomura_app_production
-  username: otomura_app
-  password: <%= ENV['otomura_app_DATABASE_PASSWORD'] %>
+  database: <%= ENV['DB_PRODUCTION_NAME'] %>

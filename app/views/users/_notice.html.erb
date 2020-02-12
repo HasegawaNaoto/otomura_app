@@ -1,8 +1,8 @@
 <% @notices=Notice.where(visited_id: @current_user.id).order(created_at: :desc) %>
 <% @notices.each do |notice| %>
-<% user=User.find_by(id: notice.send_id) %>
+<% user=User.find_by(id: notice.user_id) %>
 <% if notice.like_id!=nil %>
-<% if notice.send_id==notice.visited_id %>
+<% if notice.user_id==notice.visited_id %>
 <% else %>
 <% like_post=Post.find_by(id: notice.like_id) %>
 <div id="posts-index-item-<%= notice.id %>" class="posts-notice-item">
@@ -84,13 +84,6 @@
 
     <div id="likes_buttons_<%= comment_post.id %>">
       <%= render partial: 'like/like',locals: {post: comment_post} %>
-    </div>
-
-
-    <div class="destroy-css">
-      <%= link_to("/posts/destroy/#{comment_post.id}",method: :post) do %>
-      <%= icon 'fas','trash',class: "fa-delete" %>
-      <% end %>
     </div>
   </div>
 </div>

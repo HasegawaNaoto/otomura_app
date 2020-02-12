@@ -1,17 +1,13 @@
 <%= render partial: 'posts/newpost' %>
 <%= render partial: 'posts/new_post_destroy' %>
-
 <%= render partial: 'genre/edit',locals: {user: @users} %>
 <%= render partial: 'instrument/edit',locals: {user: @users} %>
 <%= render partial: 'gender/edit',locals: {user: @users} %>
 <%= render partial: 'prefecture/edit',locals: {user: @users} %>
-
-<%= render partial: 'genre/edit_genre_destroy' %>
-<%= render partial: 'instrument/edit_instrument_destroy'%>
-<%= render partial: 'gender/edit_gender_destroy' %>
-<%= render partial: 'prefecture/edit_prefecture_destroy'%>
-
-<%= render partial: 'friend_destroy_warning_form',locals: {user: @users} %>
+<%= render partial: 'genre/edit_genre_destroy',locals: {user: @users} %>
+<%= render partial: 'instrument/edit_instrument_destroy',locals: {user: @users} %>
+<%= render partial: 'gender/edit_gender_destroy',locals: {user: @users} %>
+<%= render partial: 'prefecture/edit_prefecture_destroy',locals: {user: @users} %>
 <%= render partial: 'editprofile',locals: {user: @users} %>
 <%= render partial: 'edit_userprofile_destroy',locals:{user:@users} %>
 
@@ -82,12 +78,18 @@
         <%= render partial: 'like/like',locals: {post: post} %>
       </div>
 
-
-      <div class="destroy-css">
-        <%= link_to("/posts/destroy/#{post.id}",method: :post) do %>
+      <% if @current_user.id==post.user_id %>
+      <%= render partial: 'posts/current_user_post_destroy',locals:{post: post} %>
+      <div id="current-user-post-destroy-btn-<%= post.id %>" class="destroy-css">
         <%= icon 'fas','trash',class: "fa-delete" %>
-        <% end %>
       </div>
+
+      <script>
+        $('#current-user-post-destroy-btn-<%= post.id %>').click(function(){
+          $('#current-user-post-destroy-modal-<%= post.id %>').show();
+        })
+      </script>
+      <% end %>
 
     </div>
   </div>

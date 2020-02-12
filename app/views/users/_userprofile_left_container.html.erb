@@ -9,9 +9,7 @@
       <h2><%= "@#{@users.public_uid}" %></h2>
     </div>
 
-    <div class="userprofile-connect-btn-container">
       <%= render partial: 'userprofile_btn_item' %>
-    </div>
 
     <div class="detail-userprofile-container">
       <% if @gender %>
@@ -177,26 +175,6 @@
 
         <% if @genre.acoustic==true %>
         <div id="genre-btn" class="userprofile-genre-btn">アコースティック</div>
-        <% end %>
-
-        <% if @genre.other1!="" %>
-        <div id="genre-btn" class="userprofile-genre-btn"><%= @genre.other1 %></div>
-        <% end %>
-
-        <% if @genre.other2!="" %>
-        <div id="genre-btn" class="userprofile-genre-btn"><%= @genre.other2 %></div>
-        <% end %>
-
-        <% if @genre.other3!="" %>
-        <div id="genre-btn" class="userprofile-genre-btn"><%= @genre.other3 %></div>
-        <% end %>
-
-        <% if @genre.other4!="" %>
-        <div id="genre-btn" class="userprofile-genre-btn"><%= @genre.other4 %></div>
-        <% end %>
-
-        <% if @genre.other5!="" %>
-        <div id="genre-btn" class="userprofile-genre-btn"><%= @genre.other5 %></div>
         <% end %>
 
         <% if @genre.rock==false && @genre.punk==false && @genre.pop==false && @genre.ambient==false && @genre.alternative==false && @genre.classic==false && @genre.jazz==false && @genre.hard_rock==false && @genre.progressive==false && @genre.pop_punk==false && @genre.heavy_metal==false && @genre.metalcore==false &&@genre.merocore==false && @genre.hiphop==false && @genre.instrument==false && @genre.western==false && @genre.japanese==false && @genre.acoustic==false && @genre.other1=="" && @genre.other2=="" && @genre.other3=="" && @genre.other4=="" &&@genre.other5=="" %>

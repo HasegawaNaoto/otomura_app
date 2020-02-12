@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   before_action :self_user
   before_action :current_user_notice_action
   before_action :create_details_profile
-  before_action :forbid_login_user,{only:[:about,:loginform,:newform,:top]}
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
@@ -15,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   def current_user_notice_action
     if @current_user
-      @self_user_notices=Notice.where.not(send_id:@current_user.id).where(visited_id:@current_user.id,checked: false)
+      @self_user_notices=Notice.where.not(user_id:@current_user.id).where(visited_id:@current_user.id,checked: false)
       @self_user_notice=[]
       @i=0
       @self_user_notices.each do |self_user_notice|
@@ -23,7 +22,7 @@ class ApplicationController < ActionController::Base
         @i=@i+1
       end
 
-      @notices_count=Notice.where.not(send_id:@current_user.id).where(visited_id:@current_user.id,checked: false).count
+      @notices_count=Notice.where.not(user_id:@current_user.id).where(visited_id:@current_user.id,checked: false).count
     end
   end
 
@@ -68,6 +67,11 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_out_path_for(resource)
-    new_user_session_path
+    "/"
+  end
+
+  private
+  def sign_in_required
+    redirect_to new_user_session_url unless user_signed_in?
   end
 end

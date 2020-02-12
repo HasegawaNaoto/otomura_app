@@ -10,7 +10,7 @@ class TableController < ApplicationController
   def like
     @likes=Like.all
   end
-  
+
   def friendlist
     @friendlist=Friendlist.all
   end
@@ -25,6 +25,10 @@ class TableController < ApplicationController
 
   def follow
     @follows=Follow.all
+  end
+
+  def follower
+    @followers=Follower.all
   end
 
   def serch

@@ -1,4 +1,5 @@
 class SerchController < ApplicationController
+  before_action :sign_in_required
   def serch
     @serch=Serch.new
     @post=Post.new

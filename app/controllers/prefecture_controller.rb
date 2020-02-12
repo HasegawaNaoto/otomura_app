@@ -1,19 +1,12 @@
 class PrefectureController < ApplicationController
-  before_action :update_prefecture,{only:[:update]}
+  before_action :sign_in_required
   def update
-    respond_to do |format|
-      if @prefecture.update(prefecture_params)
-        format.html { redirect_to "/profile/#{@current_user.public_uid}", notice: '地域を変更しました！' }
-        format.json { render "profile/#{@current_user.public_uid}", status: :ok, location: @prefecture }
-      else
-        format.html { render "profile/#{@current_user.public_uid}" }
-        format.json { render json: @prefecture.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def update_prefecture
     @prefecture=Prefecture.find_by(user_id: @current_user.id)
+    if @prefecture.update(prefecture_params)
+      redirect_to "/profile/#{@current_user.public_uid}", notice: '地域を変更しました！'
+    else
+      redirect_to "/profile/#{@current_user.public_uid}", notice: 'エラーが発生したため、もう一度設定し直してください'
+    end
   end
 
   private

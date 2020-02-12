@@ -12,7 +12,7 @@
           </div>
           <%= form.label :vocal,"ボーカル",class:"instrument-check-box-label" %>
           <%= form.check_box :vocal,class:"instrument-check-box" %>
-          
+
           <%= form.label :guiter,"ギター",class:"instrument-check-box-label" %>
           <%= form.check_box :guiter,class:"instrument-check-box" %>
 
@@ -36,7 +36,7 @@
 
           <%= form.label :other,"その他",class:"instrument-text-field-label" %>
           <%= form.text_field :other,value:"#{@instrument.other}",placeholder:"一覧にない楽器",class:"instrument-text-field" %>
-
+          
           <div class="actions">
             <%= form.submit "更新する", class: "genre-create-btn" %>
           </div>
@@ -56,11 +56,6 @@
 
             $("#intrument_cancel_btn").click(function(){
               $('#edit-instrument-destroy-modal').show();
-            })
-
-            $('#edit-instrument-modal-yes-btn').click(function(){
-              $('#instrument-edit-modal').hide();
-              $('#edit-instrument-destroy-modal').hide();
             })
 
             $('#edit-instrument-modal-no-btn').click(function(){

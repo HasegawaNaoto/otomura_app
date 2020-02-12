@@ -51,44 +51,95 @@
 
     <%= form_with model:@post,url:"/comment/create/#{post.id}",multipart: true,method: :post,class: "new-form",local:true do |form| %>
     <div class="new-post-form-body">
+      <div id="comment-num-<%= post.id %>" class="comment-content-num"></div>
       <%= form.text_area :content,value:"",id:"comment-text-form-#{post.id}",placeholder:"投稿内容を記入する" %>
       <div class="output_container">
         <output id="comment_list_<%= post.id %>"></output>
       </div>
 
       <div id="new-comment-form-notice-<%= post.id %>" class="form-notice">画像は4枚までしかアップロードできません！</div>
+      <div id="new-comment-form-notice-2-<%= post.id %>" class="form-notice">ファイルの容量は100MB以内で添付してください！</div>
       <div class="post-menu-select">
-        <label id="image_file_label" class="image_file_css" for="comment_image_file_name_<%=post.id%>"><%= icon 'fas','camera'%>
+        <label id="image_file_label_<%= post.id %>" class="image_file_css" for="comment_image_file_name_<%= post.id %>"><%= icon 'fas','camera' %>
           <%= form.file_field :images,id:"comment_image_file_name_#{post.id}",accept:"image/*",multiple:true %>
         </label>
 
-        <label id="video_file_label" class="video_file_css" for="post_video_<%=post.id%>">
+        <label id="video_file_label_<%= post.id %>" class="video_file_css" for="post_video_<%= post.id %>">
           <%= icon 'fas', 'film'%>
           <%= form.file_field :video,id:"post_video_#{post.id}",accept:"video/*" %>
         </label>
 
-        <div id="newpost-cancel-btn-<%=post.id%>" class="newpost-cancel-container"><%= icon 'fas','times-circle' %></div>
+        <div id="newpost-cancel-btn-<%= post.id %>" class="newpost-cancel-container"><%= icon 'fas','times-circle' %></div>
 
       </div>
-      <%= form.submit "投 稿",id:"comment_post_form_btn_#{post.id}",class: 'new-comment-btn' %>
+      <%= form.submit "投 稿",id:"comment_post_form_btn_#{post.id}",class: 'new-comment-btn',disabled:'true' %>
     </div>
     <% end %>
     <% end %>
 
     <script>
+      $(function() {
+        $('#image_file_label_<%= post.id %>').hover(function() {
+          $(this).css('color', 'rgba(120,200,80,1)');
+        }, function() {
+          $(this).css('color', 'rgba(10,180,80,0.7)');
+        })
+      });
+
+      $(function() {
+        $('#video_file_label_<%= post.id %>').hover(function() {
+          $(this).css('color', 'rgba(120,200,80,1)');
+        }, function() {
+          $(this).css('color', 'rgba(10,180,80,0.7)');
+        })
+      });
+
       $(function(){
-        document.getElementById('post_video_<%=post.id%>').onchange = function(event){
+        var btn=document.getElementById("comment_post_form_btn_<%= post.id %>")
+        $("#comment-text-form-<%= post.id %>").bind("change keyup",function(){
+          var count = $(this).val().length;
+          $("#comment-num-<%= post.id %>").text(count+"/200");
+
+          if(count>0 && count<=200){
+            btn.disabled = false;
+            $(btn).attr({
+              style:"background-color:rgba(10,180,80,0.7); border:1px solid rgba(120,200,80,1);"
+            });
+            $('#comment-num-<%= post.id %>').attr({
+              style:"color:rgba(10,180,80,1);"
+            });
+          }
+
+          else{
+            btn.disabled = true;
+            $(btn).attr({
+              style:"background-color:rgba(10,180,80,0.3);  border:1px solid rgba(10,180,80,0.5);"
+            });
+
+            $('#comment-num-<%= post.id %>').attr({
+              style:"color:red;"
+            });
+          }
+        });
+      });
+
+      $(function(){
+        document.getElementById('post_video_<%= post.id %>').onchange = function(event){
           initializeFiles();
 
           var files = event.target.files;
 
           var size_in_megabytes = files[0].size/1024/1024;
           if (size_in_megabytes > 100) {
-            alert('ファイルの容量が大きすぎます(100MB以内で添付してください)');
-            $('#post_video_<%=post.id%>').val("")
+            var btn=document.getElementById("comment_post_form_btn_<%= post.id %>");
+            $('#new-comment-form-notice-2-<%= post.id %>').css('display','block');
+            $('#post_video_<%= post.id %>').val("");
+            btn.disabled = true;
+            $(btn).attr({
+              style:"background-color:rgba(10,180,80,0.3);  border:1px solid rgba(10,180,80,0.5);"
+            })
 
           }else{
-
             var reader = new FileReader;
             reader.readAsDataURL(files[0]);
 
@@ -104,24 +155,23 @@
               }
             })(files[0]);
 
-            alert('ファイルを添付しました');
-            $('#comment_image_file_name_<%=post.id%>').attr('id', 'comment_image_file_name_none_<%=post.id%>');
-            $('.image_file_css').css('color', 'rgba(120,120,120,0.7)');
-            $('.image_file_css').hover(function() {
+            $('#comment_image_file_name_<%= post.id %>').attr('id', 'comment_image_file_name_none_<%= post.id %>');
+            $('#image_file_label_<%= post.id %>').css('color', 'rgba(120,120,120,0.7)');
+            $('#image_file_label_<%= post.id %>').hover(function() {
               $(this).css('color', 'rgba(120,120,120,1)');
             }, function() {
               $(this).css('color', 'rgba(120,120,120,0.7)');
             })
-            $('.image_file_css').css('cursor','default');
+            $('#image_file_label_<%= post.id %>').css('cursor','default');
 
-            $('#post_video_<%=post.id%>').attr('id', 'post_video_none_<%=post.id%>');
-            $('.video_file_css').css('color', 'rgba(120,120,120,0.7)');
-            $('.video_file_css').hover(function() {
+            $('#post_video_<%= post.id %>').attr('id', 'post_video_none_<%=post.id%>');
+            $('#video_file_label_<%= post.id %>').css('color', 'rgba(120,120,120,0.7)');
+            $('#video_file_label_<%= post.id %>').hover(function() {
               $(this).css('color', 'rgba(120,120,120,1)');
             }, function() {
               $(this).css('color', 'rgba(120,120,120,0.7)');
             })
-            $('.video_file_css').css('cursor','default');
+            $('#video_file_label_<%= post.id %>').css('cursor','default');
           }
         };
 
@@ -129,7 +179,6 @@
           document.getElementById('comment_list_<%= post.id %>').innerHTML = '';
         }
       })
-
 
       $(function(){
         document.getElementById('comment_image_file_name_<%=post.id%>').onchange = function(event){
@@ -148,42 +197,62 @@
                   $('#new-comment-form-notice-<%= post.id %>').css('display','none')
                   div.className = 'reader_file_1';
                   div.innerHTML += '<img class="reader_image_1" src="' + e.target.result + '" />';
+                  $('#comment_image_file_name_<%=post.id%>').attr('id', 'comment_image_file_name_none_<%=post.id%>');
+                  $('#image_file_label_<%= post.id %>').css('color', 'rgba(120,120,120,0.7)');
+                  $('#image_file_label_<%= post.id %>').hover(function() {
+                    $(this).css('color', 'rgba(120,120,120,1)');
+                  }, function() {
+                    $(this).css('color', 'rgba(120,120,120,0.7)');
+                  })
+                  $('#image_file_label_<%= post.id %>').css('cursor','default');
+
+                  $('#post_video_<%= post.id %>').attr('id', 'post_video_none_<%=post.id%>');
+                  $('#video_file_label_<%= post.id %>').css('color', 'rgba(120,120,120,0.7)');
+                  $('#video_file_label_<%= post.id %>').hover(function() {
+                    $(this).css('color', 'rgba(120,120,120,1)');
+                  }, function() {
+                    $(this).css('color', 'rgba(120,120,120,0.7)');
+                  })
+                  $('#video_file_label_<%= post.id %>').css('cursor','default');
                 }
 
                 if(1<i && i<5){
                   $('#new-comment-form-notice-<%= post.id %>').css('display','none')
                   div.className = 'reader_file_2';
                   div.innerHTML += '<img class="reader_image_2" src="' + e.target.result + '" />';
+                  $('#comment_image_file_name_<%=post.id%>').attr('id', 'comment_image_file_name_none_<%= post.id %>');
+                  $('#image_file_label_<%= post.id %>').css('color', 'rgba(120,120,120,0.7)');
+                  $('#image_file_label_<%= post.id %>').hover(function() {
+                    $(this).css('color', 'rgba(120,120,120,1)');
+                  }, function() {
+                    $(this).css('color', 'rgba(120,120,120,0.7)');
+                  })
+                  $('#image_file_label_<%= post.id %>').css('cursor','default');
+
+                  $('#post_video_<%= post.id %>').attr('id', 'post_video_none_<%= post.id %>');
+                  $('#video_file_label_<%= post.id %>').css('color', 'rgba(120,120,120,0.7)');
+                  $('#video_file_label_<%= post.id %>').hover(function() {
+                    $(this).css('color', 'rgba(120,120,120,1)');
+                  }, function() {
+                    $(this).css('color', 'rgba(120,120,120,0.7)');
+                  })
+                  $('.video_file_css').css('cursor','default');
                 }
 
                 if(i>4){
+                  var btn=document.getElementById("comment_post_form_btn_<%= post.id %>");
                   $('#new-comment-form-notice-<%= post.id %>').css('display','block');
                   $('#comment_image_file_name_<%=post.id%>').val("");
+                  btn.disabled = true;
+                  $(btn).attr({
+                    style:"background-color:rgba(10,180,80,0.3);  border:1px solid rgba(10,180,80,0.5);"
+                  });
                 }
 
                 document.getElementById('comment_list_<%= post.id %>').insertBefore(div, null);
               }
             })(f);
           }
-
-          $('#comment_image_file_name_<%=post.id%>').attr('id', 'comment_image_file_name_none_<%=post.id%>');
-          $('.image_file_css').css('color', 'rgba(120,120,120,0.7)');
-          $('.image_file_css').hover(function() {
-            $(this).css('color', 'rgba(120,120,120,1)');
-          }, function() {
-            $(this).css('color', 'rgba(120,120,120,0.7)');
-          })
-          $('.image_file_css').css('cursor','default');
-
-          $('#post_video_<%=post.id%>').attr('id', 'post_video_none_<%=post.id%>');
-          $('.video_file_css').css('color', 'rgba(120,120,120,0.7)');
-          $('.video_file_css').hover(function() {
-            $(this).css('color', 'rgba(120,120,120,1)');
-          }, function() {
-            $(this).css('color', 'rgba(120,120,120,0.7)');
-          })
-          $('.video_file_css').css('cursor','default');
-
         };
 
         function initializeFiles() {

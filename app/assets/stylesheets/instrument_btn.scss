@@ -1,0 +1,103 @@
+//楽器選択ボタンレイアウト
+.userprofile-instrument-btn {
+  font-size:14px;
+  font-weight:600;
+  margin:5px;
+  padding-left:10px;
+  padding-right:10px;
+  cursor:pointer;
+  background-color:rgba(0,169,104,0.5);
+  border-top-left-radius:100px;
+  border-bottom-left-radius:100px;
+  border-top-right-radius:100px;
+  border-bottom-right-radius:100px;
+  border:solid 1px rgba(20,189,124,0.5);
+  color:#ffffff;
+  transition:0.1s;
+  display:inline-block;
+  height:20px;
+  line-height:20px;
+  text-align:center;
+  outline:none;
+}
+
+.userprofile-instrument-btn:hover{
+  background-color:rgba(0,169,104,1);
+  border:solid 1px rgba(20,189,124,1);
+}
+
+.instrument{
+  font-weight:600;
+  margin:5px auto;
+}
+
+.instrument-check-box-label{
+  cursor:pointer;
+  color:#ffffff;
+  transition:0.1s;
+  display:inline-block;
+  height:20px;
+  line-height:20px;
+  text-align:center;
+  outline:none;
+  user-select: none;
+  font-size:14px;
+  font-weight:600;
+  margin:5px 0px;
+  padding-left:10px;
+  padding-right:10px;
+  background-color:rgba(0,169,104,0.5);
+  border-top-left-radius:100px;
+  border-bottom-left-radius:100px;
+  border-top-right-radius:100px;
+  border-bottom-right-radius:100px;
+  border:solid 1px rgba(20,189,124,0.5);
+}
+
+.instrument-check-box-active{
+  background-color:rgba(0,169,104,1);
+  border:solid 1px rgba(20,189,124,1);
+}
+
+.instrument-text-field{
+  width:200px;
+  border-top-left-radius:100px;
+  border-bottom-left-radius:100px;
+  border-top-right-radius:100px;
+  border-bottom-right-radius:100px;
+  background-color:rgba(0,89,24,0.5);
+  border:solid 1px rgba(20,89,44,0.5);
+  color:#ffffff;
+  font-weight:600;
+  outline:none;
+  font-size:14px;
+  user-select: none;
+  display:inline-block;
+  margin:0px 5px;
+}
+
+.instrument-text-field-active{
+  background-color:rgba(0,89,24,1);
+  border:solid 1px rgba(20,89,44,1);
+}
+
+.instrument-text-field:focus{
+  background-color:rgba(0,89,24,1);
+  border:solid 1px rgba(20,89,44,1);
+}
+
+.instrument-text-field::placeholder{
+  color:rgba(255,255,255,0.8);
+  font-size:14px;
+  font-weight:300;
+  text-align:center;
+}
+
+.instrument-text-field-label{
+  display:none;
+}
+
+.instrument-check-box{
+  display:none;
+}
+//楽器選択ボタンレイアウト

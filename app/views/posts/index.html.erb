@@ -4,13 +4,14 @@
 <div class="main">
   <div class="main-container">
     <%= render partial: 'index_left_container' %>
-    <div id="posts_index" class="posts-index-center-items">
+    <div class="posts-index-center-items">
       <div class="index-center-header"><h3>投稿一覧</h3></div>
-      <div id="posts-index-item">
         <%= render partial: 'posts',locals: {post: @posts,comment:@comments} %>
-      </div>
     </div>
+
+    <div class="index-userlist-containers">
     <%= render partial: 'index_right_container' %>
+  </div>
   </div>
 </div>
 

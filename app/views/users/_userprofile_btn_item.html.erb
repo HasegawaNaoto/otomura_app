@@ -1,11 +1,7 @@
 <% if @users.id!=@current_user.id %>
 <% if Follow.find_by(follow_id:@users.id,user_id: @current_user.id) %>
-<%= form_tag("/follow/destroy/#{@users.public_uid}",method: :post) do %>
-<input type="submit" value="コネクト中" class="userprofile-follow-destroy-btn">
-<% end %>
+<%= link_to("コネクト中","/follow/destroy/#{@users.public_uid}",class: "userprofile-follow-destroy-btn",method: :post) %>
 <% else %>
-<%= form_tag("/follow/create/#{@users.public_uid}",method: :post) do %>
-<input type="submit" value="コネクト" class="userprofile-follow-create-btn">
-<% end %>
+<%= link_to("コネクト","/follow/create/#{@users.public_uid}",class: "userprofile-follow-create-btn",method: :post) %>
 <% end %>
 <% end %>

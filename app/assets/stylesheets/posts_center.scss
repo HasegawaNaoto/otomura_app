@@ -1,0 +1,351 @@
+// 投稿ページ中央レイアウト
+.posts-index-center-items {
+  width:50%;
+  padding-bottom:1000px;
+  float:left;
+}
+
+.posts-index-item {
+  position:relative;
+  background-color: white;
+  padding-bottom:10px;
+  height:auto;
+  min-width:150px;
+  width:100%;
+  border-bottom:solid 1px #c1ced7;
+  border-right:solid 1px #c1ced7;
+  border-left:solid 1px #c1ced7;
+  transition:0.5s;
+  overflow-x:hidden;
+}
+
+.posts-index-item:hover{
+  background-color:rgba(200,216,225,0.4);
+}
+
+.post_image_container{
+  overflow:hidden;
+  margin-left:76px;
+}
+
+.post_image_1{
+  width:90%;
+  height:auto;
+  margin:2px;
+  border-radius: 10px;
+  object-fit: cover;
+  background-color:white;
+}
+
+.post_images{
+  margin:2px;
+  width:45%;
+  height:auto;
+  min-height:100px;
+  border-radius: 10px;
+  object-fit: cover;
+  background-color:white;
+  float:left;
+}
+
+.post_video{
+  width:90%;
+  height:auto;
+  margin:2px;
+  border-radius: 10px;
+  object-fit: cover;
+  background-color:white;
+}
+
+.before-time{
+  position:absolute;
+  right:21px;
+  top:12px;
+  font-size:14px;
+  color:rgba(0,0,0,0.6);
+}
+
+.post-user-image img{
+  position:absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  border:solid 1px #c1ced7;
+  object-fit: cover;
+  top:5px;
+  left:15px;
+}
+
+.thread-user-image img{
+  position:absolute;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border:solid 1px #c1ced7;
+  object-fit: cover;
+  top:6px;
+  left:22px;
+}
+
+.thread-menu-item{
+  position:relative;
+  margin-bottom:-10px;
+  height:50px;
+  line-height:50px;
+  width:100%;
+  text-align:center;
+  font-size:18px;
+  transition:0.5s;
+}
+
+.thread-menu-item:hover{
+  background-color:rgba(220,236,245,0.4);
+}
+
+.posts-index-items h2{
+  text-align:center;
+}
+
+.posts-index-items h5{
+  text-align:center;
+  color:red;
+}
+
+.post-user-name{
+  position:absolute;
+  font-weight: 600;
+  font-size:18px;
+  width:40%;
+  height:30px;
+  line-height:30px;
+  top:7px;
+  left:80px;
+  text-align:justify-all;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  color:black;
+}
+
+.post-user-name a:link{
+  color:black;
+}
+
+.post-user-name a:visited{
+  color:black;
+}
+
+.post-user-name a:hover{
+  border-bottom:1px solid black;
+}
+
+.post-user-id{
+  position:absolute;
+  font-weight: 600;
+  font-size:14px;
+  width:300px;
+  height:30px;
+  top:32px;
+  left:82px;
+  text-align:justify-all;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.post-contents{
+  margin-left:82px;
+  margin-right:22px;
+  padding-top:50px;
+  // margin-top:50px;
+  text-align:left;
+  word-wrap:break-word;
+  font-size:17px;
+}
+
+.comment-line{
+  position:absolute;
+  top: 59px;
+  right: 0;
+  bottom: 46px;
+  left: 38px;
+  background-color:rgba(0, 0, 0, 0.4);
+  border-radius:50px;
+  width:5px;
+}
+
+.show-comment-line{
+  position:absolute;
+  top: 59px;
+  right: 0;
+  bottom: 2px;
+  left: 38px;
+  background-color:rgba(0, 0, 0, 0.4);
+  border-radius:50px;
+  width:5px;
+}
+
+.post-contents a:link{
+  color:black;
+}
+
+.post-contents a:visited{
+  color:black;
+}
+
+.time{
+  text-align:right;
+  width:100%;
+  margin-top:10px;
+}
+
+.time p{
+  margin-right:25px;
+}
+
+.menu-item{
+  margin-top:10px;
+  height:30px;
+  width:100%;
+  position:relative;
+  overflow: hidden;
+}
+
+.like-count{
+  position:absolute;
+  left:115px;
+  top:2px;
+  font-size:18px;
+}
+
+.destroy-css{
+  position:absolute;
+  right:25px;
+  top:2px;
+  cursor:pointer;
+}
+
+.comment-count{
+  position:absolute;
+  left:200px;
+  top:2px;
+  font-size:18px;
+}
+
+.comment-css{
+  position:absolute;
+  color:rgba(0, 0, 0, 0.6);
+  display:inline-block;
+  left:20px;
+  width:100px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.index-center-header{
+  width:100%;
+  height:36px;
+  line-height:36px;
+  text-align:center;
+  background-color: white;
+  color:rgba(20,20,20,1);
+  border-bottom:solid 1px #c1ced7;
+  border-left:solid 1px #c1ced7;
+  border-right:solid 1px #c1ced7;
+  float:left;
+}
+
+.fa-star{
+  position:absolute;
+  left:90px;
+  top:5px;
+  font-size:18px;
+}
+
+.fa-comment{
+  position:absolute;
+  left:154px;
+  top:6px;
+  font-size:18px;
+  color:rgba(0, 0, 0, 0.6);
+}
+
+.fa-comment:hover{
+  color:rgb(0, 104, 183);
+}
+
+.fa-like_create{
+  color:rgba(255,204,0,1);
+}
+
+.fa-like_create:hover{
+  color:rgba(255,204,0,0.8);
+}
+
+.fa-like_destroy{
+  color:rgba(0, 0, 0, 0.6);
+}
+
+.fa-like_destroy:hover{
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.fa-delete{
+  color:rgba(0, 0, 0, 0.6);
+  font-size:18px;
+}
+
+.fa-delete:hover{
+  color:rgba(100,200,80,1);
+}
+
+.thread-link a:link{
+  color:rgba(255,69,0,1);
+}
+
+.thread-link a:visited{
+  color:rgba(255,69,0,1);
+}
+
+.thread-link a:hover{
+  color:rgba(255,69,0,0.6);
+}
+
+@media(max-width:1170px){
+  .posts-index-center-items {
+  min-width:450px;
+  width:65%;
+  float:right;
+}
+}
+
+@media(max-width:750px){
+  .posts-index-center-items {
+    width:100%;
+    min-width:320px;
+    max-width:750px;
+  }
+
+  .posts-index-item {
+    min-width:320px;
+    max-width:750px;
+  }
+
+  .post-user-name{
+    font-size:16px;
+  }
+
+  .post-user-name a:link{
+    color:black;
+  }
+
+  .post-user-name a:visited{
+    color:black;
+  }
+
+  .post-user-name a:hover{
+    border-bottom:1px solid black;
+  }
+}
+// 投稿ページ中央レイアウト

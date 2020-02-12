@@ -18,12 +18,12 @@
     <div class="index-user-content">
       <li class="index-connects"><%= link_to("/connect/#{@current_user.public_uid}") do%>
         コネクト<br>
-        <%= @follow_count %>
+        <%= @follow.count %>
         <% end %>
       </li>
       <li class="index-connecteds"><%= link_to("/connected/#{@current_user.public_uid}") do%>
         コネクター<br>
-        <%= @follower_count %>
+        <%= @follower.count %>
         <% end %>
       </li>
     </div>
@@ -31,21 +31,5 @@
 
   <div class="index-profile-koukoku-container">
     <%= image_tag 'test_koukoku.png' %>
-  </div>
-
-  <div class="responsive-1024px-index-userlist-container">
-    <div class="index-userlist-header">
-      <h3>ユーザ一覧</h3>
-    </div>
-
-    <div class="index-userlists-container">
-      <div class="index-userlists">
-        <%   @serch_users_load_33_or.first(10).each do |recomended_user| %>
-        <% unless Friendlist.find_by(friend_id:recomended_user.id,user_id:@current_user.id) || recomended_user.id==@current_user.id || Follow.find_by(follow_id:recomended_user.id,user_id:@current_user.id) %>
-        <%= render partial: 'recomended_user_reply_btn',locals: {recomended_user:recomended_user}%>
-        <% end %>
-        <% end %>
-      </div>
-    </div>
   </div>
 </div>

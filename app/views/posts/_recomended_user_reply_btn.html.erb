@@ -11,23 +11,7 @@
     <%= link_to("@#{recomended_user.public_uid}","/profile/#{recomended_user.public_uid}") %>
   </div>
 
-  <% if Follow.find_by(follow_id: recomended_user.id,user_id: @current_user.id) %>
-  <%= form_tag("/follow/destroy/#{recomended_user.public_uid}",method: :post) do %>
-  <input type="submit" value="コネクト中" class="index-follow-destroy-btn">
-  <% end %>
-  <% else %>
-  <%= form_tag("/follow/create/#{recomended_user.public_uid}",method: :post) do %>
-  <input type="submit" value="コネクト" class="index-follow-create-btn">
-  <% end %>
-  <% end %>
-
-  <% if Notice.find_by(friend_id: @current_user.id,visited_id: recomended_user.id,send_id: @current_user.id) %>
-  <%= form_tag("/friendlist/reply/destroy/#{recomended_user.public_uid}",method: :post) do %>
-  <input type="submit" value="申請中" class="index-friend-destroy-btn">
-  <% end %>
-  <% else %>
-  <%= form_tag("/friendlist/reply/create/#{recomended_user.public_uid}",method: :post) do %>
-  <input type="submit" value="友達申請" class="index-friend-reply-btn">
-  <% end %>
-  <% end %>
+<div id="follow_buttons_<%= recomended_user.id %>" class="index-follow-btn-container">
+  <%= render partial: 'follow/follow_btn',locals: {recomended_user: recomended_user} %>
+</div>
 </div>

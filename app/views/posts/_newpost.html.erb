@@ -1,5 +1,5 @@
 <div id="post-modal" class="post-modal-wrapper">
-  <div id="new-post-form" class="new-post-form post-modal">
+  <div id="new-post-form" class="post-modal">
     <%= icon 'fas','times',id:'post_cancel_btn',class: "fa-post-cancel-btn" %>
     <div class="comment-own-user">
       <div class="own-user-image">
@@ -13,13 +13,15 @@
 
     <%= form_with model:@post,url:'/posts/create',multipart: true,local:true,method: :post,class: "new-form" do |form| %>
     <div class="new-post-form-body">
-      <%= form.text_area :content,id:"new-post-content",placeholder:"投稿内容を記入する" %>
+      <div id="num" class="content-num"></div>
+      <%= form.text_area :content,id:"new-post-content",placeholder:"投稿内容を記入する",value:"" %>
       <div class="output_container">
         <output id="list">
         </output>
       </div>
 
       <div id="new-post-form-notice" class="form-notice">画像は4枚までしかアップロードできません！</div>
+      <div id="new-post-form-notice-2" class="form-notice">ファイルの容量は100MB以内で添付してください！</div>
       <div class="post-menu-select">
         <label id="image_file_label" class="image_file_css" for="article_image_file_name"><%= icon 'fas', 'camera'%>
           <%= form.file_field :images,id:"article_image_file_name",accept:"image/*",multiple:true %>
@@ -30,12 +32,12 @@
           <%= form.file_field :video,accept:"video/*" %>
         </label>
 
-        <div id="newpost-cancel-btn" class="newpost-cancel-container"><%= icon 'fas','times-circle' %></div>
+        <div id="file-cancel-btn" class="newpost-cancel-container"><%= icon 'fas','times-circle' %></div>
       </div>
 
 
       <div class="post-btn-container">
-        <%= form.submit "投 稿",class: 'new-post-btn' %>
+        <%= form.submit "投 稿",id:'post-btn',class: 'new-post-btn',disabled:'true' %>
       </div>
     </div>
     <% end %>
@@ -44,7 +46,7 @@
 
 <script>
   $(function() {
-    $('.image_file_css').hover(function() {
+    $('#image_file_label').hover(function() {
       $(this).css('color', 'rgba(120,200,80,1)');
     }, function() {
       $(this).css('color', 'rgba(10,180,80,0.7)');
@@ -52,11 +54,40 @@
   });
 
   $(function() {
-    $('.video_file_css').hover(function() {
+    $('#video_file_label').hover(function() {
       $(this).css('color', 'rgba(120,200,80,1)');
     }, function() {
       $(this).css('color', 'rgba(10,180,80,0.7)');
     })
+  });
+
+  $(function(){
+    var btn=document.getElementById("post-btn")
+    $("#new-post-content").bind("change keyup",function(){
+      var count = $(this).val().length;
+      $("#num").text(count+"/200");
+
+      if(count>0 && count<=200){
+        btn.disabled = false;
+        $(btn).attr({
+          style:"background-color:rgba(10,180,80,0.7); border:1px solid rgba(120,200,80,1);"
+        });
+        $('#num').attr({
+          style:"color:rgba(10,180,80,1);"
+        });
+      }
+
+      else{
+        btn.disabled = true;
+        $(btn).attr({
+          style:"background-color:rgba(10,180,80,0.3);  border:1px solid rgba(10,180,80,0.5);"
+        });
+
+        $('#num').attr({
+          style:"color:red;"
+        });
+      }
+    });
   });
 
   $(function(){
@@ -67,11 +98,15 @@
 
       var size_in_megabytes = files[0].size/1024/1024;
       if (size_in_megabytes > 100) {
-        alert('ファイルの容量が大きすぎます(100MB以内で添付してください)');
-        $('#post_video').val("")
+        var btn=document.getElementById("post-btn");
+        $('#new-post-form-notice-2').css('display','block');
+        $('#post_video').val("");
+        btn.disabled = true;
+        $(btn).attr({
+          style:"background-color:rgba(10,180,80,0.3);  border:1px solid rgba(10,180,80,0.5);"
+        })
 
       }else{
-
         var reader = new FileReader;
         reader.readAsDataURL(files[0]);
 
@@ -88,32 +123,29 @@
         })(files[0]);
 
         $('#article_image_file_name').attr('id', 'article_image_file_name_none');
-        $('.image_file_css').css('color', 'rgba(120,120,120,0.7)');
-        $('.image_file_css').hover(function() {
+        $('#image_file_label').css('color', 'rgba(120,120,120,0.7)');
+        $('#image_file_label').hover(function() {
           $(this).css('color', 'rgba(120,120,120,1)');
         }, function() {
           $(this).css('color', 'rgba(120,120,120,0.7)');
         })
-        $('.image_file_css').css('cursor','default');
+        $('#image_file_label').css('cursor','default');
 
         $('#post_video').attr('id', 'post_video_none');
-        $('.video_file_css').css('color', 'rgba(120,120,120,0.7)');
-        $('.video_file_css').hover(function() {
+        $('#video_file_label').css('color', 'rgba(120,120,120,0.7)');
+        $('#video_file_label').hover(function() {
           $(this).css('color', 'rgba(120,120,120,1)');
         }, function() {
           $(this).css('color', 'rgba(120,120,120,0.7)');
         })
-        $('.video_file_css').css('cursor','default');
-
-
+        $('#video_file_label').css('cursor','default');
       }
     };
 
     function initializeFiles() {
       document.getElementById('list').innerHTML = '';
     }
-  })
-
+  });
 
   $(function(){
     document.getElementById('article_image_file_name').onchange = function(event){
@@ -133,46 +165,67 @@
               $('#new-post-form-notice').css('display','none');
               div.className = 'reader_file_1';
               div.innerHTML += '<img class="reader_image_1" src="' + e.target.result + '" />';
+              $('#article_image_file_name').attr('id', 'article_image_file_name_none');
+              $('#image_file_label').css('color', 'rgba(120,120,120,0.7)');
+              $('#image_file_label').hover(function() {
+                $(this).css('color', 'rgba(120,120,120,1)');
+              }, function() {
+                $(this).css('color', 'rgba(120,120,120,0.7)');
+              })
+              $('#image_file_label').css('cursor','default');
+
+              $('#post_video').attr('id', 'post_video_none');
+              $('#video_file_label').css('color', 'rgba(120,120,120,0.7)');
+              $('#video_file_label').hover(function() {
+                $(this).css('color', 'rgba(120,120,120,1)');
+              }, function() {
+                $(this).css('color', 'rgba(120,120,120,0.7)');
+              })
+              $('#video_file_label').css('cursor','default');
             }
 
             else if(1<i && i<5){
               $('#new-post-form-notice').css('display','none')
               div.className = 'reader_file_2';
               div.innerHTML += '<img class="reader_image_2" src="' + e.target.result + '" />';
+              $('#article_image_file_name').attr('id', 'article_image_file_name_none');
+              $('#image_file_label').css('color', 'rgba(120,120,120,0.7)');
+              $('#image_file_label').hover(function() {
+                $(this).css('color', 'rgba(120,120,120,1)');
+              }, function() {
+                $(this).css('color', 'rgba(120,120,120,0.7)');
+              })
+              $('#image_file_label').css('cursor','default');
+
+              $('#post_video').attr('id', 'post_video_none');
+              $('#video_file_label').css('color', 'rgba(120,120,120,0.7)');
+              $('#video_file_label').hover(function() {
+                $(this).css('color', 'rgba(120,120,120,1)');
+              }, function() {
+                $(this).css('color', 'rgba(120,120,120,0.7)');
+              })
+              $('#video_file_label').css('cursor','default');
             }
 
             else if(i>4){
-              $('#new-post-form-notice').css('display','block')
-              $('#article_image_file_name').val("")
+              var btn=document.getElementById("post-btn");
+              $('#new-post-form-notice').css('display','block');
+              $('#article_image_file_name').val("");
+              btn.disabled = true;
+              $(btn).attr({
+                style:"background-color:rgba(10,180,80,0.3);  border:1px solid rgba(10,180,80,0.5);"
+              });
             }
 
             document.getElementById('list').insertBefore(div, null);
           }
         })(f);
       }
-
-      $('#post_video').attr('id', 'post_video_none');
-      $('.video_file_css').css('color', 'rgba(120,120,120,0.7)');
-      $('.video_file_css').hover(function() {
-        $(this).css('color', 'rgba(120,120,120,1)');
-      }, function() {
-        $(this).css('color', 'rgba(120,120,120,0.7)');
-      })
-      $('.video_file_css').css('cursor','default');
-
-      $('#article_image_file_name').attr('id', 'article_image_file_name_none');
-      $('.image_file_css').css('color', 'rgba(120,120,120,0.7)');
-      $('.image_file_css').hover(function() {
-        $(this).css('color', 'rgba(120,120,120,1)');
-      }, function() {
-        $(this).css('color', 'rgba(120,120,120,0.7)');
-      })
-      $('.image_file_css').css('cursor','default');
-
     };
+
 
     function initializeFiles() {
       document.getElementById('list').innerHTML = '';
     }
-  })
+  });
 </script>

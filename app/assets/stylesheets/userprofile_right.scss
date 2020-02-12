@@ -29,4 +29,10 @@
   height:504px;
     overflow:scroll;
 }
+
+@media(max-width:1170px){
+  .userprofile-right-containers{
+    display:none;
+  }
+}
 // userprofile右ページレイアウト

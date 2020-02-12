@@ -1,7 +1,6 @@
-<% i=0 %>
 <% unless @serch_posts_words.first==nil %>
 <% @serch_posts_words.each do |post| %>
-<%= render partial:'comment/commentform',locals: {post: post,comment: @comments} %>
+<%= render partial:'comment/commentform',locals: {post: post} %>
 <div id="image-patial-item">
   <%= render partial:'posts/image_modal',locals: {post: post,index: @index} %>
 </div>
@@ -65,18 +64,24 @@
       <%= render partial: 'like/like',locals: {post: post} %>
     </div>
 
-
-    <div class="destroy-css">
-      <%= link_to("/posts/destroy/#{post.id}",method: :post) do %>
+    <% if @current_user.id==post.user_id %>
+    <%= render partial: 'posts/current_user_post_destroy',locals:{post: post} %>
+    <div id="current-user-post-destroy-btn-<%= post.id %>" class="destroy-css">
       <%= icon 'fas','trash',class: "fa-delete" %>
-      <% end %>
     </div>
+
+    <script>
+      $('#current-user-post-destroy-btn-<%= post.id %>').click(function(){
+        $('#current-user-post-destroy-modal-<%= post.id %>').show();
+      })
+    </script>
+    <% end %>
   </div>
 
   <% if Post.find_by(comment_id:post.id,user_id:post.user_id) %>
   <div class="thread-serch-menu-item">
     <div class="thread-user-image">
-      <%=link_to image_tag(user.image.url),"/profile/#{post_user.public_uid}"%>
+      <%=link_to image_tag(post_user.image.url),"/profile/#{post_user.public_uid}"%>
     </div>
     <div class="thread-serch-link">
       <%= link_to("このスレッドを表示する","/posts/show/#{post.id}/#posts-#{post.id}") %>
@@ -85,8 +90,6 @@
   <% end %>
 
 </div>
-
-<% i=i+1 %>
 
 <% end %>
 <% end %>

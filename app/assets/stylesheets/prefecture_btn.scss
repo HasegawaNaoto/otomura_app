@@ -1,0 +1,62 @@
+//都道府県選択ボタンレイアウト
+.userprofile-prefecture-btn {
+  font-size:14px;
+  font-weight:600;
+  margin:5px;
+  padding-left:10px;
+  padding-right:10px;
+  cursor:pointer;
+  background-color:rgba(190,177,204,0.8);
+  border-top-left-radius:100px;
+  border-bottom-left-radius:100px;
+  border-top-right-radius:100px;
+  border-bottom-right-radius:100px;
+  border:solid 1px rgba(240,227,244,0.8);
+  color:#ffffff;
+  transition:0.1s;
+  display:inline-block;
+  height:20px;
+  line-height:20px;
+  text-align:center;
+  outline:none;
+}
+
+.userprofile-prefecture-btn:hover{
+  background-color:rgba(190,177,204,1);
+  border:solid 1px rgba(240,227,244,1);
+}
+
+.prefecture{
+  font-weight:600;
+  margin:5px auto;
+}
+
+select {
+  background-color: white;
+  border: thin solid rgba(176,196,222,1);
+  border-radius: 4px;
+  display: inline-block;
+  font: inherit;
+  line-height: 1.5em;
+  padding: 0.5em 3.5em 0.5em 1em;
+  outline:none;
+  user-select:none;
+  cursor:pointer;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  z-index:10;
+  background-image:url("/images/chevron-down-solid.svg");
+  background-repeat: no-repeat;
+  background-size: 12px 10px;
+  background-position: right 10px center;
+  background-color: rgba(201,225,255,0.7);
+}
+
+select::-ms-expand {
+  display: none;
+}
+//都道府県選択ボタンレイアウト

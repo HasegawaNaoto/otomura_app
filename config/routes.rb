@@ -1,34 +1,13 @@
 Rails.application.routes.draw do
   # resources :prefectures
-  devise_for :users, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
-
-  get '/audio/index' => 'audio#index'
-  get '/audio/tag/:id' => 'audio#tag'
-  get '/audio/show/:id' => 'audio#show'
-  get '/audio/search/:keyword' => 'audio#search'
-  get '/audio/list/:id' => 'audio#list'
-  get '/audio/form' => 'audio#form'
-  post '/audio/create' => 'audio#create'
-    post '/audio/searching' => 'audio#searching'
+  devise_for :users,controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
+  devise_scope :user do
+    root :to => "devise/sessions#new"
+  end
 
   post '/follow/create/:id' => 'follow#create'
   post '/follow/destroy/:id' => 'follow#destroy'
-
-  get '/media/:id' => 'users#userlist'
-  post '/friendlist/reply/destroy/:id' => 'friendlist#reply_destroy'
-  post '/friendlist/reply/create/:id' => 'friendlist#reply_create'
-  post '/friendlist/create/:id' => 'friendlist#create'
-  post '/friendlist/destroy/:id' => 'friendlist#destroy'
-  # get '/' => 'home#top'
-  # get '/' => 'devise/resource#sign_up'
-  get '/about' => 'home#about'
-
-  post '/newcreate' => 'home#newcreate'
-  get '/newform' => 'home#newform'
-
-  get '/loginform' => 'home#loginform'
-  post '/login' => 'home#login'
-
+  get '/media/:id' => 'users#media'
   get '/posts/index' => 'posts#index'
   get '/posts/show/:id' => 'posts#show'
   get '/posts/newpost' => 'posts#newpost'
@@ -41,16 +20,13 @@ Rails.application.routes.draw do
   post '/posts/destroy/:id' => 'posts#destroy'
   post '/posts/logout' => 'posts#logout'
   post '/posts/logout' => 'devise/sessions#destroy'
-
   post '/comment/create/:id' => 'comment#create'
-  get '/comment/:id/show/:id' => 'comment#show'
   post '/comment/commentform/:id' => 'comment#commentform'
-
   get '/profile/:id' => 'users#userprofile'
-  get '/like/:id' => 'users#like'
   get '/connect/:id' => 'users#follow'
   get '/connected/:id' => 'users#follower'
   get '/users/userlist' => 'users#userlist'
+  get '/like/:id' => 'users#like'
   get 'users/serch/:serch' => 'users#serch'
   post '/users/serching' => 'users#serching'
   get '/users/serch/:serch' => 'users#serch'
@@ -59,10 +35,8 @@ Rails.application.routes.draw do
   get '/users/notice/:id' => 'users#notice'
   get '/users/genre/:id' => 'users#genre'
   get '/users/genre_edit' => 'users#genre_edit'
-
   post '/like/create/:id' => 'like#create'
   post '/like/destroy/:id' => 'like#destroy'
-
   get '/table/posts' => 'table#posts'
   get '/table/users' => 'table#users'
   get '/table/like' => 'table#like'
@@ -70,6 +44,7 @@ Rails.application.routes.draw do
   get '/table/friendlist' => 'table#friendlist'
   get '/table/notices' => 'table#notices'
   get '/table/follow' => 'table#follow'
+  get '/table/follower' => 'table#follower'
   get '/table/serch' => 'table#serch'
   get '/table/genre' => 'table#genre'
   get '/table/gender' => 'table#gender'
@@ -78,26 +53,21 @@ Rails.application.routes.draw do
   get '/table/audio' => 'table#audio'
   get '/table/audio_tag' => 'table#audio_tag'
   get '/table/audio_tagmap' => 'table#audio_tagmap'
-
   get '/genre/new' => 'genre#new'
   get '/genre/edit/:id' => 'genre#edit'
   post '/genre/create' => 'genre#create'
   post '/genre/destroy' => 'genre#destroy'
   post '/genre/update/:id' => 'genre#update'
-
   post '/prefecture/update/:id' => 'prefecture#update'
-
   get '/gender/new' => 'gender#new'
   get '/gender/edit/:id' => 'gender#edit'
   post '/gender/create' => 'gender#create'
   post '/gender/destroy' => 'gender#destroy'
   post '/gender/update/:id' => 'gender#update'
-
   post '/serch/create' => 'serch#create'
   get '/search/:id/users' => 'serch#users'
   get '/search/:id/posts' => 'serch#posts'
   get '/search' => 'serch#serch'
-
   get '/instrument/new' => 'instrument#new'
   get '/instrument/edit/:id' => 'instrument#edit'
   post '/instrument/create' => 'instrument#create'

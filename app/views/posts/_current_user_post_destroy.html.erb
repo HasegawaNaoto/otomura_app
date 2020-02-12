@@ -1,0 +1,18 @@
+<div id="current-user-post-destroy-modal-<%= post.id %>" class="post-modal-wrapper">
+  <div id="urrent-user-post-destroy-form" class="warning-form">
+    <div class="destroy-modal-content">内容を破棄してもよろしいですか？</div>
+    <div class="warning-modal-menu">
+      <%= link_to("/posts/destroy/#{post.id}",method: :post) do %>
+      <div id="current-user-post-destroy-yes-btn" class="destroy-modal-yes-btn">はい</div>
+      <% end %>
+
+      <div id="current-user-post-destroy-no-btn-<%= post.id %>" class="destroy-modal-no-btn">いいえ</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('#current-user-post-destroy-no-btn-<%= post.id %>').click(function(){
+    $('#current-user-post-destroy-modal-<%= post.id %>').hide();
+  })
+</script>

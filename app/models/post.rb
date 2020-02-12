@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :user
-  validates :content,{length:{maximum:200}}
+  validates :content,{presence: true,length:{maximum:200}}
   mount_uploaders :images, ImageUploader
   mount_uploader :video, VideoUploader
   validate  :video_size

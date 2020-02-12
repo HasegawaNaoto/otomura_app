@@ -5,15 +5,19 @@ class User < ApplicationRecord
     public_uid
   end
 
-  has_many :prefectures, dependent: :destroy
-  has_many :audios, dependent: :destroy
+  has_many :like, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :genres, dependent: :destroy
   has_many :genders, dependent: :destroy
   has_many :instruments, dependent: :destroy
+  has_many :prefectures, dependent: :destroy
+  has_many :notice, dependent: :destroy
+  has_many :user_follows,class_name: 'Follow', :foreign_key => 'user_id',dependent: :destroy
+  has_many :follow_follows,class_name: 'Follow', :foreign_key => 'follow_id',dependent: :destroy
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :validatable, :omniauthable
   validates :name,{presence:true,length:{maximum:20}}
+  validates :public_uid,length:{maximum:20}
   validates :content,length:{maximum:200}
   validates :email,{uniqueness:true}
   devise :validatable, password_length: 10..128

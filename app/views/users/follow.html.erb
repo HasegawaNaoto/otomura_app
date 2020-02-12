@@ -1,17 +1,13 @@
 <%= render partial: 'posts/newpost' %>
 <%= render partial: 'posts/new_post_destroy' %>
-
 <%= render partial: 'genre/edit',locals: {user: @users} %>
 <%= render partial: 'instrument/edit',locals: {user: @users} %>
 <%= render partial: 'gender/edit',locals: {user: @users} %>
 <%= render partial: 'prefecture/edit',locals: {user: @users} %>
-
-<%= render partial: 'genre/edit_genre_destroy' %>
-<%= render partial: 'instrument/edit_instrument_destroy'%>
-<%= render partial: 'gender/edit_gender_destroy' %>
-<%= render partial: 'prefecture/edit_prefecture_destroy'%>
-
-<%= render partial: 'friend_destroy_warning_form',locals: {user: @users} %>
+<%= render partial: 'genre/edit_genre_destroy',locals: {user: @users} %>
+<%= render partial: 'instrument/edit_instrument_destroy',locals: {user: @users} %>
+<%= render partial: 'gender/edit_gender_destroy',locals: {user: @users} %>
+<%= render partial: 'prefecture/edit_prefecture_destroy',locals: {user: @users} %>
 <%= render partial: 'editprofile',locals: {user: @users} %>
 <%= render partial: 'edit_userprofile_destroy',locals:{user:@users} %>
 
@@ -36,19 +32,17 @@
 
         <div class="friends-user-id"><h5><%= link_to("@#{follow.public_uid}","/profile/#{follow.public_uid}") %></h5></div>
 
-        <% unless follow.content==nil %>
         <div class="friends-contents">
-          <p><%= link_to(follow.content,"/profile/#{follow.public_uid}") %></p>
+          <% unless follow.content==nil %>
+          <p><%= link_to("","/profile/#{follow.public_uid}") %></p>
+          <% end %>
         </div>
-        <% end %>
 
-        <% if follow.id!=@current_user.id %>
-        <%if Follow.find_by(user_id: @current_user.id, follow_id: follow.id)%>
-        <div class="followlist-follow-destroy-btn"><%= link_to("コネクト中","/follow/destroy/#{follow.public_uid}",method: :post)%></div>
-        <% else %>
-        <div  class="followlist-follow-create-btn"><%= link_to("コネクト","/follow/create/#{follow.public_uid}",method: :post)%></div>
-        <% end %>
-        <% end %>
+        <% unless follow.id==@current_user.id %>
+        <div class="follow-follower-list-btn-container">
+    <%= render partial: 'follow/follow_btn',locals: {recomended_user: follow} %>
+  </div>
+    <% end %>
       </div>
     </div>
     <% end %>

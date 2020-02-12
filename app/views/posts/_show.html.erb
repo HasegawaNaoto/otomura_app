@@ -93,11 +93,18 @@
       <%= render partial: 'like/like',locals: {post: before_posts[i-1]} %>
     </div>
 
-    <div class="destroy-css">
-      <%= link_to("/posts/destroy/#{before_posts[i-1].id}",method: :post) do %>
-      <%= icon 'fas','trash',class: "fa-delete" %>
-      <% end %>
-    </div>
+    <% if @current_user.id==before_posts[i-1].user_id %>
+    <%= render partial: 'posts/current_user_post_destroy',locals:{post: before_posts[i-1]} %>
+      <div id="current-user-post-destroy-btn-<%= before_posts[i-1].id %>" class="destroy-css">
+        <%= icon 'fas','trash',class: "fa-delete" %>
+      </div>
+
+    <script>
+      $('#current-user-post-destroy-btn-<%= before_posts[i-1].id %>').click(function(){
+        $('#current-user-post-destroy-modal-<%= before_posts[i-1].id %>').show();
+      })
+    </script>
+    <% end %>
   </div>
 </div>
 <% i=i-1 %>
@@ -181,14 +188,21 @@
     </div>
 
     <div id="likes_buttons_<%= post.id %>">
-      <%= render partial: 'like/like',locals: {post: @post} %>
+      <%= render partial: 'like/like',locals: {post: post} %>
     </div>
 
-    <div class="destroy-css">
-      <%= link_to("/posts/destroy/#{post.id}",method: :post) do %>
+    <% if @current_user.id==post.user_id %>
+    <%= render partial: 'posts/current_user_post_destroy',locals:{post: post} %>
+    <div id="current-user-post-destroy-btn-<%= post.id %>" class="destroy-css">
       <%= icon 'fas','trash',class: "fa-delete" %>
-      <% end %>
     </div>
+
+    <script>
+      $('#current-user-post-destroy-btn-<%= post.id %>').click(function(){
+        $('#current-user-post-destroy-modal-<%= post.id %>').show();
+      })
+    </script>
+    <% end %>
   </div>
 </div>
 
@@ -257,11 +271,18 @@
       <%= render partial: 'like/like',locals: {post: repost} %>
     </div>
 
-    <div class="destroy-css">
-      <%= link_to("/posts/destroy/#{repost.id}",method: :post) do %>
+    <% if @current_user.id==repost.user_id %>
+    <%= render partial: 'posts/current_user_post_destroy',locals:{post: repost} %>
+    <div id="current-user-post-destroy-btn-<%= repost.id %>" class="destroy-css">
       <%= icon 'fas','trash',class: "fa-delete" %>
-      <% end %>
     </div>
+
+    <script>
+      $('#current-user-post-destroy-btn-<%= repost.id %>').click(function(){
+        $('#current-user-post-destroy-modal-<%= repost.id %>').show();
+      })
+    </script>
+    <% end %>
   </div>
 </div>
 <% end %>
@@ -334,12 +355,18 @@
       <%= render partial: 'like/like',locals: {post: comment} %>
     </div>
 
-
-    <div class="destroy-css">
-      <%= link_to("/posts/destroy/#{comment.id}",method: :post) do %>
+    <% if @current_user.id==comment.user_id %>
+    <%= render partial: 'posts/current_user_post_destroy',locals:{post: comment} %>
+    <div id="current-user-post-destroy-btn-<%= comment.id %>" class="destroy-css">
       <%= icon 'fas','trash',class: "fa-delete" %>
-      <% end %>
     </div>
+
+    <script>
+      $('#current-user-post-destroy-btn-<%= comment.id %>').click(function(){
+        $('#current-user-post-destroy-modal-<%= comment.id %>').show();
+      })
+    </script>
+    <% end %>
   </div>
 </div>
 <% end %>
@@ -410,12 +437,18 @@
       <%= render partial: 'like/like',locals: {post: recomment} %>
     </div>
 
-
-    <div class="destroy-css">
-      <%= link_to("/posts/destroy/#{recomment.id}",method: :post) do %>
+    <% if @current_user.id==recomment.user_id %>
+    <%= render partial: 'posts/current_user_post_destroy',locals:{post: recomment} %>
+    <div id="current-user-post-destroy-btn-<%= recomment.id %>" class="destroy-css">
       <%= icon 'fas','trash',class: "fa-delete" %>
-      <% end %>
     </div>
+
+    <script>
+      $('#current-user-post-destroy-btn-<%= recomment.id %>').click(function(){
+        $('#current-user-post-destroy-modal-<%= recomment.id %>').show();
+      })
+    </script>
+    <% end %>
   </div>
 </div>
 <% end %>
@@ -484,12 +517,18 @@
       <%= render partial: 'like/like',locals: {post: reply} %>
     </div>
 
-
-    <div class="destroy-css">
-      <%= link_to("/posts/destroy/#{reply.id}",method: :post) do %>
+    <% if @current_user.id==reply.user_id %>
+    <%= render partial: 'posts/current_user_post_destroy',locals:{post: reply} %>
+    <div id="current-user-post-destroy-btn-<%= reply.id %>" class="destroy-css">
       <%= icon 'fas','trash',class: "fa-delete" %>
-      <% end %>
     </div>
+
+    <script>
+      $('#current-user-post-destroy-btn-<%= reply.id %>').click(function(){
+        $('#current-user-post-destroy-modal-<%= reply.id %>').show();
+      })
+    </script>
+    <% end %>
   </div>
 </div>
 <% end %>

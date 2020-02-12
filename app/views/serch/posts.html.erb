@@ -7,7 +7,7 @@
         <%= render partial: 'search_menu' %>
       </div>
       <div id="posts-index-item" class="serch-center-item-container">
-        <%= render partial: 'posts' %>
+        <%= render partial: 'posts',locals: {serch_posts_words: @serch_posts_words} %>
       </div>
     </div>
   </div>

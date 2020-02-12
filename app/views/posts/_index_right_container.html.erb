@@ -1,18 +1,13 @@
-<div class="index-userlist-containers">
-  <div class="index-userlist-container">
-    
+<div class="responsive-index-userlist-container">
     <div class="index-userlist-header">
       <h3>ユーザ一覧</h3>
     </div>
 
-    <div class="index-userlists-container-1170px">
+    <div class="index-userlists-container">
       <div class="index-userlists">
-        <%   @serch_users_load_33_or.first(10).each do |recomended_user| %>
-        <% unless Friendlist.find_by(friend_id:recomended_user.id,user_id:@current_user.id) || recomended_user.id==@current_user.id || Follow.find_by(follow_id:recomended_user.id,user_id:@current_user.id) %>
-        <%= render partial: 'recomended_user_reply_btn',locals: {recomended_user:recomended_user}%>
-        <% end %>
+        <%  @serch_users.first(10).each do |recomended_user| %>
+        <%= render partial: 'recomended_user_reply_btn',locals: {recomended_user:recomended_user} %>
         <% end %>
       </div>
     </div>
   </div>
-</div>
