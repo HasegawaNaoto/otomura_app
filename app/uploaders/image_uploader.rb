@@ -19,7 +19,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    if Rails.env.test? #テスト画像は一括削除できるようにフォルダを別にする
+    if Rails.env.test?
       "uploads_#{Rails.env}/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
     else
       "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
@@ -58,33 +58,19 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
 
-  #上限変更
   process :resize_to_limit => [700, 700]
 
-  #JPGで保存
   process :convert => 'jpg'
 
-  #サムネイルを生成
   version :thumb do
     process :resize_to_limit => [300, 300]
   end
 
-  # jpg,jpeg,gif,pngのみ
   def extension_white_list
     %w(jpg jpeg gif png)
   end
 
-  #ファイル名を変更し拡張子を同じにする
   def filename
     super.chomp(File.extname(super)) + '.jpg' if original_filename.present?
   end
-
-  #日付で保存
-  # def filename
-  #   if original_filename.present?
-  #     time = Time.now
-  #     name = time.strftime('%Y%m%d%H%M%S') + '.jpg'
-  #     name.downcase
-  #   end
-  # end
 end
